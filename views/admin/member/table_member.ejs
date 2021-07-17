@@ -13,8 +13,8 @@
           <tr>
             <th>No</th>
             <th>No Member</th>
-            <th>NIK</th>
             <th>Nama</th>
+            <th>NIK</th>
             <th>Instagram</th> 
             <th>No HP</th>
             <th>Status</th>
@@ -24,12 +24,12 @@
           <% for(let i = 0; i < member.length; i++) { %>
           <tr>
             <td><%= i + 1 %></td>
-            <td><%= member[i].No_Member %></td>
-            <td><%= member[i].NIK %></td>
-            <td><%= member[i].Nama_EKTP %></td>
-            <td><%= member[i].Instagram %></td>
-            <td><%= member[i].NoHP %></td>
-            <td><%= member[i].Status %></td>
+            <td><%= member[i].no_member %></td>
+            <td><%= member[i].name %></td>
+            <td><%= member[i].identity %></td>
+            <td><%= member[i].username_ig %></td>
+            <td><%= member[i].no_hp %></td>
+            <td><%= member[i].status %></td>
           </tr>
           <% }%>
         </tbody>
