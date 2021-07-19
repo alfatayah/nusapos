@@ -23,7 +23,47 @@
         <!-- End Heading -->
 
         <!-- nanti di sini diisi table nya -->
-        <%- include('table_transaction.ejs') %>
+        <% if(action == 'view') { %>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#show-item" role="tab"
+                aria-controls="home" aria-selected="true">Show Item</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#add-item" role="tab" aria-controls="profile"
+                aria-selected="false">Add Item</a>
+            </li>
+
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <%- include('table_discount.ejs') %>
+          </div>
+
+          <% } else if ( action == 'show image') { %>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#show-image" role="tab"
+                aria-controls="home" aria-selected="true">Show Image</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <%- include('table_transaction.ejs') %>
+          </div>
+          <% } else { %>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#edit-item" role="tab"
+                aria-controls="home" aria-selected="true">Edit Item</a>
+            </li>
+          </ul>
+          <!-- <div class="tab-content" id="myTabContent">
+            <%# include('edit_item.ejs') %>
+          </div> -->
+
+          <% } %>
+
+
+
 
       </div>
       <!-- /.container-fluid -->

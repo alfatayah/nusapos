@@ -8,11 +8,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const session = require('express-session');
 const flash = require('connect-flash');
+require('dotenv').config();
 // route ke admin
 const adminRouter = require('./routes/admin');
 const apiRouter = require("./routes/api");
-const localDB = 'mongodb://localhost:27017/nusa';
-const deployDB = 'mongodb+srv://alfatayah:satelit@cluster0.ahqs8.mongodb.net/nusa?retryWrites=true&w=majority';
+let localDB =  process.env.LOCAL_DB;
+let deployDB =  process.env.DEPLOY_DB;
 
 //import mongoose
 const mongoose = require("mongoose");
@@ -23,7 +24,7 @@ mongoose.connect(localDB, {
   useFindAndModify: false,
 })
 .then(() => console.log("DB NUSA is connected"))
-.catch((err) => console.log("NOT CONNECT " ,err));
+.catch((err) => console.log("NOT CONNECT " , err));
 
 // ini route ke index.ejs (login)
 
