@@ -1,8 +1,8 @@
 var seeder = require('mongoose-seed');
 var mongoose = require('mongoose');
-
-const localDB = 'mongodb://localhost:27017/nusa';
-const deployDB = 'mongodb+srv://alfatayah:satelit@cluster0.ahqs8.mongodb.net/nusa?retryWrites=true&w=majority';
+require('dotenv').config();
+let localDB =  process.env.LOCAL_DB;
+let deployDB =  process.env.DEPLOY_DB;
 seeder.connect(deployDB, {
   useNewUrlParser: true,
   useCreateIndex: true,

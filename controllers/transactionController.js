@@ -26,6 +26,7 @@ module.exports = {
         user: req.session.user,
         trans,
         alert,
+        action: 'view',
       });
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
