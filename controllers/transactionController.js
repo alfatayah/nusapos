@@ -17,7 +17,6 @@ module.exports = {
     try {
       const trans = await tbTrans.find()
         .populate({ path: 'member_Id ', select: 'name no_member' })
-        console.log("trans " , trans);
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
