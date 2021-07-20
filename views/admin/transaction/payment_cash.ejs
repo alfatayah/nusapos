@@ -1,0 +1,39 @@
+<!-- Modal -->
+<div class="modal fade" id="cash-payment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tunai </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="" method="POST" >
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="name">Uang yang diterima</label>
+              <input type="text" class="form-control" id="money" name="name" placeholder="Enter value"
+                required />
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-success" >Uang Pas </button>
+                <button type="button" class="btn btn-success" value="20000" onclick="giveValue(this.value)">Rp20.0000 </button>
+                <button type="button" class="btn btn-success" value="50000" onclick="giveValue(this.value)" >Rp50.0000 </button>
+                <button type="button" class="btn btn-success" value="100000" onclick="giveValue(this.value)" >Rp100.000 </button>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+    function giveValue(val) {
+        let valMoney = document.getElementById("money").value = val;
+    }
+</script>

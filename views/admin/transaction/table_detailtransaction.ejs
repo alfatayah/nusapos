@@ -1,12 +1,10 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <a href="/admin/transaction" class="btn btn-warning">Back</a>
-      <!-- Button trigger modal -->
-      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-product">
-        <i class="fas fa-plus"></i>
-      </button> -->
-    </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash-payment">Tunai </button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah Pembayaran</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dp-payment"> DP </button>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -16,6 +14,7 @@
               <th>Product name</th> 
               <th>Price</th> 
               <th>Description</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -25,6 +24,11 @@
               <td><%= TransDetail.product_Id[i].product_name%></td>
               <td><%= TransDetail.product_Id[i].price%></td>
               <td><%= TransDetail.product_Id[i].description%></td>
+              <td>
+                <a href="/admin/transaction/ %> " class="btn btn-success btn-circle btn-sm button-update">
+                  <i class="fas fa-eye"></i></a>
+              </td>
+              </tr>
             </tr>
             <% }%>
           </tbody>
