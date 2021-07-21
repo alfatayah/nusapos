@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const  { ObjectId } = mongoose.Schema;
 const memberSchema = new mongoose.Schema({
   no_member: {
-    type: Number,
+    type: String,
     required: true
   },
   name: {
