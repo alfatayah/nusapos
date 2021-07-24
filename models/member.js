@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const  { ObjectId } = mongoose.Schema;
 const memberSchema = new mongoose.Schema({
   no_member: {
-    type: Number,
+    type: String,
     required: true
   },
   name: {
@@ -10,7 +10,7 @@ const memberSchema = new mongoose.Schema({
     required: true
   },
   no_hp: {
-    type: Number,
+    type: String,
     required: true
   },
   username_ig: {
@@ -18,11 +18,11 @@ const memberSchema = new mongoose.Schema({
     required: true
   },
   identity: {
-    type: Number,
+    type: String,
     required: true
   },
   status: {
-    type: Number,
+    type: String,
     required: true
   },
 })

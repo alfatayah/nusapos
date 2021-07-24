@@ -63,9 +63,36 @@
     </div>
   </div>
 </div>
+<%- include('payment_transfer.ejs') %>
 <%- include('payment_kasbon.ejs') %>
 <%- include('payment_dp.ejs') %>
 <%- include('payment_split.ejs') %>
 <%- include('payment_cash.ejs') %>
 <%- include('../../partials/js.ejs') %>
 </body>
+
+
+<!-- Bootstrap Date-Picker Plugin -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script> 
+
+  <script>
+    $(function () {
+      $('#dateline').datepicker({
+        format: "dd-M-yy",
+        todayHighlight: 'TRUE',
+        autoclose: true,
+        minDate: 0,
+        startDate: new Date(),
+        maxDate: '+1Y+6M'
+      }).on('changeDate', function (ev) {
+        $('#tdate').datepicker('setStartDate', $("#dateline").val());
+      });
+  
+ 
+     
+  
+    });
+  </script>
+  
