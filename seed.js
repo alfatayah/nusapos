@@ -20,10 +20,14 @@ seeder.connect(localDB, {
     './models/transaction_detail',
     './models/discount',
     './models/type',
+    './models/payment_cash',
+    './models/payment_split',
+    './models/payment_transfer',
+    './models/payment_kasbon',
   ]);
 
   // Clear specified collections
-  seeder.clearModels(['user' , 'member', 'merk','product' , 'transaction', 'transaction_detail', 'discount', 'type' ], function () {
+  seeder.clearModels(['user' , 'member', 'merk','product' , 'transaction', 'transaction_detail', 'discount', 'type', 'payment_cash', 'payment_split', 'payment_transfer','payment_kasbon'  ], function () {
     // Callback to populate DB once collections have been cleared
     seeder.populateModels(data, function () {
       seeder.disconnect();
@@ -165,7 +169,6 @@ var data = [
       {
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101445'),
         member_Id:{ _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315') },
-        subtotal: 50000,
         total : 40000,
         total_discount : 10000,
         start_date: '11-1-2021',
@@ -174,6 +177,45 @@ var data = [
         status: "DONE",
         guarantee: "KTP", 
         note: "transakasi pertama bos",
+        transdetail_id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101245') },
+      },
+      {
+        _id: mongoose.Types.ObjectId('1e96cbe292b97300fc101445'),
+        member_Id:{ _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315') },
+        total : 40000,
+        total_discount : 10000,
+        start_date: '11-1-2021',
+        end_date: '12-1-2021',
+        invoice: "INV0002",
+        status: "DONE",
+        guarantee: "KTP", 
+        note: "transakasi kedua bos",
+        transdetail_id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101245') },
+      },
+      {
+        _id: mongoose.Types.ObjectId('2e96cbe292b97300fc101445'),
+        member_Id:{ _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315') },
+        total : 10000,
+        total_discount : 10000,
+        start_date: '11-1-2021',
+        end_date: '12-1-2021',
+        invoice: "INV0003",
+        status: "DONE",
+        guarantee: "KTP", 
+        note: "transakasi ketiga bos",
+        transdetail_id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101245') },
+      },
+      {
+        _id: mongoose.Types.ObjectId('2e16cbe292b97300fc101445'),
+        member_Id:{ _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315') },
+        total : 20000,
+        total_discount : 10000,
+        start_date: '11-1-2021',
+        end_date: '12-1-2021',
+        invoice: "INV0004",
+        status: "DONE",
+        guarantee: "KTP", 
+        note: "transakasi ketiga bos",
         transdetail_id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101245') },
       },
     ]
@@ -196,11 +238,54 @@ var data = [
         price: 5000,
         note: "transakasi pertama ya",
       },
-
-      
     ]
   },
-
+  {
+    'model': 'payment_cash',
+    'documents': [  
+      {
+        _id: mongoose.Types.ObjectId('1e96cbe292b973001c101445'),
+        paid: 50000,
+        changes : 40000,
+        transaction_Id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101445') },
+      },
+    ]
+  },
+  {
+    'model': 'payment_split',
+    'documents': [  
+      {
+        _id: mongoose.Types.ObjectId('2296cbe292b973001c101445'),
+        first_paid: 20000,
+        first_changes : 10000,
+        second_paid: 20000,
+        second_changes : 10000,
+        transaction_Id: { _id: mongoose.Types.ObjectId('2e96cbe292b97300fc101445') },
+      },
+    ]
+  },
+  {
+    'model': 'payment_transfer',
+    'documents': [  
+      {
+        _id: mongoose.Types.ObjectId('2496cbe292b973001c101445'),
+        paid: 50000,
+        changes : 40000,
+        transaction_Id: { _id: mongoose.Types.ObjectId('1e96cbe292b97300fc101445') },
+      },
+    ]
+  },
+  {
+    'model': 'payment_kasbon',
+    'documents': [  
+      {
+        _id: mongoose.Types.ObjectId('2196cbe292b973001c101445'),
+        paid: 50000,
+        due_date : '12-1-2021',
+        transaction_Id: { _id: mongoose.Types.ObjectId('2e16cbe292b97300fc101445') },
+      },
+    ]
+  }
 ]
 
 
