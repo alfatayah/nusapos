@@ -31,6 +31,24 @@ module.exports = {
     
   },
 
+  viewDoc: async (req, res) => {
+     try {
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
+      res.render('admin/documentation/doc', {
+        title: "Nusa | Documentation",
+        user: req.session.user, 
+        alert,
+      });
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/documentation");
+    }
+    
+  },
+
   actionSignin: async (req, res) => {
     try {
       const { username, password } = req.body;

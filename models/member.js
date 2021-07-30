@@ -10,7 +10,7 @@ const memberSchema = new mongoose.Schema({
     required: true
   },
   no_hp: {
-    type: Number,
+    type: String,
     required: true
   },
   username_ig: {

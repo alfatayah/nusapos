@@ -16,7 +16,7 @@ module.exports = {
   viewTransaction: async (req, res) => {
     try {
       const trans = await tbTrans.find()
-        .populate({ path: 'member_Id ', select: 'name no_member' })
+        .populate({ path: 'member_Id ', select: 'no_member name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };

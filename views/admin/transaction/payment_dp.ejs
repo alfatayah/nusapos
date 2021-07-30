@@ -12,7 +12,11 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" class="form-control name" name="name" placeholder="Enter Name" required />
+              <input type="text" class="form-control name" name="name" placeholder="Enter Value" required />
+            </div>
+            <div class="form-group">
+              <label for="name">Tanggal</label>
+              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>" id="datelineDP" name="datelineDP" required >
             </div>
           </div>
           <div class="modal-footer">
@@ -20,7 +24,7 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
               Close
             </button>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>
