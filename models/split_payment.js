@@ -6,7 +6,7 @@ const splitpaymentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  fisrt_changes: {
+  first_changes: {
     type: Number,
     required: true,
   },

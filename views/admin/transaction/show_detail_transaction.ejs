@@ -89,10 +89,19 @@
       }).on('changeDate', function (ev) {
         $('#tdate').datepicker('setStartDate', $("#dateline").val());
       });
-  
- 
-     
-  
+    });
+
+    $(function () {
+      $('#datelineDP').datepicker({
+        format: "dd-M-yy",
+        todayHighlight: 'TRUE',
+        autoclose: true,
+        minDate: 0,
+        startDate: new Date(),
+        maxDate: '+1Y+6M'
+      }).on('changeDate', function (ev) {
+        $('#tdate').datepicker('setStartDate', $("#datelineDP").val());
+      });
     });
   </script>
   

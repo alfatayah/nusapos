@@ -1,11 +1,21 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash-payment">Tunai </button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah Pembayaran</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transfer-payment"> Transfer </button>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dp-payment"> DP </button>
+      <div class="row">
+        <div class="col-1">
+          <a href="/admin/transaction" class="btn btn-warning">Back</a>
+        </div>
+        <div class="col-5">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash-payment">Tunai </button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah
+            Pembayaran</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transfer-payment"> Transfer </button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dp-payment"> DP </button>
+        </div>
+
+
+      </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
