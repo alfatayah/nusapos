@@ -17,7 +17,7 @@ let deployDB =  process.env.DEPLOY_DB;
 
 //import mongoose
 const mongoose = require("mongoose");
-mongoose.connect(localDB, {
+mongoose.connect(deployDB, {
   useNewUrlParser: true, 
   useUnifiedTopology: true,
   useCreateIndex: true,
