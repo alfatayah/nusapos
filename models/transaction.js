@@ -38,6 +38,14 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date_transaction: {
+    type: Date,
+    required: true,
+  },
+  user_id:{
+    type : ObjectId,
+    ref: 'user'
+  },
   note: {
     type: String,
   },
@@ -45,6 +53,28 @@ const transactionSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'transaction_detail'
   },
+  dp_id:{
+    type : ObjectId,
+    ref: 'dp_payment'
+  },
+  split_id:{
+    type : ObjectId,
+    ref: 'split_payment'
+  },
+  cash_id:{
+    type : ObjectId,
+    ref: 'cash_payment'
+  },
+  kasbon_id:{
+    type : ObjectId,
+    ref: 'kasbon_payment'
+  },
+  transfer_id:{
+    type : ObjectId,
+    ref: 'transfer_payment'
+  }
+
+
 })
 
 module.exports = mongoose.model("transaction", transactionSchema);

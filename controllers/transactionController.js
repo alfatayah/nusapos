@@ -82,7 +82,7 @@ module.exports = {
     const id = uuidv4();
     const _id = id.slice(0, 8)
 
-    const { productId, fdate, tdate, jaminan ,time , days , select2,subtotal2,diskonID, typeDiskon,diskonDataValue, totalDiskon, totalAll,  desc}  = req.body;
+    const { productId, fdate, tdate, jaminan ,time , days , select2,subtotal2,diskonID, typeDiskon,diskonDataValue, totalDiskon, totalAll,  desc, userID, dateNow }  = req.body;
    
 
     console.log("_id  " + _id);
@@ -100,6 +100,8 @@ module.exports = {
     console.log("totalDiskon  " + totalDiskon); 
     console.log("totalAll  " + totalAll); 
     console.log("desc  " + desc); 
+    console.log("userID " + userID);
+    console.log("dateNow " + dateNow);
     // try {
     //   if(!productId){
     //     req.flash("alertMessage", "Product Empty");
