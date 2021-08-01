@@ -61,27 +61,27 @@
 <script>
   $(function () {
 
-    $('#fdate').datepicker({
+    $('#start_date').datepicker({
       format: "dd-M-yy",
       todayHighlight: 'TRUE',
       autoclose: true,
       minDate: 0,
-      startDate: new Date(),
+      starend_date: new Date(),
       maxDate: '+1Y+6M'
     }).on('changeDate', function (ev) {
-      $('#tdate').datepicker('setStartDate', $("#fdate").val());
+      $('#end_date').datepicker('setStarend_date', $("#start_date").val());
     });
 
-    $('#tdate').datepicker({
+    $('#end_date').datepicker({
       format: "dd-M-yy",
       todayHighlight: 'TRUE',
       autoclose: true,
       minDate: '0',
       maxDate: '+1Y+6M'
     }).on('changeDate', function (ev) {
-      var start = $("#fdate").val();
+      var start = $("#start_date").val();
       var startD = new Date(start);
-      var end = $("#tdate").val();
+      var end = $("#end_date").val();
       var endD = new Date(end);
       var diff = parseInt((endD.getTime() - startD.getTime()) / (24 * 3600 * 1000));
       $("#days").val(diff);

@@ -5,11 +5,13 @@ const users = require('../models/user');
 const tbProduct = require('../models/product');
 const tbTrans = require('../models/transaction');
 const tbTransDetail = require('../models/transaction_detail')
+const tbDiscount = require('../models/discount');
 const tbMember = require('../models/member');
 const tbType = require('../models/type');
 const tbMerk = require('../models/merk');
 const { v4: uuidv4 } = require('uuid');
 var mongoose = require('mongoose');
+var moment = require('moment');  
 
 
 module.exports = {
@@ -79,52 +81,74 @@ module.exports = {
   },
 
   addTrans: async (req, res) => {
-    const id = uuidv4();
-    const _id = id.slice(0, 8)
-
-    const { productId, fdate, tdate, jaminan ,time , days , select2,subtotal2,diskonID, typeDiskon,diskonDataValue, totalDiskon, totalAll,  desc, userID, dateNow }  = req.body;
-   
-
-    console.log("_id  " + _id);
+    // const _id = uuidv4();
+    // const _id = id.slice(0, 8)
+    var transid = mongoose.Types.ObjectId();
+    var transdetail_id = mongoose.Types.ObjectId();
+    const trans = await tbTrans.find()
+    const numberinvoice =  trans.length + 1;
+    const invoice = "N"+ moment().format('DDMMYY') + numberinvoice ;
+    const status = "PAYMENT";
+    const { select2, productId, start_date, end_date, jaminan ,time , days , subtotal,diskonID, typeDiskon,diskonDataValue, total_discount, total,  desc_diskon, userID, date_transaction }  = req.body;
+    const product = await tbProduct.find({ _id : productId});
+  
+    console.log("transid  " + transid);
     console.log("productId  " + productId);
     console.log("jaminan  " + jaminan);
     console.log("time  " + time);
-    console.log("fdate  " + fdate);
-    console.log("tdate  " + tdate);
+    console.log("start_date  " + start_date);
+    console.log("end_date  " + end_date);
     console.log("days  " + days);
     console.log("memberID  " + select2);
     console.log("diskonID  " + diskonID);
     console.log("typeDiskon  " + typeDiskon); 
     console.log("diskonDataValue  " + diskonDataValue); 
-    console.log("subtotal2  " + subtotal2); 
-    console.log("totalDiskon  " + totalDiskon); 
-    console.log("totalAll  " + totalAll); 
-    console.log("desc  " + desc); 
+    console.log("subtotal  " + subtotal); 
+    console.log("total_discount  " + total_discount); 
+    console.log("total  " + total); 
+    console.log("desc_diskon  " + desc_diskon); 
     console.log("userID " + userID);
-    console.log("dateNow " + dateNow);
-    // try {
-    //   if(!productId){
-    //     req.flash("alertMessage", "Product Empty");
-    //     req.flash("alertStatus", "danger");
-    //     res.redirect(`/admin/dashboard`);
-    //   } else {
-    //     //This big shit
-    //     const product = await tbProduct.find({ _id : productId});
-    //     for (var i = 0; i < product.length; i++){
-    //     product[i].status = "NOT AVALAIBLE";
-    //     await product[i].save();
-    //     }
-    //     await tbTrans.create({productId ,select2, time, fdate, tdate, days ,typeDiscount , everyDiskon , jaminan ,subtotal2 ,totalDiskon, totalAll ,desc});
-    //     req.flash("alertMessage", "Succes Add Transaction");
-    //     req.flash("alertStatus", "success");
-    //     res.redirect(`/admin/dashboard`);
-    //     // await tbBooking.deleteMany();
-    //   }
-    // } catch (error) {
-    //   req.flash("alertMessage", `${error.message}`);
-    //   req.flash("alertStatus", 'danger');
-    //   res.redirect(`/admin/dashboard`);
-    // }
+    console.log("date_transaction " + date_transaction);
+    console.log("invoice " + invoice);
+    try {
+      if(!productId || product.status === "NOT AVALAIBLE" ){
+        req.flash("alertMessage", "Product Empty or Not Avalaible");
+        req.flash("alertStatus", "danger");
+        res.redirect(`/admin/dashboard`);
+      } else {
+        const newTransaction = {
+          _id: transid,
+          member_Id: select2, 
+          subtotal, 
+          total,
+          total_discount, 
+          start_date, 
+          end_date, 
+          days,
+          invoice,
+          status, 
+          jaminan,
+          date_transaction,
+          userID,
+          desc_diskon,
+          transdetail_id,
+        }
+        await tbTrans.create(newTransaction);
+        await tbTransDetail.create({ _id:transdetail_id , product_Id:productId, discountId: diskonID, transaction_Id: transid })
+     
+        for (var i = 0; i < product.length; i++){
+        product[i].status = "NOT AVALAIBLE";
+        await product[i].save();
+        }
+        req.flash("alertMessage", "Succes Add Transaction");
+        req.flash("alertStatus", "success");
+        res.redirect(`/admin/dashboard`);
+      }
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect(`/admin/dashboard`);
+    }
   },
 
 }

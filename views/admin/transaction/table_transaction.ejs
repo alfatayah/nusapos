@@ -13,7 +13,6 @@
               <th>Diskon</th>
               <th>Total</th>
               <th>Jaminan</th>
-              <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -26,8 +25,7 @@
               <td><%= trans[i].subtotal %></td>
               <td><%= trans[i].total_discount %></td>
               <td><%= trans[i].total %></td>
-              <td><%= trans[i].guarantee %></td>
-              <td><%= trans[i].note %></td>
+              <td><%= trans[i].jaminan %></td>
               <td>
                 <a href="/admin/transaction/<%= trans[i].transdetail_id %> " class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-eye"></i></a>

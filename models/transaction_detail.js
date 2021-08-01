@@ -13,17 +13,6 @@ const transaction_detailSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'transaction'
   }],
-  product_name: {
-    type: String,
-    required: true
-  },
-  price: {
-    type: Number,
-    required: true
-  },
-  note: {
-    type: String,
-  },
 })
 
 module.exports = mongoose.model("transaction_detail", transaction_detailSchema);

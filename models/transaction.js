@@ -26,6 +26,10 @@ const transactionSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  days:{
+    type: Number,
+    required: true
+  },
   invoice: {
     type: String,
     required: true
@@ -34,7 +38,7 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  guarantee: {
+  jaminan: {
     type: String,
     required: true,
   },
@@ -46,9 +50,9 @@ const transactionSchema = new mongoose.Schema({
     type : ObjectId,
     ref: 'user'
   },
-  note: {
+  desc_diskon: [{
     type: String,
-  },
+  }],
   transdetail_id: {
     type: ObjectId,
     ref: 'transaction_detail'

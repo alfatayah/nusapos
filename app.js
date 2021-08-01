@@ -40,7 +40,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   // ini nanti di uncomment buat max time session nya
-  cookie: { maxAge: 50000 }
+  cookie: { maxAge: 500000 }
 }))
 app.use(flash());
 

@@ -84,10 +84,10 @@
         todayHighlight: 'TRUE',
         autoclose: true,
         minDate: 0,
-        startDate: new Date(),
+        starend_date: new Date(),
         maxDate: '+1Y+6M'
       }).on('changeDate', function (ev) {
-        $('#tdate').datepicker('setStartDate', $("#dateline").val());
+        $('#end_date').datepicker('setStarend_date', $("#dateline").val());
       });
     });
 
@@ -97,10 +97,10 @@
         todayHighlight: 'TRUE',
         autoclose: true,
         minDate: 0,
-        startDate: new Date(),
+        starend_date: new Date(),
         maxDate: '+1Y+6M'
       }).on('changeDate', function (ev) {
-        $('#tdate').datepicker('setStartDate', $("#datelineDP").val());
+        $('#end_date').datepicker('setStarend_date', $("#datelineDP").val());
       });
     });
   </script>
