@@ -9,11 +9,11 @@
 <script src="/sb-admin-2/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="/sb-admin-2/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="/sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- <script src="/sb-admin-2/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/sb-admin-2/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
 
 <!-- Page level custom scripts -->
-<script src="/sb-admin-2/js/demo/datatables-demo.js"></script>
+<!-- <script src="/sb-admin-2/js/demo/datatables-demo.js"></script> -->
 <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 
 
@@ -65,7 +65,7 @@
     document.getElementById(diskonID).value = dataidDiskon;
 
     if (ex) {
-      var subtotal = parseInt(document.getElementById("subtotal2").value);
+      var subtotal = parseInt(document.getElementById("subtotal").value);
       var idDiskon = parseInt(document.getElementById("arrayidDiskon").value);
       var total = 0;
       for (var i = 1; i <= idDiskon; i++) {
@@ -75,10 +75,10 @@
         }
       }
       var days = parseInt(document.getElementById("days").value);
-      var diskon = document.getElementById('totalDiskon').value = total;
+      var diskon = document.getElementById('total_discount').value = total;
       if(days){
         var finalTotal = subtotal * days - diskon 
-        document.getElementById('totalAll').value = finalTotal;
+        document.getElementById('total').value = finalTotal;
       }
 
     }
@@ -98,38 +98,38 @@
 <script>
   $(function () {
 
-    $('#fdate').datepicker({
+    $('#start_date').datepicker({
       format: "dd-M-yy",
       todayHighlight: 'TRUE',
       autoclose: true,
       minDate: 0,
-      startDate: new Date(),
+      starend_date: new Date(),
       maxDate: '+1Y+6M'
     }).on('changeDate', function (ev) {
-      $('#tdate').datepicker('setStartDate', $("#fdate").val());
+      $('#end_date').datepicker('setStarend_date', $("#start_date").val());
     });
 
-    $('#tdate').datepicker({
+    $('#end_date').datepicker({
       format: "dd-M-yy",
       todayHighlight: 'TRUE',
       autoclose: true,
       minDate: '0',
       maxDate: '+1Y+6M'
     }).on('changeDate', function (ev) {
-      $('#tdate').datepicker('setStartDate', $("#fdate").val());
-      var start = $("#fdate").val();
+      $('#end_date').datepicker('setStarend_date', $("#start_date").val());
+      var start = $("#start_date").val();
       var startD = new Date(start);
-      var end = $("#tdate").val();
+      var end = $("#end_date").val();
       var endD = new Date(end);
       var diff = parseInt((endD.getTime() - startD.getTime()) / (24 * 3600 * 1000));
       $("#days").val(diff);
 
-      var subtotal = parseInt(document.getElementById("subtotal2").value);
-      var diskon = document.getElementById('totalDiskon').value
+      var subtotal = parseInt(document.getElementById("subtotal").value);
+      var diskon = document.getElementById('total_discount').value
       var days = parseInt(document.getElementById("days").value);
       if (diskon) {
         var finalTotal = subtotal * days - diskon
-        document.getElementById('totalAll').value = finalTotal;
+        document.getElementById('total').value = finalTotal;
       }
    
     });

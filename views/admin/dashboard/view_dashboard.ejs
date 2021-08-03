@@ -75,8 +75,20 @@
                       <div class="row">
                   
                         <div class="col">
-                          <div class="form-group">
+                          <!-- TODO: ini nanti di uncommnet untuk di push -->
+                          <!-- <div class="form-group">
                             <select class="form-control " name ="select2" id="select2" required>
+                              <option selected disabled value="">Member</option>
+                              <%# for(var i = 0; i < member.length; i++){ %>
+                              <option value=<%#= member[i]._id %> ><%#= member[i].name %></option>
+                              <%# } %>
+                            </select>
+                          </div> -->
+
+                          
+                       <!-- TODO: ini nanti di uncommnet untuk di push -->
+                          <div class="form-group">
+                            <select class="form-control " name ="select2" required>
                               <option selected disabled value="">Member</option>
                               <% for(var i = 0; i < member.length; i++){ %>
                               <option value=<%= member[i]._id %> ><%= member[i].name %></option>
@@ -95,11 +107,11 @@
                           </div>
                         </div>
                         <div class="col">
-                          <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>" id="fdate" name="fdate" required >
+                          <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>" id="start_date" name="start_date" required >
                         </div>
                         
                         <div class="col">
-                          <input class="form-control " type="text"  placeholder="<%= moment().format('DD-MMM-YY') %>" id="tdate" name="tdate" required >
+                          <input class="form-control " type="text"  placeholder="<%= moment().format('DD-MMM-YY') %>" id="end_date" name="end_date" required >
                         </div>
                   
                           <input class="form-control"  name="time" value="<%= moment().format('LT') %>" type="hidden"  />
@@ -146,19 +158,21 @@
                             <div class="col">
                             </div>
                           </div>
-                          <input class="form-control" type="text"  placeholder="Description" name="desc" >
+                          <input class="form-control" type="text"  placeholder="Description" name="desc_diskon" >
                         </div>
                       </div>
                       <% } %>
                   
                      <div style="width: 18rem;" class="card shadow mb-4">
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> Subtotal :  <input  class="form-control" value=" <%= subtotal %>" type="text" id="subtotal2" name="subtotal2" readonly="true" /></li>
+                        <li class="list-group-item"> Subtotal :  <input  class="form-control" value=" <%= subtotal %>" type="text" id="subtotal" name="subtotal" readonly="true" /></li>
                         <li class="list-group-item"> Rental Days :  <input class="form-control"  type="number" name="days"  id="days" readonly="true" /></li>
-                          <li class="list-group-item">Diskon     :   <input class="form-control"  type="text" id="totalDiskon" name="totalDiskon" readonly="true" /> </li>
-                        <li class="list-group-item">Total     : <input class="form-control"  type="text" id="totalAll" name="totalAll" readonly="true" /> </li>
+                          <li class="list-group-item">Diskon     :   <input class="form-control"  type="text" id="total_discount" name="total_discount" readonly="true" /> </li>
+                        <li class="list-group-item">Total     : <input class="form-control"  type="text" id="total" name="total" readonly="true" /> </li>
                       </ul>
                     </div>
+                    <input type="hidden" class="form-control" id= "userID" name="userID" value="<%= user.id  %> "  >
+                    <input type="hidden" class="form-control" id= "date_transaction" name="date_transaction" value="<%= moment().format('lll') %> "  >
                     <div style="margin-bottom: 1rem;" class="card-body">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

@@ -29,12 +29,11 @@
             </tr>
           </thead>
           <tbody>
-            <% for(let i = 0; i < TransDetail.product_Id.length; i++) { %>
+            <% for(let i = 0; i < trans.product_Id.length; i++) { %>
             <tr>
               <td><%= i + 1 %></td>
-              <td><%= TransDetail.product_Id[i].product_name%></td>
-              <td><%= TransDetail.product_Id[i].price%></td>
-              <td><%= TransDetail.product_Id[i].description%></td>
+              <td><%= trans.product_Id[i].product_name%></td>
+              <td><%= trans.product_Id[i].price%></td>
               <td>
                 <a href="/admin/transaction/ %> " class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-eye"></i></a>
