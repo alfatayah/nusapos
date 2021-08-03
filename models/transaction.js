@@ -19,11 +19,11 @@ const transactionSchema = new mongoose.Schema({
     required: true
   },
   start_date: {
-    type: Date,
+    type: String,
     required: true
   },
   end_date: {
-    type: Date,
+    type: String,
     required: true
   },
   days:{
@@ -43,7 +43,7 @@ const transactionSchema = new mongoose.Schema({
     required: true,
   },
   date_transaction: {
-    type: Date,
+    type: String,
     required: true,
   },
   user_id:{
@@ -52,6 +52,14 @@ const transactionSchema = new mongoose.Schema({
   },
   desc_diskon: [{
     type: String,
+  }],
+  product_Id:[{
+    type: ObjectId,
+    ref: 'product'
+  }],
+  discountId:[{
+    type: ObjectId,
+    ref: 'discount'
   }],
   transdetail_id: {
     type: ObjectId,

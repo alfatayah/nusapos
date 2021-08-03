@@ -259,60 +259,24 @@ var data = [
     'documents': [  
       {
         _id: mongoose.Types.ObjectId('5e961be292b97300fc101245'),
-        product_Id: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
-          { _id: mongoose.Types.ObjectId('1e96cbe292b97310fc90bb01') },
-        ],
-        discountId: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc91144d') },
-          { _id: mongoose.Types.ObjectId('1e96cbe292b97300fc321242') },
-        ] ,
         transaction_Id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101445') },
       },
       {
         _id: mongoose.Types.ObjectId('5e92cbe292b97300fc101245'),
-        product_Id: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
-        ],
-        discountId: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc91144d') },
-        ] ,
         transaction_Id: { _id: mongoose.Types.ObjectId('1e96cbe292b97300fc101445') },
       },
       {
         _id: mongoose.Types.ObjectId('1396cbe292b97300fc101245'),
-        product_Id: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
-        ],
-        discountId: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc91144d') },
-        ] ,
         transaction_Id: { _id: mongoose.Types.ObjectId('2e96cbe292b97300fc101445') },
       },
       {
         _id: mongoose.Types.ObjectId('3496cbe292b97300fc101245'),
-        product_Id: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
-        ],
-        discountId: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc91144d') },
-        ] ,
         transaction_Id: { _id: mongoose.Types.ObjectId('2e16cbe292b97300fc101445') },
       },
       {
         _id: mongoose.Types.ObjectId('3496bbe292b97300fc101245'),
-        product_Id: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
-          { _id: mongoose.Types.ObjectId('1e96cbe292b97310fc90bb01') },
-        ],
-        discountId: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc91144d') },
-          { _id: mongoose.Types.ObjectId('1e96cbe292b97300fc321242') },
-        ] ,
         transaction_Id: { _id: mongoose.Types.ObjectId('2116cbe292b97300fc101445') },
       },
-
-      
     ]
   },
   {

@@ -42,14 +42,14 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-      const TransDetail = await tbTransDetail.findOne({ _id: id })
-      .populate("transaction_Id")
+      const trans = await tbTrans.findOne({ _id: id })
       .populate("product_Id")
       .populate("discountId");
+      console.log("transdetail " , trans);
       res.render("admin/transaction/show_detail_transaction", {
         title: "Staycation | Detail Transaction",
         user: req.session.user,
-        TransDetail,
+        trans,
         alert
       });
     } catch (error) {
@@ -130,11 +130,14 @@ module.exports = {
           jaminan,
           date_transaction,
           userID,
+          product_Id: productId,
+          discountId: diskonID,
           desc_diskon,
           transdetail_id,
         }
         await tbTrans.create(newTransaction);
-        await tbTransDetail.create({ _id:transdetail_id , product_Id:productId, discountId: diskonID, transaction_Id: transid })
+        await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid })
+        // const productAll = tbProduct.find();
      
         for (var i = 0; i < product.length; i++){
         product[i].status = "NOT AVALAIBLE";
