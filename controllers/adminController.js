@@ -12,6 +12,16 @@ const { v4: uuidv4 } = require('uuid');
 var list = [];
 module.exports = {
   
+ 
+  /** @module color/mixer
+   * ini buat apa aja
+   * @param  {asdasd} req
+   * @param  {asdasd} res
+   * @param  {asdasd} =>{try{constalertMessage=req.flash('alertMessage'
+   * @param  {asdasd} ;constalertStatus=req.flash('alertStatus'
+   * @param  {alertMessage} ;constalert={message
+   * @param  {alertStatus};if(req.session.user===null||req.session.user==undefined} status
+   */
   viewSignIn: async (req, res) => {
     try {
       const alertMessage = req.flash('alertMessage');
@@ -28,7 +38,6 @@ module.exports = {
     } catch (error) {
       res.redirect('/admin/signin');
     }
-    
   },
 
   viewDoc: async (req, res) => {
