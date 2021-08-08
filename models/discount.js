@@ -3,8 +3,6 @@ const { ObjectId } = mongoose.Schema;
 
 const discountSchema = new mongoose.Schema({
   typeDiscount: {
-    // enum : ['Diskon','Potongan'],
-    // default: 'Diskon'
     type: String,
     required: true
   },
@@ -19,10 +17,6 @@ const discountSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  product_id:[{
-    type: ObjectId,
-    ref: "product"
-  }]
   
 })
 

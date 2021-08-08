@@ -19,10 +19,11 @@
               </button>
 
               <!-- Topbar Search -->
-              <form action="/admin/dashboard/addBook" method="POST" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+              <form action="/admin/dashboard/addBook" method="POST"
+                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                  <input type="text"  name="barcode" class="form-control bg-light border-0 small" placeholder="Search for..."
-                    aria-label="Search" aria-describedby="basic-addon2">
+                  <input type="text" name="barcode" class="form-control bg-light border-0 small"
+                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
                       <i class="fas fa-search fa-sm"></i>
@@ -60,158 +61,166 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
               <%- include('../../partials/message.ejs') %>
-              
-              <!-- Page Heading -->
-              <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
-          
-             
-              <!-- Content Row -->
-              <div class="row">
-                <div class="col-lg-6">
-                  <div>
-                  <!-- form add trans dimasukin ke sini : no 1 -->
-                  <form action="/admin/transaction/addTrans" method="POST" >
-                    <div class="container">
-                      <div class="row">
-                  
-                        <div class="col">
-                          <!-- TODO: ini nanti di uncommnet untuk di push -->
-                          <!-- <div class="form-group">
-                            <select class="form-control " name ="select2" id="select2" required>
-                              <option selected disabled value="">Member</option>
-                              <%# for(var i = 0; i < member.length; i++){ %>
-                              <option value=<%#= member[i]._id %> ><%#= member[i].name %></option>
-                              <%# } %>
-                            </select>
-                          </div> -->
 
-                          
-                       <!-- TODO: ini nanti di uncommnet untuk di push -->
-                          <div class="form-group">
-                            <select class="form-control " name ="select2" required>
-                              <option selected disabled value="">Member</option>
-                              <% for(var i = 0; i < member.length; i++){ %>
-                              <option value=<%= member[i]._id %> ><%= member[i].name %></option>
-                              <% } %>
-                            </select>
-                          </div>
-                        </div>
-                  
-                        <div class="col">
-                          <div class="form-group">
-                            <select class="form-control" name="jaminan" required>
-                              <option selected disabled value="">Jaminan</option>
-                              <option value="KTP">KTP / Kartu Pelajar</option>
-                              <option value="kartukeluarga">Kartu Keluarga</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>" id="start_date" name="start_date" required >
-                        </div>
-                        
-                        <div class="col">
-                          <input class="form-control " type="text"  placeholder="<%= moment().format('DD-MMM-YY') %>" id="end_date" name="end_date" required >
-                        </div>
-                  
-                          <input class="form-control"  name="time" value="<%= moment().format('LT') %>" type="hidden"  />
-                    
-                      </div>
-                    </div>
-                    <% var subtotal = 0;  %>
-                    <% var generateID = 1;  %>
-                    <% let diskonValue   %>
-                      <% for(var i = 0; i < list.length; i++){ %>
-                      <input class="form-control" type="hidden" value=<%= subtotal += list[i].price %> >
-                      <input type="hidden"  name="productId"  value=<%= list[i]._id %>  >
-                      <div class="card shadow mb-4">
-                        <div class="card-header">
-                          <div class="row justify-content-between">
-                            <div class="col-4">
-                              <h6 class="m-0 font-weight-bold text-primary"> <%= list[i].product_name %> </h6>
-                            </div>
-                            <div class="col-4">
-                              <input class="form-control" type="number" id="price" name="price" value="<%= list[i].price %>" readonly="true" >
-                              </div>
-                          </div> 
-                        </div>
-                       
-                        <div class="card-body">
-                          <div class="row">
-                            <div class="col">
-                              <div class="form-group" >
-                                <select class="form-control"  id="discountValue<%= generateID + i  %>" name="discountValue" onchange="displayValue('<%= JSON.stringify(generateID + i) %>')" >
-                                  <option selected disabled value="">Type Diskon</option>
-                                  <% for(var x = 0; x < list[i].discount_id.length; x++){ %>
-                                    <option value=<%= list[i].discount_id[x].amount + '^' +  list[i].discount_id[x].id + '^' +  list[i].discount_id[x].typeDiscount %> > <%= list[i].discount_id[x].typeDiscount %></option>
-                                    <% } %>
-                                  </select>
-                              </div>
-                            </div>
-                            <div class="col">
-                              <input type="number" class="form-control" name="diskonDataValue" value="" id= "diskon<%= generateID + i  %>" readonly="true" >
-                              <!-- ini buat dapetin value jumlah array nya -->
-                              <input type="hidden" class="form-control" id="arrayidDiskon" name="arrayidDiskon" value=<%=  list.length  %> >
-                              <input type="hidden" class="form-control" id= "diskonID<%= generateID + i  %>" name="diskonID"  >
-                              <input type="hidden" class="form-control" id= "typeDiskon<%= generateID + i  %>" name="typeDiskon"  >
-                            </div>
-                            <div class="col">
-                            </div>
-                          </div>
-                          <input class="form-control" type="text"  placeholder="Description" name="desc_diskon" >
-                        </div>
-                      </div>
-                      <% } %>
-                  
-                     <div style="width: 18rem;" class="card shadow mb-4">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item"> Subtotal :  <input  class="form-control" value=" <%= subtotal %>" type="text" id="subtotal" name="subtotal" readonly="true" /></li>
-                        <li class="list-group-item"> Rental Days :  <input class="form-control"  type="number" name="days"  id="days" readonly="true" /></li>
-                          <li class="list-group-item">Diskon     :   <input class="form-control"  type="text" id="total_discount" name="total_discount" readonly="true" /> </li>
-                        <li class="list-group-item">Total     : <input class="form-control"  type="text" id="total" name="total" readonly="true" /> </li>
-                      </ul>
-                    </div>
-                    <input type="hidden" class="form-control" id= "userID" name="userID" value="<%= user.id  %> "  >
-                    <input type="hidden" class="form-control" id= "date_transaction" name="date_transaction" value="<%= moment().format('lll') %> "  >
-                    <div style="margin-bottom: 1rem;" class="card-body">
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                
-                  
-                  </form>
-                  </div>
-              
-                </div>
+                <!-- Page Heading -->
+                <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
 
-                
-                <div class="col-lg-6">
-                  <div class="col-sm-12 mb-3">
-                    <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()" placeholder="Search for names..">
-                  </div>
-                  <div class="row"  id="myItems">
-                    <% for(let i = 0; i < product.length; i++){ %>
-                    <div class="card" style="width: 12rem; margin-right: 1rem; margin-left: 1rem; margin-bottom: 1rem">
-                      <img src="https://nusapos.herokuapp.com/images/1.webp" alt="image" class="card-img-top"
-                        style="height: 13rem;  object-fit: contain">
-                      <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                          <div class="col mr-2">
-                            <div class="text-xs">
-                              <%= product[i].product_name %> </div>
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-0">
-                              <%= product[i].status %></div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <%= product[i].price %></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <% } %>
-                  </div>
-                </div>
 
                 <!-- Content Row -->
-              </div>
-              <!-- /.container-fluid -->
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div>
+                      <!-- form add trans dimasukin ke sini : no 1 -->
+                      <form action="/admin/transaction/addTrans" method="POST">
+                        <div class="container">
+                          <div class="row">
+
+
+
+                            <div class="col">
+                              <div class="form-group">
+                                <select class="form-control" name="jaminan" required>
+                                  <option selected disabled value="">Jaminan</option>
+                                  <option value="KTP">KTP / Kartu Pelajar</option>
+                                  <option value="kartukeluarga">Kartu Keluarga</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col">
+                              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>"
+                                id="start_date" name="start_date" required>
+                            </div>
+
+                            <div class="col">
+                              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>"
+                                id="end_date" name="end_date" required>
+                            </div>
+                            <input class="form-control" name="time" value="<%= moment().format('LT') %>"
+                              type="hidden" />
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <select class="form-control" name="Diskon" required>
+                                  <option selected disabled value="">Diskon</option>
+                                  <% for(var i=0; i < discount.length; i++){ %>
+                                    <option value=<%= discount[i]._id %> ><%= discount[i].typeDiscount %>
+                                    </option>
+                                    <% } %>
+                                </select>
+                              </div>
+
+                            </div>
+                            <div class="col">
+                              <div class="form-group">
+                                <select class="form-control " name="select2" id="select2" required>
+                                  <option selected disabled value="">Member</option>
+                                  <% for(var i=0; i < member.length; i++){ %>
+                                    <option value=<%=member[i]._id %> ><%= member[i].name %>
+                                    </option>
+                                    <% } %>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div class="col">
+                              <input class="form-control" type="text" placeholder="Description" name="desc_diskon">
+                            </div>
+
+                          </div>
+                        </div>
+                        <% var subtotal=0; %>
+                          <% var generateID=1; %>
+                            <% let diskonValue %>
+                            <div class="row" id="myItems">
+                              <% for(var i=0; i < list.length; i++){ %>
+                                <input class="form-control" type="hidden" value=<%=subtotal +=list[i].price %> >
+                                <input type="hidden" name="productId" value=<%=list[i]._id %> >
+
+                                <div class="card"
+                                style="width: 10rem; margin-right: 1rem; margin-left: 1rem; margin-bottom: 1rem">
+                                <img src="http://localhost:3001/<%= list[i].image %>" alt="image" class="card-img-top"
+                                  style="height: 13rem;  object-fit: contain">
+                                <div class="card-body">
+                                  <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                      <div class="text-xs">
+                                        <%= list[i].product_name %>
+                                      </div>
+                                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-0">
+                                        <%= list[i].status %>
+                                      </div>
+                                      <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <%= list[i].price %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                               <% } %>
+                              </div>
+
+                                  <div style="width: 18rem;" class="card shadow mb-4">
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item"> Subtotal : <input class="form-control"
+                                          value=" <%= subtotal %>" type="text" id="subtotal" name="subtotal"
+                                          readonly="true" /></li>
+                                      <li class="list-group-item"> Rental Days : <input class="form-control"
+                                          type="number" name="days" id="days" readonly="true" /></li>
+                                      <li class="list-group-item">Diskon : <input class="form-control" type="text"
+                                          id="total_discount" name="total_discount" readonly="true" /> </li>
+                                      <li class="list-group-item">Total : <input class="form-control" type="text"
+                                          id="total" name="total" readonly="true" /> </li>
+                                    </ul>
+                                  </div>
+                                  <input type="hidden" class="form-control" id="userID" name="userID"
+                                    value="<%= user.id  %> ">
+                                  <input type="hidden" class="form-control" id="date_transaction"
+                                    name="date_transaction" value="<%= moment().format('lll') %> ">
+                                  <div style="margin-bottom: 1rem;" class="card-body">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                  </div>
+
+
+                      </form>
+                    </div>
+
+                  </div>
+
+
+                  <div class="col-lg-6">
+                    <div class="col-sm-12 mb-3">
+                      <input type="text" id="myFilter" class="form-control" onkeyup="myFunction()"
+                        placeholder="Search for names..">
+                    </div>
+                    <div class="row" id="myItems">
+                      <% for(let i=0; i < product.length; i++){ %>
+                        <div class="card"
+                          style="width: 10rem; margin-right: 1rem; margin-left: 1rem; margin-bottom: 1rem">
+                          <img src="https://nusapos.herokuapp.com/images/1.webp" alt="image" class="card-img-top"
+                            style="height: 13rem;  object-fit: contain">
+                          <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                              <div class="col mr-2">
+                                <div class="text-xs">
+                                  <%= product[i].product_name %>
+                                </div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-0">
+                                  <%= product[i].status %>
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <%= product[i].price %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <% } %>
+                    </div>
+                  </div>
+
+                  <!-- Content Row -->
+                </div>
+                <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
 
@@ -256,4 +265,3 @@
   </body>
 
   </html>
-

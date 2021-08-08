@@ -202,8 +202,8 @@ module.exports = {
   viewDashboard: async (req, res) => {
     try {
       const product = await tbProduct.find()
-      .populate({ path: 'discount_id', select: 'typeDiscount amount' })
       const member = await tbMember.find()
+      const discount = await tbDiscount.find() 
     if( product.length ==  list.length ){
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
@@ -213,6 +213,7 @@ module.exports = {
         user: req.session.user,
         product,
         member,
+        discount,
         alert,
         list
       });
@@ -225,6 +226,7 @@ module.exports = {
         user: req.session.user,
         product,
         member,
+        discount,
         alert,
         list
       });
@@ -249,6 +251,7 @@ module.exports = {
       .populate({ path: 'discount_id', select: 'typeDiscount amount' })
       
       const member = await tbMember.find()
+      const discount = await tbDiscount.find();
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
@@ -261,12 +264,14 @@ module.exports = {
         res.redirect(`/admin/dashboard`);
       } else {
         list.push(productSearch);
+        console.table("list " , list);
         res.render('admin/dashboard/view_dashboard', {
           title: "Nusa | Dashboard",
           user: req.session.user,
           product,
           list,
           member,
+          discount,
           alert
         });
       }
