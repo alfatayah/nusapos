@@ -15,5 +15,5 @@ it('add transaction' , function () {
     cy.get(':nth-child(4) > .card-body > [type="text"]').type("order aja")
     cy.get('#discountValue2').select("2000^1e96cbe292b97300fc321242^Discount_Percent")
     cy.get(':nth-child(7) > .card-body > [type="text"]').type("sip oke")
-    cy.get('[style="margin-bottom: 1rem;"] > .btn').click()
+    // cy.get('[style="margin-bottom: 1rem;"] > .btn').click()
 })

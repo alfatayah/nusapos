@@ -34,10 +34,6 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  discount_id:[{
-    type: ObjectId,
-    ref: "discount"
-  }]
 })
 
 module.exports = mongoose.model("product", productSchema);
