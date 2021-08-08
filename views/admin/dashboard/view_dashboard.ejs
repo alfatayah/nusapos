@@ -23,7 +23,7 @@
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
                   <input type="text" name="barcode" class="form-control bg-light border-0 small"
-                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" required>
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
                       <i class="fas fa-search fa-sm"></i>
@@ -76,7 +76,47 @@
                           <div class="row">
 
 
+                            <div class="col">
+                              <div class="form-group">
+                                <select class="form-control " name="select2" id="select2" required>
+                                  <option selected disabled value="">Member</option>
+                                  <% for(var i=0; i < member.length; i++){ %>
+                                    <option value=<%= member[i]._id %> ><%= member[i].name %>
+                                    </option>
+                                    <% } %>
+                                </select>
+                              </div>
+                            </div>
+                            <!-- <div class="col">
+                              <input class="form-control " type="text" placeholder="<%# moment().format('DD-MMM-YY') %>"
+                                id="start_date" name="start_date" required>
+                            </div>
 
+                            <div class="col">
+                              <input class="form-control " type="text" placeholder="<%# moment().format('DD-MMM-YY') %>"
+                                id="end_date" name="end_date" required>
+                            </div> -->
+
+                            <div class="col">
+                              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>"
+                              name="datetimes" required>
+                            </div>
+
+                            <input class="form-control" name="time" value="<%= moment().format('LT') %>"
+                              type="hidden" />
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <select class="form-control" id="discountValue" name="discountValue" onchange="onChangeDiskon() " >
+                                  <option selected disabled value="">Diskon</option>
+                                  <% for(var x = 0; x < discount.length; x++){ %>
+                                    <option value=<%= discount[x].id + '^' +  discount[x].amount %> > <%= discount[x].typeDiscount %></option>
+                                    <% } %>
+                                </select>
+                              </div>
+
+                            </div>
                             <div class="col">
                               <div class="form-group">
                                 <select class="form-control" name="jaminan" required>
@@ -86,46 +126,11 @@
                                 </select>
                               </div>
                             </div>
+                          
+
 
                             <div class="col">
-                              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>"
-                                id="start_date" name="start_date" required>
-                            </div>
-
-                            <div class="col">
-                              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>"
-                                id="end_date" name="end_date" required>
-                            </div>
-                            <input class="form-control" name="time" value="<%= moment().format('LT') %>"
-                              type="hidden" />
-                          </div>
-                          <div class="row">
-                            <div class="col">
-                              <div class="form-group">
-                                <select class="form-control" name="Diskon" required>
-                                  <option selected disabled value="">Diskon</option>
-                                  <% for(var i=0; i < discount.length; i++){ %>
-                                    <option value=<%= discount[i]._id %> ><%= discount[i].typeDiscount %>
-                                    </option>
-                                    <% } %>
-                                </select>
-                              </div>
-
-                            </div>
-                            <div class="col">
-                              <div class="form-group">
-                                <select class="form-control " name="select2" id="select2" required>
-                                  <option selected disabled value="">Member</option>
-                                  <% for(var i=0; i < member.length; i++){ %>
-                                    <option value=<%=member[i]._id %> ><%= member[i].name %>
-                                    </option>
-                                    <% } %>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col">
-                              <input class="form-control" type="text" placeholder="Description" name="desc_diskon">
+                              <input class="form-control" type="text" placeholder="Description" name="desc_trans">
                             </div>
 
                           </div>
@@ -175,6 +180,7 @@
                                   </div>
                                   <input type="hidden" class="form-control" id="userID" name="userID"
                                     value="<%= user.id  %> ">
+                                    <input type="hidden" class="form-control" id="diskonID" name="diskonID">
                                   <input type="hidden" class="form-control" id="date_transaction"
                                     name="date_transaction" value="<%= moment().format('lll') %> ">
                                   <div style="margin-bottom: 1rem;" class="card-body">
