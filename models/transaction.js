@@ -50,9 +50,9 @@ const transactionSchema = new mongoose.Schema({
     type : ObjectId,
     ref: 'user'
   },
-  desc_diskon: [{
+  desc_trans: {
     type: String,
-  }],
+  },
   product_Id:[{
     type: ObjectId,
     ref: 'product'

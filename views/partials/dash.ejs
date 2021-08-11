@@ -22,9 +22,47 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script> 
 
+
+<!-- script date range -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <!-- seacrh and input combo box -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+
+<script>
+  $('#select2').select2();
+</script>
+<!-- script date range -->
+<script>
+  $(function () {
+    $('input[name="datetimes"]').daterangepicker({
+      // timePicker: true,
+      minDate: new Date(),
+      startDate: new Date(),
+    }).on('hide.daterangepicker', function (ev, picker) {
+      var start = moment(picker.startDate.format('DD-MMM-YY'));
+      var end = moment(picker.endDate.format('DD-MMM-YY'));
+      var diff = end.diff(start, 'days');
+      $("#days").val(diff);
+      let totalDiskon = document.getElementById("total_discount").value
+      var subtotal = parseInt(document.getElementById("subtotal").value);
+      if(totalDiskon){
+        var finalTotal = subtotal * diff - totalDiskon
+        document.getElementById('total').value = finalTotal;
+      } else {
+        var finalTotal2 = subtotal * diff;
+        document.getElementById('total').value = finalTotal2;
+      }
+    })
+  });
+
+  </script>
+
 
 <!-- script untuk search -->
 <script>
@@ -43,44 +81,24 @@
       }
     }
   }
+</script>
 
-
-
-  function displayValue(data) {
-
-    var id = "diskon" + data;
-    let idValue = "discountValue" + data;
-    let diskonID = "diskonID" + data;
-    let type_id = "typeDiskon" + data;
-    let concat = document.getElementById(idValue).value;
-    var output = concat.split('^');
-
-    var exType = output[2];
-    document.getElementById(type_id).value = exType;
-
-    var ex = parseInt(output[0]);
-    document.getElementById(id).value = ex;
-
-    var dataidDiskon = output[1]
-    document.getElementById(diskonID).value = dataidDiskon;
-
-    if (ex) {
-      var subtotal = parseInt(document.getElementById("subtotal").value);
-      var idDiskon = parseInt(document.getElementById("arrayidDiskon").value);
-      var total = 0;
-      for (var i = 1; i <= idDiskon; i++) {
-        var val = parseInt(document.getElementById("diskon" + i).value);
-        if (val > 0) {
-          total += val;
-        }
-      }
-      var days = parseInt(document.getElementById("days").value);
-      var diskon = document.getElementById('total_discount').value = total;
-      if(days){
-        var finalTotal = subtotal * days - diskon 
-        document.getElementById('total').value = finalTotal;
-      }
-
+<script>
+  function onChangeDiskon() {
+    let diskon = document.getElementById("discountValue").value;
+    var output = diskon.split('^');
+    var diskonID = output[0];
+    var amount = output[1];
+    document.getElementById("diskonID").value = diskonID;
+    document.getElementById("total_discount").value = amount;
+    var subtotal = parseInt(document.getElementById("subtotal").value);
+    var days = document.getElementById("days").value
+    if (days) {
+      var finalTotal = subtotal * days - amount
+      document.getElementById('total').value = finalTotal;
+    } else {
+      var finalTotal2 = subtotal - amount
+      document.getElementById('total').value = finalTotal2;
     }
   }
  
@@ -89,50 +107,5 @@
 
 
 
-<script>
-  $('#select2').select2();
-</script>
 
 
-
-<script>
-  $(function () {
-
-    $('#start_date').datepicker({
-      format: "dd-M-yy",
-      todayHighlight: 'TRUE',
-      autoclose: true,
-      minDate: 0,
-      starend_date: new Date(),
-      maxDate: '+1Y+6M'
-    }).on('changeDate', function (ev) {
-      $('#end_date').datepicker('setStarend_date', $("#start_date").val());
-    });
-
-    $('#end_date').datepicker({
-      format: "dd-M-yy",
-      todayHighlight: 'TRUE',
-      autoclose: true,
-      minDate: '0',
-      maxDate: '+1Y+6M'
-    }).on('changeDate', function (ev) {
-      $('#end_date').datepicker('setStarend_date', $("#start_date").val());
-      var start = $("#start_date").val();
-      var startD = new Date(start);
-      var end = $("#end_date").val();
-      var endD = new Date(end);
-      var diff = parseInt((endD.getTime() - startD.getTime()) / (24 * 3600 * 1000));
-      $("#days").val(diff);
-
-      var subtotal = parseInt(document.getElementById("subtotal").value);
-      var diskon = document.getElementById('total_discount').value
-      var days = parseInt(document.getElementById("days").value);
-      if (diskon) {
-        var finalTotal = subtotal * days - diskon
-        document.getElementById('total').value = finalTotal;
-      }
-   
-    });
-
-  });
-</script>

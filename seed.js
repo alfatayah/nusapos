@@ -205,7 +205,7 @@ var data = [
         jaminan: "KTP", 
         date_transaction : '11-1-2021',
         user_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
-        desc_diskon: "transakasi pertama bos",
+        desc_trans: "transakasi pertama bos",
         transdetail_id: { _id: mongoose.Types.ObjectId('5e961be292b97300fc101245') },
       },
       {
@@ -222,7 +222,7 @@ var data = [
         jaminan: "KTP", 
         date_transaction : '11-1-2021',
         user_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
-        desc_diskon: "transakasi kedua bos",
+        desc_trans: "transakasi kedua bos",
         transdetail_id: { _id: mongoose.Types.ObjectId('5e92cbe292b97300fc101245') },
       },
       {
@@ -239,7 +239,7 @@ var data = [
         jaminan: "KTP", 
         date_transaction : '11-1-2021',
         user_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
-        desc_diskon: "transakasi ketiga bos",
+        desc_trans: "transakasi ketiga bos",
         transdetail_id: { _id: mongoose.Types.ObjectId('1396cbe292b97300fc101245') },
       },
       {
@@ -256,7 +256,7 @@ var data = [
         jaminan: "KTP", 
         date_transaction : '11-1-2021',
         user_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
-        desc_diskon: "transakasi ketiga bos",
+        desc_trans: "transakasi ketiga bos",
         transdetail_id: { _id: mongoose.Types.ObjectId('3496cbe292b97300fc101245') },
       },
       {
@@ -273,7 +273,7 @@ var data = [
         jaminan: "KTP", 
         date_transaction : '11-1-2021',
         user_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
-        desc_diskon: "transakasi ketiga bos",
+        desc_trans: "transakasi ketiga bos",
         transdetail_id: { _id: mongoose.Types.ObjectId('3496bbe292b97300fc101245') },
       },
     ]
