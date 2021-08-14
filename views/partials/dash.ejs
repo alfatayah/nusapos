@@ -44,6 +44,9 @@
       // timePicker: true,
       minDate: new Date(),
       startDate: new Date(),
+      locale: {
+      format: 'DD-MM-YY: hh:mm'
+    }
     }).on('hide.daterangepicker', function (ev, picker) {
       var start = moment(picker.startDate.format('DD-MMM-YY'));
       var end = moment(picker.endDate.format('DD-MMM-YY'));
