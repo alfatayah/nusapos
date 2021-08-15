@@ -242,7 +242,7 @@ module.exports = {
 
   addBook: async (req, res) => {
     const { barcode } = req.body;
-    const productSearch = await tbProduct.findOne({ barcode: barcode , status: 'Avalaible' })
+    const productSearch = await tbProduct.findOne({ barcode: barcode , status: 'AVALAIBLE' })
     .populate("discount_id")
 
     try {       

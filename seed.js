@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 require('dotenv').config();
 let localDB =  process.env.LOCAL_DB;
 let deployDB =  process.env.DEPLOY_DB;
-seeder.connect(deployDB, {
+seeder.connect(localDB, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: true,
@@ -128,7 +128,7 @@ var data = [
         typeId: mongoose.Types.ObjectId('2e96dbe292b97300fc904315'),
         merkId: mongoose.Types.ObjectId('1e96cbe292b97300fc904315'),
         product_name: 'Canon D100',
-        status:"Avalaible",
+        status:"AVALAIBLE",
         description: 'barang ada',
         image:'images/1.webp',
         price: 12000,
@@ -139,7 +139,7 @@ var data = [
         typeId: mongoose.Types.ObjectId('5e96cbe392b97300fc904315'),
         merkId: mongoose.Types.ObjectId('3e96cbe292b97300fc904315'),
         product_name: 'Canon 101',
-        status:"Avalaible",
+        status:"AVALAIBLE",
         description: 'barang ada',
         image:'images/2.webp',
         price: 13000,
@@ -150,7 +150,7 @@ var data = [
         typeId: mongoose.Types.ObjectId('5e96cbe392b97300fc904315'),
         merkId: mongoose.Types.ObjectId('3e96cbe292b97300fc904315'),
         product_name: 'Canon 103',
-        status:"Avalaible",
+        status:"AVALAIBLE",
         description: 'barang ada',
         image:'images/3.webp',
         price: 13000,
@@ -161,7 +161,7 @@ var data = [
         typeId: mongoose.Types.ObjectId('5e96cbe392b97300fc904315'),
         merkId: mongoose.Types.ObjectId('3e96cbe292b97300fc904315'),
         product_name: 'Canon 104',
-        status:"Avalaible",
+        status:"AVALAIBLE",
         description: 'barang ada',
         image:'images/4.webp',
         price: 13000,
