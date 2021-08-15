@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 require('dotenv').config();
 let localDB =  process.env.LOCAL_DB;
 let deployDB =  process.env.DEPLOY_DB;
-seeder.connect(deployDB, {
+seeder.connect(localDB, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: true,
