@@ -42,12 +42,15 @@
   $(function () {
     $('input[name="datetimes"]').daterangepicker({
       // timePicker: true,
+      autoUpdateInput: false,
       minDate: new Date(),
       startDate: new Date(),
       locale: {
+      cancelLabel: 'Clear',
       format: 'DD-MM-YY: hh:mm'
     }
-    }).on('hide.daterangepicker', function (ev, picker) {
+    }).on('apply.daterangepicker', function (ev, picker) {
+      $(this).val(picker.startDate.format('DD-MMM-YY') + ' - ' + picker.endDate.format('DD-MMM-YY'));
       var start = moment(picker.startDate.format('DD-MMM-YY'));
       var end = moment(picker.endDate.format('DD-MMM-YY'));
       var diff = end.diff(start, 'days');
@@ -62,6 +65,11 @@
         document.getElementById('total').value = finalTotal2;
       }
     })
+
+    $('input[name="datetimes"]').on('cancel.daterangepicker', function (ev, picker) {
+      $(this).val('');
+    });
+
   });
 
   </script>
