@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="col">
-                              <input class="form-control " type="text" name="datetimes" required >
+                              <input class="form-control " type="text" name="datetimes"  autocomplete="off" required >
                             </div>
                           </div>
                           <div class="row">
@@ -170,6 +170,8 @@
                                     <input type="hidden" class="form-control" id="diskonID" name="diskonID">
                                   <input type="hidden" class="form-control" id="date_transaction"
                                     name="date_transaction" value="<%= moment().format('DD-MM-YY: hh:mm') %> ">
+                                    <input class="form-control " type="hidden" id="start_date" name="start_date"  >
+                                    <input class="form-control " type="hidden" id="end_date" name="end_date"  >
                                   <div style="margin-bottom: 1rem;" class="card-body">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                   </div>
@@ -188,25 +190,27 @@
                     </div>
                     <div class="row" id="myItems">
                       <% for(let i=0; i < product.length; i++){ %>
-                        <div class="card"
-                          style="width: 10rem; margin-right: 1rem; margin-left: 1rem; margin-bottom: 1rem">
-                          <img src="https://nusapos.herokuapp.com/<%= product[i].image %>" alt="image" class="card-img-top"
-                            style="height: 13rem;  object-fit: contain">
-                          <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                              <div class="col mr-2">
-                                <div class="text-xs">
-                                  <%= product[i].product_name %>
-                                </div>
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-0">
-                                  <%= product[i].status %>
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <%= product[i].price %>
+                        <% if( product[i].status === "Avalaible") {%>
+                          <div class="card"
+                            style="width: 10rem; margin-right: 1rem; margin-left: 1rem; margin-bottom: 1rem">
+                            <img src="https://nusapos.herokuapp.com/<%= product[i].image %>" alt="image" class="card-img-top"
+                              style="height: 13rem;  object-fit: contain">
+                            <div class="card-body">
+                              <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                  <div class="text-xs">
+                                    <%= product[i].product_name %>
+                                  </div>
+                                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-0">
+                                    <%= product[i].status %>
+                                  </div>
+                                  <div class="h5 mb-0 font-weight-bold text-gray-800">Rp. <%= product[i].price %>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </div>
+                        <% } %>  
                         <% } %>
                     </div>
                   </div>

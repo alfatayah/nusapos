@@ -89,7 +89,7 @@ module.exports = {
     const numberinvoice =  trans.length + 1;
     const invoice = "N"+ moment().format('DDMMYY') + numberinvoice ;
     const status = "PAYMENT";
-    const { select2, productId, jaminan  , days , subtotal,diskonID, total_discount, total,  desc_trans, userID, date_transaction , datetimes }  = req.body;
+    const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, userID, date_transaction , start_date , end_date  }  = req.body;
     const product = await tbProduct.find({ _id : productId});
   
     console.log("transid  " + transid);
@@ -105,49 +105,50 @@ module.exports = {
     console.log("userID " + userID);
     console.log("date_transaction " + date_transaction);
     console.log("invoice " + invoice);
-    console.log("datetimes " + datetimes);
-    // try {
-    //   if(!productId || product.status === "NOT AVALAIBLE" ){
-    //     req.flash("alertMessage", "Product Empty or Not Avalaible");
-    //     req.flash("alertStatus", "danger");
-    //     res.redirect(`/admin/dashboard`);
-    //   } else {
-    //     const newTransaction = {
-    //       _id: transid,
-    //       member_Id: select2, 
-    //       subtotal, 
-    //       total,
-    //       total_discount, 
-    //       start_date, 
-    //       end_date, 
-    //       days,
-    //       invoice,
-    //       status, 
-    //       jaminan,
-    //       date_transaction,
-    //       userID,
-    //       product_Id: productId,
-    //       discountId: diskonID,
-    //       desc_trans,
-    //       transdetail_id,
-    //     }
-    //     await tbTrans.create(newTransaction);
-    //     await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid })
-    //     // const productAll = tbProduct.find();
+    console.log("start_date " + start_date);
+    console.log("end_date " + end_date);
+    try {
+      if(!productId || product.status === "NOT AVALAIBLE" ){
+        req.flash("alertMessage", "Product Empty or Not Avalaible");
+        req.flash("alertStatus", "danger");
+        res.redirect(`/admin/dashboard`);
+      } else {
+        const newTransaction = {
+          _id: transid,
+          member_Id: select2, 
+          subtotal, 
+          total,
+          total_discount, 
+          start_date, 
+          end_date, 
+          days,
+          invoice,
+          status, 
+          jaminan,
+          date_transaction,
+          userID,
+          product_Id: productId,
+          discountId: diskonID,
+          desc_trans,
+          transdetail_id,
+        }
+        await tbTrans.create(newTransaction);
+        await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid })
+
      
-    //     for (var i = 0; i < product.length; i++){
-    //     product[i].status = "NOT AVALAIBLE";
-    //     await product[i].save();
-    //     }
-    //     req.flash("alertMessage", "Succes Add Transaction");
-    //     req.flash("alertStatus", "success");
-    //     res.redirect(`/admin/dashboard`);
-    //   }
-    // } catch (error) {
-    //   req.flash("alertMessage", `${error.message}`);
-    //   req.flash("alertStatus", 'danger');
-    //   res.redirect(`/admin/dashboard`);
-    // }
+        for (var i = 0; i < product.length; i++){
+        product[i].status = "NOT AVALAIBLE";
+        await product[i].save();
+        }
+        req.flash("alertMessage", "Succes Add Transaction");
+        req.flash("alertStatus", "success");
+        res.redirect(`/admin/dashboard`);
+      }
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect(`/admin/dashboard`);
+    }
   },
 
 }

@@ -55,6 +55,8 @@
       var end = moment(picker.endDate.format('DD-MMM-YY'));
       var diff = end.diff(start, 'days');
       $("#days").val(diff);
+      document.getElementById('start_date').value = picker.startDate.format('DD-MMM-YY hh:mm');
+      document.getElementById('end_date').value =  picker.endDate.format('DD-MMM-YY hh:mm');
       let totalDiskon = document.getElementById("total_discount").value
       var subtotal = parseInt(document.getElementById("subtotal").value);
       if(totalDiskon){
