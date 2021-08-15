@@ -87,23 +87,10 @@
                                 </select>
                               </div>
                             </div>
-                            <!-- <div class="col">
-                              <input class="form-control " type="text" placeholder="<%# moment().format('DD-MMM-YY') %>"
-                                id="start_date" name="start_date" required>
-                            </div>
 
                             <div class="col">
-                              <input class="form-control " type="text" placeholder="<%# moment().format('DD-MMM-YY') %>"
-                                id="end_date" name="end_date" required>
-                            </div> -->
-
-                            <div class="col">
-                              <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>"
-                              name="datetimes" required>
+                              <input class="form-control " type="text" name="datetimes" required >
                             </div>
-
-                            <input class="form-control" name="time" value="<%= moment().format('LT') %>"
-                              type="hidden" />
                           </div>
                           <div class="row">
                             <div class="col">
@@ -182,7 +169,7 @@
                                     value="<%= user.id  %> ">
                                     <input type="hidden" class="form-control" id="diskonID" name="diskonID">
                                   <input type="hidden" class="form-control" id="date_transaction"
-                                    name="date_transaction" value="<%= moment().format('lll') %> ">
+                                    name="date_transaction" value="<%= moment().format('DD-MM-YY: hh:mm') %> ">
                                   <div style="margin-bottom: 1rem;" class="card-body">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                   </div>

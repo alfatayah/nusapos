@@ -89,15 +89,12 @@ module.exports = {
     const numberinvoice =  trans.length + 1;
     const invoice = "N"+ moment().format('DDMMYY') + numberinvoice ;
     const status = "PAYMENT";
-    const { select2, productId, start_date, end_date, jaminan ,time , days , subtotal,diskonID, total_discount, total,  desc_trans, userID, date_transaction , datetimes }  = req.body;
+    const { select2, productId, jaminan  , days , subtotal,diskonID, total_discount, total,  desc_trans, userID, date_transaction , datetimes }  = req.body;
     const product = await tbProduct.find({ _id : productId});
   
     console.log("transid  " + transid);
     console.log("productId  " + productId);
     console.log("jaminan  " + jaminan);
-    console.log("time  " + time);
-    console.log("start_date  " + start_date);
-    console.log("end_date  " + end_date);
     console.log("days  " + days);
     console.log("memberID  " + select2);
     console.log("diskonID  " + diskonID); 
