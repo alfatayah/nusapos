@@ -1,12 +1,12 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <div class="row">
+      <div id="allbutton" class="row">
         <div class="col-1">
           <a href="/admin/transaction" class="btn btn-warning">Back</a>
         </div>
         <div class="col-5">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cash-payment">Tunai </button>
+          <button type="button"  class="btn btn-primary tunai" data-toggle="modal" data-target="#cash-payment" data-total="<%= trans_detail.transaction_Id.total%>" >Tunai </button>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah
             Pembayaran</button>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
@@ -22,23 +22,51 @@
           <thead>
             <tr>
               <th>No</th>
-              <th>Product name</th> 
-              <th>Price</th> 
-              <th>Description</th>
-              <th>Action</th>
+              <th>Invoice</th> 
+              <th>Date</th> 
+              <th>Type Discount</th> 
+              <th>Discount</th>
+              <th>Subtotal</th>
+              <th>Days</th>
+              <th>Total</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <% for(let i = 0; i < trans.product_Id.length; i++) { %>
             <tr>
-              <td><%= i + 1 %></td>
-              <td><%= trans.product_Id[i].product_name%></td>
-              <td><%= trans.product_Id[i].price%></td>
-              <td>
-                <a href="/admin/transaction/ %> " class="btn btn-success btn-circle btn-sm button-update">
-                  <i class="fas fa-eye"></i></a>
-              </td>
+              <td><%= 1 %></td>
+              <td><%= trans_detail.transaction_Id.invoice%></td>
+              <td><%= trans_detail.transaction_Id.date_transaction%></td>
+              <td><%= trans_detail.transaction_Id.discountId.typeDiscount%></td>
+              <td>Rp. <%= trans_detail.transaction_Id.total_discount%></td>
+              <td>Rp. <%= trans_detail.transaction_Id.subtotal%></td>
+              <td><%= trans_detail.transaction_Id.days%></td>
+              <td>Rp. <%= trans_detail.transaction_Id.total%></td>
+              <td><%= trans_detail.transaction_Id.status%></td>
               </tr>
+             </tr>
+          </tbody>
+        </table>
+
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Product Name</th> 
+              <th>Price</th> 
+              <th>Image</th> 
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i = 0; i < trans.product_id.length; i++) { %>
+            <tr>
+                <td><%= 1 %></td>
+                <td><%= trans.product_id[i].product_name%></td>
+                <td ><%= trans.product_id[i].price%></td>
+                <td >
+                  <img src="http://localhost:3001/<%= trans.product_id[i].image %> " alt="image" width="200px">
+                </td>
+                
             </tr>
             <% }%>
           </tbody>

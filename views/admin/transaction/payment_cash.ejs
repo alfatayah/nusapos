@@ -16,7 +16,7 @@
                 required />
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-success" >Uang Pas </button>
+                <button type="button" class="btn btn-success btnTunai" onclick="giveValue(this.value)" >Uang Pas </button>
                 <button type="button" class="btn btn-success" value="20000" onclick="giveValue(this.value)">Rp20.0000 </button>
                 <button type="button" class="btn btn-success" value="50000" onclick="giveValue(this.value)" >Rp50.0000 </button>
                 <button type="button" class="btn btn-success" value="100000" onclick="giveValue(this.value)" >Rp100.000 </button>
@@ -34,6 +34,8 @@
 
 <script>
     function giveValue(val) {
-        let valMoney = document.getElementById("money").value = val;
+        let valMoney = document.getElementById("money").value ="Rp. " + val;
     }
 </script>
+
+

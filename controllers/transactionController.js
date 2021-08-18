@@ -2,9 +2,9 @@ const bycrypt = require("bcryptjs");
 const fs = require('fs-extra');
 const path = require('path');
 const users = require('../models/user');
-const tbProduct = require('../models/product');
 const tbTrans = require('../models/transaction');
-const tbTransDetail = require('../models/transaction_detail')
+const tbTransDetail = require('../models/transaction_detail');
+const tbProduct = require('../models/product');
 const tbDiscount = require('../models/discount');
 const tbMember = require('../models/member');
 const tbType = require('../models/type');
@@ -42,13 +42,16 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-      const trans = await tbTrans.findOne({ _id: id })
-      .populate("product_Id")
-      .populate("discountId");
-      console.log("transdetail " , trans);
+      const trans_detail = await tbTransDetail.findOne({ _id: id })
+        .populate({ path: "transaction_Id", populate: { path: "discountId" } })
+      let transID = trans_detail.transaction_Id._id;
+      const trans = await tbTrans.findOne({ _id: transID })
+        .populate("product_id")
+ 
       res.render("admin/transaction/show_detail_transaction", {
         title: "Staycation | Detail Transaction",
         user: req.session.user,
+        trans_detail,
         trans,
         alert
       });
@@ -66,7 +69,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus };
       const TransDetail = await tbTransDetail.findOne({ _id: id })
       .populate("transaction_Id")
-      .populate("product_Id")
+      .populate("product_id")
       .populate("discountId");
       res.render("admin/transaction/print", {
         title: "Staycation | Print Transaction",
