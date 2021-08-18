@@ -16,7 +16,6 @@ const transactionSchema = new mongoose.Schema({
   },
   total_discount: {
     type: Number,
-    required: true
   },
   start_date: {
     type: String,
@@ -53,38 +52,19 @@ const transactionSchema = new mongoose.Schema({
   desc_trans: {
     type: String,
   },
-  product_Id:[{
+  product_id:[{
     type: ObjectId,
-    ref: 'product'
+    ref: "product"
   }],
-  discountId:[{
+  discountId:{
     type: ObjectId,
     ref: 'discount'
-  }],
+  },
   transdetail_id: {
     type: ObjectId,
     ref: 'transaction_detail'
   },
-  dp_id:{
-    type : ObjectId,
-    ref: 'dp_payment'
-  },
-  split_id:{
-    type : ObjectId,
-    ref: 'split_payment'
-  },
-  cash_id:{
-    type : ObjectId,
-    ref: 'cash_payment'
-  },
-  kasbon_id:{
-    type : ObjectId,
-    ref: 'kasbon_payment'
-  },
-  transfer_id:{
-    type : ObjectId,
-    ref: 'transfer_payment'
-  }
+
 
 
 })

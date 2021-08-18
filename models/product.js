@@ -34,6 +34,10 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  transaction_Id: [{
+    type: ObjectId,
+    ref: 'transaction'
+  }],
 })
 
 module.exports = mongoose.model("product", productSchema);

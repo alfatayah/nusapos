@@ -7,11 +7,10 @@ it('add transaction' , function () {
     cy.get('.btn').click()
     cy.get('.input-group > .form-control').type("BR12345{enter}")
     cy.get('.input-group > .form-control').type("BR12346{enter}")
-    cy.get('.input-group > .form-control').type("BR12347{enter}")
-    cy.get('.input-group > .form-control').type("BR12348{enter}")
+    // cy.get('.input-group > .form-control').type("BR12347{enter}")
+    // cy.get('.input-group > .form-control').type("BR12348{enter}")
     cy.get('#select2-select2-container').type("fadhil{enter}")
-    // cy.get('.container > :nth-child(1) > :nth-child(2) > .form-control').clear()
-    cy.get('.container > :nth-child(1) > :nth-child(2) > .form-control').type("27-Sep-21 12:00 - 30-Sep-21 11:59");
+    cy.get('.container > :nth-child(1) > :nth-child(2) > .form-control').type("27-Sep-21 - 30-Sep-21");
     cy.get('.applyBtn').click()
     cy.get('.container > :nth-child(2) > :nth-child(1)')
     cy.get('#discountValue').select("1e96cbe292b97300fc321242^2000")
