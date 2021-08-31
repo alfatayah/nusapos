@@ -57,7 +57,45 @@ module.exports = {
       });
     } catch (error) {
       console.log("error  " , error);
-      res.redirect(`/admin/transaction`);
+      res.redirect(`/admin/transaction/detail`);
+    }
+  },
+  
+
+   
+      // push data di table transaksi detail (DP, kasbon)
+      //
+  paymentCash: async (req, res) => {
+    // const { id } = req.params;
+    const {transaction_id} = req.body;
+    try {
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus };
+      // update status transaksi
+      // const trans = await tbTrans.findOne({_id : id})
+      console.log("ID trans " , transaction_id);
+      // trans.status = "PAYMENT";
+      // await trans.save();
+      //  // update status di product
+      // const product = await tbProduct.find({ _id : trans.productId});
+      // for (var i = 0; i < product.length; i++){
+      //   product[i].status = "AVALAIBLE";
+      //   await product[i].save();
+      // }
+       
+
+
+      res.render("/admin/transaction/show_detail_transaction" , {
+        title: "Nusa | Payment Cash",
+        user: req.session.user,
+        alert
+      })
+
+    } catch (error) {
+      console.log("error  " , error);
+      res.redirect(`/admin/transaction/show_detail_transactionh`);
+
     }
   },
 

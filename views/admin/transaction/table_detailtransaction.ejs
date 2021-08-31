@@ -6,7 +6,8 @@
           <a href="/admin/transaction" class="btn btn-warning">Back</a>
         </div>
         <div class="col-5">
-          <button type="button"  class="btn btn-primary tunai" data-toggle="modal" data-target="#cash-payment" data-total="<%= trans_detail.transaction_Id.total%>" >Tunai </button>
+          <button type="button"  class="btn btn-primary tunai" data-toggle="modal" data-target="#cash-payment"
+            data-total="<%= trans_detail.transaction_Id.total%>"   data-transaction_id="<%= trans_detail.transaction_Id.id %>" >Tunai </button>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah
             Pembayaran</button>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
@@ -30,6 +31,7 @@
               <th>Days</th>
               <th>Total</th>
               <th>Status</th>
+              <th>id</th>
             </tr>
           </thead>
           <tbody>

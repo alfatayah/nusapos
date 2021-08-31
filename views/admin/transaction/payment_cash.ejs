@@ -8,7 +8,9 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="" method="POST" >
+        
+        <div class="transID"></div>
+        <form action="/admin/transaction/show_detail_transaction"  method="POST" >
           <div class="modal-body">
             <div class="form-group">
               <label for="name">Uang yang diterima</label>
@@ -21,6 +23,7 @@
                 <button type="button" class="btn btn-success" value="50000" onclick="giveValue(this.value)" >Rp50.0000 </button>
                 <button type="button" class="btn btn-success" value="100000" onclick="giveValue(this.value)" >Rp100.000 </button>
             </div>
+            <input type="hidden" id="transaction_id" name="transaction_id" >
           <div class="modal-footer">
             <button type="button" class="btn btn-success" data-dismiss="modal">
               Close
@@ -37,5 +40,6 @@
         let valMoney = document.getElementById("money").value ="Rp. " + val;
     }
 </script>
+
 
 
