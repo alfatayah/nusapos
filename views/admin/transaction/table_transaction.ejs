@@ -27,6 +27,11 @@
               <td>
                 <a href="/admin/transaction/detail/<%= trans[i].transdetail_id %> " class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-eye"></i></a>
+                  <% if ( user.status === "SPV" && trans[i].status === "NOT_DONE" ) { %>
+                    <a href="javascript:void()" type="button" class="btn btn-success btn-circle btn-sm button-cancel"
+                      data-id="<%= trans[i]._id %>">
+                      <i class="fas fa-window-close"></i></a>
+                    <% } %>
                 <a href="/admin/transaction/print/<%= trans[i].transdetail_id %>  "
                   class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-print"></i></a>

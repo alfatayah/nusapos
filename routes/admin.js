@@ -25,9 +25,10 @@ router.post("/transaction/addTrans", adminController.addTrans);
 
 
 router.get("/transaction", transactionController.viewTransaction);
+router.post("/transaction" , transactionController.cancelTransaction)
 router.get("/transaction/detail/:id", transactionController.showDetailTransaction);
 router.get("/transaction/print/:id", transactionController.showPrintTransaction);
-router.post("/transaction/detail/", transactionController.paymentCash);
+router.post("/transaction/detail/:id", transactionController.paymentCash);
 
 router.get("/discount", adminController.viewDiscount);
 router.post("/discount", discountController.addDiscount);

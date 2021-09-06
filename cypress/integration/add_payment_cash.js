@@ -6,5 +6,5 @@ it('goto_detail_transaction' , function () {
     cy.get('#exampleInputPassword').type("rahasia")
     cy.get('.btn').click()
     cy.get(':nth-child(8) > .nav-link').click()
-    cy.get('[href="/admin/transaction/611b22a2a50c2c61a4d1cde2 "]').click()
+    cy.get('[href="/admin/transaction/detail/61224697b8b77423e013c4e5 "]').click()
 })

@@ -78,7 +78,8 @@ module.exports = {
       }
       req.session.user = {
         id: user.id,
-        username: user.username
+        username: user.username,
+        status : user.status
       }
       res.redirect('/admin/dashboard');
 

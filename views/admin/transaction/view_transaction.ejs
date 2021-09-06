@@ -63,5 +63,14 @@
   </div>
 </div>
 
+<%- include('cancel_transaction.ejs') %>
 <%- include('../../partials/js.ejs') %>
 </body>
+
+<script>
+  $('#dataTable').on('click', '.button-cancel', function () {
+    let id = $(this).data('id');
+    $('#cancel-modal').modal('show');
+    $('.id').val(id);
+  })
+</script>
