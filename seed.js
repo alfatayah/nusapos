@@ -45,7 +45,13 @@ var data = [
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
         username: 'admin',
         password: 'rahasia',
-        status: 'active',
+        status: 'SPV',
+      },
+      {
+        _id: mongoose.Types.ObjectId('1e96cbe292b97300fc903341'),
+        username: 'admin2',
+        password: 'rahasia',
+        status: 'STAFF',
       },
     ]
   },
@@ -310,7 +316,7 @@ var data = [
         _id: mongoose.Types.ObjectId('1e96cbe292b973001c101445'),
         paid: 50000,
         changes : 40000,
-        transaction_Id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101445') },
+        transaction_Id: mongoose.Types.ObjectId('5e96cbe292b97300fc101445'),
       },
     ]
   },

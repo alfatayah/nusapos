@@ -9,6 +9,7 @@ const tbDiscount = require('../models/discount');
 const tbMember = require('../models/member');
 const tbType = require('../models/type');
 const tbMerk = require('../models/merk');
+const payment_cash = require('../models/cash_payment');
 const { v4: uuidv4 } = require('uuid');
 var mongoose = require('mongoose');
 var moment = require('moment');  
@@ -67,7 +68,6 @@ module.exports = {
    * @description Get id and desc from req.body then status update to "CANCEL" after that save all data to table transaction
    * @todo Cancel transaction when admin wrong input data in system
    */
-  
   cancelTransaction: async (req, res) => {
     const { id, desc } = req.body;
     try {
@@ -86,39 +86,38 @@ module.exports = {
   
 
    
-      // push data di table transaksi detail (DP, kasbon)
-      //
+ /**
+   * @module paymentCash
+   * @param req body get id_transaction, changes, paid (uang yang dibayar) from input user
+   * @param res redirect to /admin/transaction 
+   * @description 1. Update status transaksi to "PAYMENT" , 2. Save data to table payment cash , 3. Save id payment cash to table transaction detail
+   * @todo Payment cash when user choose payment method cash
+   */
   paymentCash: async (req, res) => {
-    // const { id } = req.params;
-    const {transaction_id} = req.body;
+    const {id_transaction, changes, paid } = req.body;
     try {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       // update status transaksi
-      // const trans = await tbTrans.findOne({_id : id})
-      console.log("ID trans " , transaction_id);
-      // trans.status = "PAYMENT";
-      // await trans.save();
-      //  // update status di product
-      // const product = await tbProduct.find({ _id : trans.productId});
-      // for (var i = 0; i < product.length; i++){
-      //   product[i].status = "AVALAIBLE";
-      //   await product[i].save();
-      // }
-       
-
-
-      res.render("admin/transaction/show_detail_transaction" , {
-        title: "Nusa | Payment Cash",
-        user: req.session.user,
-        alert
-      })
+      const trans = await tbTrans.findOne({_id : id_transaction})
+      trans.status = "PAYMENT";
+      await trans.save();
+      // save ke table payment
+      const  newItem = {
+        paid,
+        changes,
+      }
+      const datapaymentCash = await payment_cash.create(newItem);
+      // masukin id payment cash ke transaction detail
+      const transDetail = await tbTransDetail.findOne({_id : trans.transdetail_id})
+      transDetail.cash_id = datapaymentCash._id;
+      await transDetail.save();
+      res.redirect("/admin/transaction")
 
     } catch (error) {
       console.log("error  " , error);
-      res.redirect(`/admin/transaction/detail/cash`);
-
+      res.redirect("/admin/transaction")
     }
   },
 
