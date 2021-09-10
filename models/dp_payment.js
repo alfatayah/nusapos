@@ -10,10 +10,10 @@ const dppaymentSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
-  transaction_Id: [{
+  transdetail_id: {
     type: ObjectId,
-    ref: 'transaction'
-  }],
+    ref: 'transaction_detail'
+  },
   
 })
 

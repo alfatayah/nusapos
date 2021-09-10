@@ -60,6 +60,9 @@ const transactionSchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'discount'
   },
+  payment_method:{
+    type: String,
+  },
   transdetail_id: {
     type: ObjectId,
     ref: 'transaction_detail'

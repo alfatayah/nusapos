@@ -7,20 +7,24 @@
           <thead>
             <tr >
               <th>No</th>
+              <th>Status</th> 
               <th>No Member</th> 
               <th>Member</th> 
+              <th>Payment Method</th> 
               <th>Date</th> 
               <th>Jaminan</th>
               <th>Total</th>
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody></tbody>
             <% for(let i = 0; i < trans.length; i++) { %>
             <tr  >
               <td><%= i + 1 %></td>
+              <td  class="m-0 font-weight-bold text-success" ><%= trans[i].status %></td>
               <td><%= trans[i].member_Id.no_member %></td>
               <td><%= trans[i].member_Id.name %></td>
+              <td><%= trans[i].payment_method %></td>
               <td><%= trans[i].date_transaction %></td>
               <td><%= trans[i].jaminan %></td>
               <td><%= trans[i].total %></td>

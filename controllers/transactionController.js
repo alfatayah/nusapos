@@ -102,11 +102,13 @@ module.exports = {
       // update status transaksi
       const trans = await tbTrans.findOne({_id : id_transaction})
       trans.status = "PAYMENT";
+      trans.payment_method = "CASH"
       await trans.save();
       // save ke table payment
       const  newItem = {
         paid,
         changes,
+        transdetail_id:  trans.transdetail_id,
       }
       const datapaymentCash = await payment_cash.create(newItem);
       // masukin id payment cash ke transaction detail

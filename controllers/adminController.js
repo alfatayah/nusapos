@@ -312,6 +312,7 @@ module.exports = {
       userID,
       product_id: productId,
       discountId: diskonID,
+      payment_method: "_",
       desc_trans,
       transdetail_id,
     }
@@ -330,6 +331,7 @@ module.exports = {
       date_transaction,
       userID,
       product_id: productId,
+      payment_method: "_",
       desc_trans,
       transdetail_id,
     }
