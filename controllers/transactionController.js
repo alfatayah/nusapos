@@ -90,7 +90,11 @@ module.exports = {
    * @module paymentCash
    * @param req body get id_transaction, changes, paid (uang yang dibayar) from input user
    * @param res redirect to /admin/transaction 
-   * @description 1. Update status transaksi to "PAYMENT" , 2. Save data to table payment cash , 3. Save id payment cash to table transaction detail
+   * @description
+   *  1. Update status transaksi to "PAYMENT" 
+   *  2. Update status payment method to "CASH" 
+   *  3. Save data to table payment cash , 
+   *  4. Save id payment cash to table transaction detail
    * @todo Payment cash when user choose payment method cash
    */
   paymentCash: async (req, res) => {
