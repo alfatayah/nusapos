@@ -129,6 +129,17 @@ module.exports = {
     }
   },
 
+   /**
+   * @module paymentTransfer
+   * @param req body get id_transaction from input user
+   * @param res redirect to /admin/transaction 
+   * @description
+   *  1. Update status transaksi to "PAYMENT" 
+   *  2. Update status payment method to "TRANSFER" 
+   *  3. Save data to table transfer_payment , 
+   *  4. Save id payment transfer to table transaction detail
+   * @todo transfer payment when user choose payment method transfer
+   */
   paymentTransfer: async (req, res) => {
    const {id_transaction , no_transfer } = req.body; 
    try {
