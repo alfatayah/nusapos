@@ -29,6 +29,7 @@ router.post("/transaction" , transactionController.cancelTransaction)
 router.get("/transaction/detail/:id", transactionController.showDetailTransaction);
 router.get("/transaction/print/:id", transactionController.showPrintTransaction);
 router.post("/transaction/payment_cash", transactionController.paymentCash);
+router.post ("/transaction/payment_transfer" , transactionController.paymentTransfer);
 
 router.get("/discount", adminController.viewDiscount);
 router.post("/discount", discountController.addDiscount);

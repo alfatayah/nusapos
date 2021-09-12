@@ -10,6 +10,7 @@ const tbMember = require('../models/member');
 const tbType = require('../models/type');
 const tbMerk = require('../models/merk');
 const payment_cash = require('../models/cash_payment');
+const payment_transfer = require('../models/transfer_payment');
 const { v4: uuidv4 } = require('uuid');
 var mongoose = require('mongoose');
 var moment = require('moment');  
@@ -100,9 +101,6 @@ module.exports = {
   paymentCash: async (req, res) => {
     const {id_transaction, changes, paid } = req.body;
     try {
-      const alertMessage = req.flash("alertMessage");
-      const alertStatus = req.flash("alertStatus");
-      const alert = { message: alertMessage, status: alertStatus };
       // update status transaksi
       const trans = await tbTrans.findOne({_id : id_transaction})
       trans.status = "PAYMENT";
@@ -119,12 +117,44 @@ module.exports = {
       const transDetail = await tbTransDetail.findOne({_id : trans.transdetail_id})
       transDetail.cash_id = datapaymentCash._id;
       await transDetail.save();
+      req.flash("alertMessage", "Success Payment Transaction !");
+      req.flash("alertStatus", "success");
       res.redirect("/admin/transaction")
 
     } catch (error) {
+      req.flash("alertMessage", "Failed Payment Transaction ! ");
+      req.flash("alertStatus", "danger");
       console.log("error  " , error);
       res.redirect("/admin/transaction")
     }
+  },
+
+  paymentTransfer: async (req, res) => {
+   const {id_transaction , no_transfer } = req.body; 
+   try {
+      // update status transaksi
+      const trans = await tbTrans.findOne({_id : id_transaction})
+      trans.status = "PAYMENT";
+      trans.payment_method = "TRANSFER";
+      await trans.save();
+      //save ke table transfer_payments
+      const newItem ={
+        no_transfer,
+        transdetail_id:  trans.transdetail_id,
+      }
+      const paymentTransfer = await payment_transfer.create(newItem);
+      const transDetail = await tbTransDetail.findOne({_id : trans.transdetail_id})
+      transDetail.transfer_id = paymentTransfer._id;
+      await transDetail.save();
+      req.flash("alertMessage", "Success Payment Transaction !");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/transaction")
+   } catch (error) {
+     req.flash("alertMessage", "Failed Payment Transaction ! ");
+     req.flash("alertStatus", "danger");
+     console.log("error  ", error);
+     res.redirect("/admin/transaction")
+   }
   },
 
   showPrintTransaction: async (req, res) => {
