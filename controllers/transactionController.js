@@ -20,12 +20,35 @@ var moment = require('moment');
 module.exports = {
   viewTransaction: async (req, res) => {
     try {
-      const trans = await tbTrans.find()
+      // operator $ne == not equal value
+      const trans = await tbTrans.find({status : {$ne: 'KASBON'} })
         .populate({ path: 'member_Id ', select: 'no_member name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
-      res.render('admin/transaction/view_transaction', {
+      console.log("trans.status " , trans);
+        res.render('admin/transaction/view_transaction', {
+          title: "Nusa | Transaction",
+          user: req.session.user,
+          trans,
+          alert,
+        });
+      
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/transaction");
+    }
+  },
+
+  viewTransactionKasbon: async (req, res) => {
+    try {
+      const trans = await tbTrans.find({status : "KASBON"})
+        .populate({ path: 'member_Id ', select: 'no_member name' })
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
+      res.render('admin/transaction/view_kasbon', {
         title: "Nusa | Transaction",
         user: req.session.user,
         trans,
@@ -34,7 +57,7 @@ module.exports = {
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
-      res.redirect("/admin/transaction");
+      res.redirect("/admin/transaction/kasbon");
     }
   },
 
@@ -174,9 +197,10 @@ module.exports = {
    * @param req body get id_transaction and dateline from input user
    * @param res redirect to /admin/transaction 
    * @description
-   *  1. Update status payment method to "KASBON" 
-   *  2. Save data to table kasbon_payment , 
-   *  3. Save id payment kasbon to table transaction detail
+   *  1. Update status transaksi to "KASBON" 
+   *  2. Update status payment method to "KASBON" 
+   *  3. Save data to table kasbon_payment , 
+   *  4. Save id payment kasbon to table transaction detail
    * @todo transfer payment when user choose payment method transfer
    */
   paymentKasbon : async (req, res) => {
@@ -184,6 +208,7 @@ module.exports = {
     try {
       // update status transaksi
       const trans = await tbTrans.findOne({ _id : id_transaction});
+      trans.status = "KASBON";
       trans.payment_method = "KASBON";
       await trans.save();
       // save ke table kasbon_payments
