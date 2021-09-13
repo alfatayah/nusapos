@@ -11,6 +11,7 @@ const tbType = require('../models/type');
 const tbMerk = require('../models/merk');
 const payment_cash = require('../models/cash_payment');
 const payment_transfer = require('../models/transfer_payment');
+const kasbon_payment = require("../models/kasbon_payment");
 const { v4: uuidv4 } = require('uuid');
 var mongoose = require('mongoose');
 var moment = require('moment');  
@@ -149,7 +150,7 @@ module.exports = {
       trans.payment_method = "TRANSFER";
       await trans.save();
       //save ke table transfer_payments
-      const newItem ={
+      const newItem = {
         no_transfer,
         transdetail_id:  trans.transdetail_id,
       }
@@ -166,6 +167,44 @@ module.exports = {
      console.log("error  ", error);
      res.redirect("/admin/transaction")
    }
+  },
+
+    /**
+   * @module paymentKasbon
+   * @param req body get id_transaction and dateline from input user
+   * @param res redirect to /admin/transaction 
+   * @description
+   *  1. Update status payment method to "KASBON" 
+   *  2. Save data to table kasbon_payment , 
+   *  3. Save id payment kasbon to table transaction detail
+   * @todo transfer payment when user choose payment method transfer
+   */
+  paymentKasbon : async (req, res) => {
+    const {id_transaction, dateline} = req.body;
+    try {
+      // update status transaksi
+      const trans = await tbTrans.findOne({ _id : id_transaction});
+      trans.payment_method = "KASBON";
+      await trans.save();
+      // save ke table kasbon_payments
+      const newItem = {
+        due_date : dateline,
+        transdetail_id:  trans.transdetail_id,
+      }
+      const kasbonPayment = await kasbon_payment.create(newItem);
+      const transDetail = await tbTransDetail.findOne({_id : trans.transdetail_id})
+      transDetail.kasbon_id = kasbonPayment._id;
+      await transDetail.save();
+      req.flash("alertMessage", "Success Payment Transaction !");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/transaction")
+    } catch (error) {
+      req.flash("alertMessage", "Failed Payment Transaction ! " , error);
+      req.flash("alertStatus", "danger");
+      console.log("error  ", error);
+      res.redirect("/admin/transaction")
+    }
+
   },
 
   showPrintTransaction: async (req, res) => {

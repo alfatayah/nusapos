@@ -8,19 +8,15 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="" method="POST">
+        <form action="/admin/transaction/payment_kasbon" method="POST">
           <div class="modal-body">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" class="form-control name" name="name" placeholder="Enter Value" required />
-            </div>
             <div class="form-group">
               <label for="name">Tanggal</label>
               <input class="form-control " type="text" placeholder="<%= moment().format('DD-MMM-YY') %>" id="dateline" name="dateline" required >
             </div>
           </div>
           <div class="modal-footer">
-            <input type="hidden" class="id" name="id" />
+            <input type="hidden" value=<%= trans._id %>  name="id_transaction" />
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
               Close
             </button>
