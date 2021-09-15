@@ -66,11 +66,9 @@
     document.getElementById('second_paid').value = cal;
     if(first_paid <= 0 ){
         alert('Pembayaran pertama tidak boleh minus dan nol ' );
-        console.log("totalbayar " , totalBayar);
         document.getElementById('first_paid').value = '';
         document.getElementById('second_paid').value = '';
     } else if(first_paid => parseInt(totalBayar)   ) {
-      console.log("masuk else if");
         alert('Pembayaran pertama tidak boleh lebih dan sama dari total bayar');
         document.getElementById('first_paid').value = '';
         document.getElementById('second_paid').value = '';

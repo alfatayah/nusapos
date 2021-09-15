@@ -291,7 +291,7 @@ module.exports = {
     var transdetail_id = mongoose.Types.ObjectId();
     const trans = await tbTrans.find()
     const numberinvoice =  trans.length + 1;
-    const invoice = "N"+ moment().format('DDMMYY') + numberinvoice ;
+    const invoice = "INV"+ moment().format('DDMMYY') + numberinvoice ;
     const status = "NOT_DONE";
     const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, userID, date_transaction , start_date , end_date  }  = req.body;
     

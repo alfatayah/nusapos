@@ -7,6 +7,7 @@
           <thead>
             <tr >
               <th>No</th>
+              <th>No Invoice</th> 
               <th>Status</th> 
               <th>No Member</th> 
               <th>Member</th> 
@@ -21,6 +22,7 @@
             <% for(let i = 0; i < trans.length; i++) { %>
             <tr  >
               <td><%= i + 1 %></td>
+              <td><%= trans[i].invoice %></td>
               <td  class="m-0 font-weight-bold text-success" ><%= trans[i].status %></td>
               <td><%= trans[i].member_Id.no_member %></td>
               <td><%= trans[i].member_Id.name %></td>
@@ -36,7 +38,7 @@
                       data-id="<%= trans[i]._id %>">
                       <i class="fas fa-window-close"></i></a>
                     <% } %>
-                <a href="/admin/transaction/print/<%= trans[i].transdetail_id %>  "
+                <a href="/admin/transaction/print_transaction/<%= trans[i].transdetail_id %>  "
                   class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-print"></i></a>
               </td>

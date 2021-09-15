@@ -26,7 +26,6 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
-      console.log("trans.status " , trans);
         res.render('admin/transaction/view_transaction', {
           title: "Nusa | Transaction",
           user: req.session.user,
@@ -238,14 +237,18 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-      const TransDetail = await tbTransDetail.findOne({ _id: id })
-      .populate("transaction_Id")
-      .populate("product_id")
-      .populate("discountId");
+      const trans_detail = await tbTransDetail.findOne({ _id: id })
+        .populate({ path: "transaction_Id", populate: { path: "discountId" } })
+      let transID = trans_detail.transaction_Id._id;
+      const trans = await tbTrans.findOne({ _id: transID })
+        .populate("product_id")
+        .populate("member_Id")
+        console.log("data trans " , trans);
       res.render("admin/transaction/print", {
         title: "Staycation | Print Transaction",
         user: req.session.user,
-        TransDetail,
+        trans_detail,
+        trans,
         alert
       });
     } catch (error) {

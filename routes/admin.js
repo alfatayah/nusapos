@@ -28,7 +28,7 @@ router.get("/transaction", transactionController.viewTransaction);
 router.get("/transaction/kasbon", transactionController.viewTransactionKasbon);
 router.post("/transaction" , transactionController.cancelTransaction)
 router.get("/transaction/detail/:id", transactionController.showDetailTransaction);
-router.get("/transaction/print/:id", transactionController.showPrintTransaction);
+router.get("/transaction/print_transaction/:id", transactionController.showPrintTransaction);
 router.post("/transaction/payment_cash", transactionController.paymentCash);
 router.post ("/transaction/payment_transfer" , transactionController.paymentTransfer);
 router.post("/transaction/payment_kasbon" , transactionController.paymentKasbon);
