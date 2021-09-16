@@ -6,10 +6,10 @@ const transferpaymentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  transaction_Id: [{
+  transdetail_id: {
     type: ObjectId,
-    ref: 'transaction'
-  }],
+    ref: 'transaction_detail'
+  },
   
 })
 

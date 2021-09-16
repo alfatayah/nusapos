@@ -5,14 +5,24 @@
         <div class="col-1">
           <a href="/admin/transaction" class="btn btn-warning">Back</a>
         </div>
-        <div class="col-5">
-          <button type="button"  class="btn btn-primary tunai" data-toggle="modal" data-target="#cash-payment" data-total="<%= trans_detail.transaction_Id.total%>" >Tunai </button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah
-            Pembayaran</button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transfer-payment"> Transfer </button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dp-payment"> DP </button>
-        </div>
+        <% let status = trans_detail.transaction_Id.status  %> 
+        <% if ( status !== "PAYMENT"  && status !== "KASBON") { %>
+            <div class="col-5">
+                <button type="button"  class="btn btn-primary tunai" data-toggle="modal" data-target="#cash-payment"
+                  data-total="<%= trans_detail.transaction_Id.total%>"   data-transaction_id="<%= trans_detail.transaction_Id.id %>" >Tunai </button>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transfer-payment"> Transfer </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#split-payment">Pecah
+                Pembayaran</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#kasbon-payment">Kasbon</button>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dp-payment"> DP </button>
+            </div>
+          <% } else if (status === "KASBON" ) { %>
+            <div class="col-5">
+              <button type="button"  class="btn btn-primary tunai" data-toggle="modal" data-target="#cash-payment"
+                data-total="<%= trans_detail.transaction_Id.total%>"   data-transaction_id="<%= trans_detail.transaction_Id.id %>" >Tunai </button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#transfer-payment"> Transfer </button>
+             </div>
+           <% } %>
 
 
       </div>

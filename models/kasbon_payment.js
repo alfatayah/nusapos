@@ -4,16 +4,15 @@ const { ObjectId } = mongoose.Schema;
 const kasbonpaymentSchema = new mongoose.Schema({
   paid: {
     type: Number,
-    required: true,
   },
   due_date: {
     type: Date,
     required: true,
   },
-  transaction_Id: [{
+  transdetail_id: {
     type: ObjectId,
-    ref: 'transaction'
-  }],
+    ref: 'transaction_detail'
+  },
   
 })
 

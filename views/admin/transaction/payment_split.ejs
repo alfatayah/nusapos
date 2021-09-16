@@ -8,32 +8,45 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <div class="modal-header">
+          <h6 class="modal-title" id="exampleModalLabel">Total Bayar</h5>
+          <h6 class="modal-title" id="exampleModalLabel"  ><%= new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR" }).format(trans.total).replace(/\D00(?=\D*$)/, '') %>  </h5>           
+        </div>
+
         <form action="" method="POST">
           <div class="modal-body">
+           
             <div class="form-group">
               <label for="name">Pembayaran 1</label>
-              <select class="form-control" name="merkId">
+              <select class="form-control" id="tipePembayaran1" name="tipePembayaran1" onchange="check()" required>
                 <option value=""> Tipe Pembayaran</option>
-                <option value="tunai" >Tunai</option>
-                <option value="tunai" >Non Tunai</option>
+                <option value="TUNAI" >TUNAI</option>
+                <option value="TRANSFER" >TRANSFER</option>
               </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control name" name="name" placeholder="Enter Value" required />
+              <input type="number" class="form-control name" name="name"  onchange="validationInput()"  id="first_paid" placeholder="Enter Value" required />
+              <input type="hidden"  id="valueTotal" value=<%= trans.total %> />
             </div>
-
+            <div style="margin-bottom: 10px;">
+              <input type="hidden" class="form-control" name="codeTransaction" id="codeTransaction" placeholder="Kode Transaksi"  >
+            </div>
             <div class="form-group">
               <label for="name">Pembayaran 2</label>
-              <select class="form-control" name="merkId">
+              <select class="form-control" id="tipePembayaran2" name="tipePembayaran2" onchange="check2()" required>
                 <option value=""> Tipe Pembayaran</option>
-                <option value="tunai" >Tunai</option>
-                <option value="tunai" >Non Tunai</option>
+                <option value="TUNAI" >TUNAI</option>
+                <option value="TRANSFER" >TRANSFER</option>
               </select>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control name" name="name" placeholder="Enter Value" required />
+              <input type="number" class="form-control" id="second_paid" name="second_paid" placeholder="Enter Value" readonly />
+            </div>
+            <div >
+              <input type="hidden" class="form-control"  name="codeTransaction2" id="codeTransaction2" placeholder="Kode Transaksi"  >
             </div>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">
               Close
@@ -44,3 +57,45 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function validationInput() {
+    var first_paid = document.getElementById('first_paid').value;
+    let totalBayar = document.getElementById('valueTotal').value;
+    let cal = totalBayar - first_paid ;
+    document.getElementById('second_paid').value = cal;
+    if(first_paid <= 0 ){
+        alert('Pembayaran pertama tidak boleh minus dan nol ' );
+        document.getElementById('first_paid').value = '';
+        document.getElementById('second_paid').value = '';
+    } else if(first_paid => parseInt(totalBayar)   ) {
+        alert('Pembayaran pertama tidak boleh lebih dan sama dari total bayar');
+        document.getElementById('first_paid').value = '';
+        document.getElementById('second_paid').value = '';
+    } 
+  }
+  </script>
+
+  <script>
+    function check() {
+      let checkBox = document.getElementById("tipePembayaran1");
+      var str = checkBox.options[checkBox.selectedIndex].text;
+      if(str == "TRANSFER"){
+        document.getElementById('codeTransaction').type = "text"
+      } else {
+        document.getElementById('codeTransaction').type = "hidden"
+      }
+    }
+  </script>
+
+<script>
+  function check2() {
+    let checkBox = document.getElementById("tipePembayaran2");
+    var str = checkBox.options[checkBox.selectedIndex].text;
+    if(str == "TRANSFER"){
+      document.getElementById('codeTransaction2').type = "text"
+    } else {
+      document.getElementById('codeTransaction2').type = "hidden"
+    }
+  }
+</script>

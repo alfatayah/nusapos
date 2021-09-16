@@ -6,22 +6,14 @@ const splitpaymentSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  first_changes: {
-    type: Number,
-    required: true,
-  },
   second_paid: {
     type: Number,
     required: true,
   },
-  second_changes: {
-    type: Number,
-    required: true,
-  },
-  transaction_Id: [{
+  transdetail_id: {
     type: ObjectId,
-    ref: 'transaction'
-  }],
+    ref: 'transaction_detail'
+  },
   
 })
 

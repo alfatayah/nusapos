@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="show-transaction" role="tabpanel" aria-labelledby="home-tab">
+<div class="tab-pane fade show active" id="show-kasbon" role="tabpanel" aria-labelledby="home-tab">
   <!-- DataTales Example -->
   <div class="card shadow mb-4 mt-2">
     <div class="card-body">
@@ -7,8 +7,11 @@
           <thead>
             <tr >
               <th>No</th>
+              <th>No Invoice</th> 
+              <th>Status</th> 
               <th>No Member</th> 
               <th>Member</th> 
+              <th>Payment Method</th> 
               <th>Date</th> 
               <th>Jaminan</th>
               <th>Total</th>
@@ -19,15 +22,23 @@
             <% for(let i = 0; i < trans.length; i++) { %>
             <tr  >
               <td><%= i + 1 %></td>
+              <td><%= trans[i].invoice %></td>
+              <td  class="m-0 font-weight-bold text-success" ><%= trans[i].status %></td>
               <td><%= trans[i].member_Id.no_member %></td>
               <td><%= trans[i].member_Id.name %></td>
+              <td><%= trans[i].payment_method %></td>
               <td><%= trans[i].date_transaction %></td>
               <td><%= trans[i].jaminan %></td>
               <td><%= trans[i].total %></td>
               <td>
-                <a href="/admin/transaction/<%= trans[i].transdetail_id %> " class="btn btn-success btn-circle btn-sm button-update">
+                <a href="/admin/transaction/detail/<%= trans[i].transdetail_id %> " class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-eye"></i></a>
-                <a href="/admin/transaction/print/<%= trans[i].transdetail_id %>  "
+                  <% if ( user.status === "SPV" && trans[i].status === "NOT_DONE" ) { %>
+                    <a href="javascript:void()" type="button" class="btn btn-success btn-circle btn-sm button-cancel"
+                      data-id="<%= trans[i]._id %>">
+                      <i class="fas fa-window-close"></i></a>
+                    <% } %>
+                <a href="/admin/transaction/print_transaction/<%= trans[i].transdetail_id %>  "
                   class="btn btn-success btn-circle btn-sm button-update">
                   <i class="fas fa-print"></i></a>
               </td>

@@ -1,4 +1,32 @@
-const bycrypt = require("bcryptjs");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/transactionController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/transactionController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const bycrypt = require("bcryptjs");
 const fs = require('fs-extra');
 const path = require('path');
 const users = require('../models/user');
@@ -20,34 +48,12 @@ var moment = require('moment');
 module.exports = {
   viewTransaction: async (req, res) => {
     try {
-      // operator $ne == not equal value
-      const trans = await tbTrans.find({status : {$ne: 'KASBON'} })
+      const trans = await tbTrans.find()
         .populate({ path: 'member_Id ', select: 'no_member name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
-        res.render('admin/transaction/view_transaction', {
-          title: "Nusa | Transaction",
-          user: req.session.user,
-          trans,
-          alert,
-        });
-      
-    } catch (error) {
-      req.flash("alertMessage", `${error.message}`);
-      req.flash("alertStatus", 'danger');
-      res.redirect("/admin/transaction");
-    }
-  },
-
-  viewTransactionKasbon: async (req, res) => {
-    try {
-      const trans = await tbTrans.find({status : "KASBON"})
-        .populate({ path: 'member_Id ', select: 'no_member name' })
-      const alertMessage = req.flash("alertMessage");
-      const alertStatus = req.flash("alertStatus");
-      const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
-      res.render('admin/transaction/view_kasbon', {
+      res.render('admin/transaction/view_transaction', {
         title: "Nusa | Transaction",
         user: req.session.user,
         trans,
@@ -56,7 +62,7 @@ module.exports = {
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
-      res.redirect("/admin/transaction/kasbon");
+      res.redirect("/admin/transaction");
     }
   },
 
@@ -196,10 +202,9 @@ module.exports = {
    * @param req body get id_transaction and dateline from input user
    * @param res redirect to /admin/transaction 
    * @description
-   *  1. Update status transaksi to "KASBON" 
-   *  2. Update status payment method to "KASBON" 
-   *  3. Save data to table kasbon_payment , 
-   *  4. Save id payment kasbon to table transaction detail
+   *  1. Update status payment method to "KASBON" 
+   *  2. Save data to table kasbon_payment , 
+   *  3. Save id payment kasbon to table transaction detail
    * @todo transfer payment when user choose payment method transfer
    */
   paymentKasbon : async (req, res) => {
@@ -207,7 +212,6 @@ module.exports = {
     try {
       // update status transaksi
       const trans = await tbTrans.findOne({ _id : id_transaction});
-      trans.status = "KASBON";
       trans.payment_method = "KASBON";
       await trans.save();
       // save ke table kasbon_payments
@@ -237,18 +241,14 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
-      const trans_detail = await tbTransDetail.findOne({ _id: id })
-        .populate({ path: "transaction_Id", populate: { path: "discountId" } })
-      let transID = trans_detail.transaction_Id._id;
-      const trans = await tbTrans.findOne({ _id: transID })
-        .populate("product_id")
-        .populate("member_Id")
-        console.log("data trans " , trans);
+      const TransDetail = await tbTransDetail.findOne({ _id: id })
+      .populate("transaction_Id")
+      .populate("product_id")
+      .populate("discountId");
       res.render("admin/transaction/print", {
         title: "Staycation | Print Transaction",
         user: req.session.user,
-        trans_detail,
-        trans,
+        TransDetail,
         alert
       });
     } catch (error) {
@@ -259,4 +259,26 @@ module.exports = {
 
  
 
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-cancelTransaction.html">cancelTransaction</a></li><li><a href="module-paymentCash.html">paymentCash</a></li><li><a href="module-paymentKasbon.html">paymentKasbon</a></li><li><a href="module-paymentTransfer.html">paymentTransfer</a></li><li><a href="module-viewSignIn.html">viewSignIn</a></li></ul><h3>Global</h3><ul><li><a href="global.html">viewsigninRoutes</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Mon Sep 13 2021 14:22:05 GMT+0700 (Indochina Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

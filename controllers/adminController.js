@@ -78,7 +78,8 @@ module.exports = {
       }
       req.session.user = {
         id: user.id,
-        username: user.username
+        username: user.username,
+        status : user.status
       }
       res.redirect('/admin/dashboard');
 
@@ -290,8 +291,8 @@ module.exports = {
     var transdetail_id = mongoose.Types.ObjectId();
     const trans = await tbTrans.find()
     const numberinvoice =  trans.length + 1;
-    const invoice = "N"+ moment().format('DDMMYY') + numberinvoice ;
-    const status = "NOT PAYMENT";
+    const invoice = "INV"+ moment().format('DDMMYY') + numberinvoice ;
+    const status = "NOT_DONE";
     const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, userID, date_transaction , start_date , end_date  }  = req.body;
     
     const product = await tbProduct.find({ _id : productId});
@@ -311,6 +312,7 @@ module.exports = {
       userID,
       product_id: productId,
       discountId: diskonID,
+      payment_method: "_",
       desc_trans,
       transdetail_id,
     }
@@ -329,6 +331,7 @@ module.exports = {
       date_transaction,
       userID,
       product_id: productId,
+      payment_method: "_",
       desc_trans,
       transdetail_id,
     }
@@ -340,7 +343,7 @@ module.exports = {
         res.redirect(`/admin/dashboard`);
       } else {
         await tbTrans.create(diskonID ? transactionWithDiskon : newTransaction );
-        await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid })
+        await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid , dp_id : null , split_id : null, cash_id: null , kasbon_id: null, transfer_id: null})
   
         for (var i = 0; i < product.length; i++){
           product[i].status = "NOT AVALAIBLE";

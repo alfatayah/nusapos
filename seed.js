@@ -45,7 +45,13 @@ var data = [
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903345'),
         username: 'admin',
         password: 'rahasia',
-        status: 'active',
+        status: 'SPV',
+      },
+      {
+        _id: mongoose.Types.ObjectId('1e96cbe292b97300fc903341'),
+        username: 'admin2',
+        password: 'rahasia',
+        status: 'STAFF',
       },
     ]
   },
@@ -310,7 +316,7 @@ var data = [
         _id: mongoose.Types.ObjectId('1e96cbe292b973001c101445'),
         paid: 50000,
         changes : 40000,
-        transaction_Id: { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc101445') },
+        transdetail_id: mongoose.Types.ObjectId('5e961be292b97300fc101245'),
       },
     ]
   },
@@ -323,7 +329,7 @@ var data = [
         first_changes : 10000,
         second_paid: 20000,
         second_changes : 10000,
-        transaction_Id: { _id: mongoose.Types.ObjectId('2e96cbe292b97300fc101445') },
+        transdetail_id: mongoose.Types.ObjectId('5e92cbe292b97300fc101245'),
       },
     ]
   },
@@ -333,7 +339,7 @@ var data = [
       {
         _id: mongoose.Types.ObjectId('2496cbe292b973001c101445'),
         no_transfer: 'T00232323',
-        transaction_Id: { _id: mongoose.Types.ObjectId('1e96cbe292b97300fc101445') },
+        transdetail_id: mongoose.Types.ObjectId('1396cbe292b97300fc101245'),
       },
     ]
   },
@@ -344,7 +350,7 @@ var data = [
         _id: mongoose.Types.ObjectId('2196cbe292b973001c101445'),
         paid: 50000,
         due_date : '11-1-2021',
-        transaction_Id: { _id: mongoose.Types.ObjectId('2e16cbe292b97300fc101445') },
+        transdetail_id: mongoose.Types.ObjectId('3496cbe292b97300fc101245'),
       },
     ]
   },
@@ -352,10 +358,10 @@ var data = [
     'model': 'dp_payment',
     'documents': [  
       {
-        _id: mongoose.Types.ObjectId('2193cbe292b973001c101445'),
+        _id: mongoose.Types.ObjectId('3496bbe292b97300fc101245'),
         paid: 51000,
         due_date : '11-1-2021',
-        transaction_Id: { _id: mongoose.Types.ObjectId('2116cbe292b97300fc101445') },
+        transdetail_id: mongoose.Types.ObjectId('1396cbe292b97300fc101245'),
       },
     ]
   }

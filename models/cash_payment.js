@@ -8,12 +8,11 @@ const cashpaymentSchema = new mongoose.Schema({
   },
   changes: {
     type: Number,
-    required: true,
   },
-  transaction_Id: [{
+  transdetail_id: {
     type: ObjectId,
-    ref: 'transaction'
-  }],
+    ref: 'transaction_detail'
+  },
   
 })
 

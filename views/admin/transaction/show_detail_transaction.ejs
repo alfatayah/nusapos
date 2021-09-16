@@ -16,7 +16,7 @@
 
       <!-- Begin Page Content -->
       <div class="container-fluid">
-        <%- include('../../partials/message.ejs') %>
+      <%- include('../../partials/message.ejs') %>
 
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">Pilih Pembayaran</h1>
@@ -106,11 +106,15 @@
   </script>
 
 <script>
+  // fungsi ini untuk passing data id transaction dan total bayar ke halaman payment cash
   $('#allbutton').on('click', '.tunai', function () {
     let total = $(this).data('total');
+    let transaction_id = $(this).data('transaction_id');
+    $('.id_transaction').val(transaction_id);
     $('.btnTunai').val(total);
   })
-
 </script>
+
+
 
 
