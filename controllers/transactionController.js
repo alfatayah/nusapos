@@ -12,6 +12,7 @@ const tbMerk = require('../models/merk');
 const payment_cash = require('../models/cash_payment');
 const payment_transfer = require('../models/transfer_payment');
 const kasbon_payment = require("../models/kasbon_payment");
+const dp_payment = require("../models/dp_payment");
 const { v4: uuidv4 } = require('uuid');
 var mongoose = require('mongoose');
 var moment = require('moment');  
@@ -21,7 +22,8 @@ module.exports = {
   viewTransaction: async (req, res) => {
     try {
       // operator $ne == not equal value
-      const trans = await tbTrans.find({status : {$ne: 'KASBON'} })
+      // operator $nin == not equal with 2 value
+      const trans = await tbTrans.find({status : {$nin: ['KASBON' , 'DP']} })
         .populate({ path: 'member_Id ', select: 'no_member name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
@@ -42,7 +44,7 @@ module.exports = {
 
   viewTransactionKasbon: async (req, res) => {
     try {
-      const trans = await tbTrans.find({status : "KASBON"})
+      const trans = await tbTrans.find({ status : {$in: ['KASBON', 'DP']} })
         .populate({ path: 'member_Id ', select: 'no_member name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
@@ -68,6 +70,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus };
       const trans_detail = await tbTransDetail.findOne({ _id: id })
         .populate({ path: "transaction_Id", populate: { path: "discountId" } })
+        .populate('dp_id')
       let transID = trans_detail.transaction_Id._id;
       const trans = await tbTrans.findOne({ _id: transID })
         .populate("product_id")
@@ -228,7 +231,36 @@ module.exports = {
       console.log("error  ", error);
       res.redirect("/admin/transaction")
     }
+  },
 
+  paymentDP : async (req, res) => {
+    const {id_transaction, paid_dp, due_date, fix_total} = req.body;
+    try {
+      // update status transaksi
+      const trans = await tbTrans.findOne({ _id : id_transaction});
+      trans.status = "DP";
+      trans.payment_method = "DP";
+      trans.total = fix_total;
+      await trans.save();
+      // save ke table kasbon_payments
+      const newItem = {
+        paid: paid_dp,
+        due_date,
+        transdetail_id:  trans.transdetail_id,
+      }
+      const dpPayment = await dp_payment.create(newItem);
+      const transDetail = await tbTransDetail.findOne({_id : trans.transdetail_id})
+      transDetail.dp_id = dpPayment._id;
+      await transDetail.save();
+      req.flash("alertMessage", "Success Payment Transaction !");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/transaction")
+    } catch (error) {
+      req.flash("alertMessage", "Failed Payment Transaction ! " , error);
+      req.flash("alertStatus", "danger");
+      console.log("error  ", error);
+      res.redirect("/admin/transaction")
+    }
   },
 
   showPrintTransaction: async (req, res) => {

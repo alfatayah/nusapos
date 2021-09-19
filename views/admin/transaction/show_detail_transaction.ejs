@@ -92,7 +92,7 @@
     });
 
     $(function () {
-      $('#datelineDP').datepicker({
+      $('#due_date').datepicker({
         format: "dd-M-yy",
         todayHighlight: 'TRUE',
         autoclose: true,
@@ -100,7 +100,7 @@
         starend_date: new Date(),
         maxDate: '+1Y+6M'
       }).on('changeDate', function (ev) {
-        $('#end_date').datepicker('setStarend_date', $("#datelineDP").val());
+        $('#end_date').datepicker('setStarend_date', $("#due_date").val());
       });
     });
   </script>
