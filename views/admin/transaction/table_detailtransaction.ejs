@@ -41,7 +41,9 @@
               <th>Discount</th>
               <th>Subtotal</th>
               <th>Days</th>
-              <th>DP</th>
+              <% if (locals.trans_detail.dp_id) { %>
+                <th>DP</th>
+              <% } %>
               <th>Total</th>
               <th>Status</th>
             </tr>
@@ -55,7 +57,9 @@
               <td>Rp. <%= trans_detail.transaction_Id.total_discount%></td>
               <td>Rp. <%= trans_detail.transaction_Id.subtotal%></td>
               <td><%= trans_detail.transaction_Id.days%></td>
-              <td>Rp. <%= trans_detail.dp_id.paid%></td>
+              <% if (locals.trans_detail.dp_id) { %>
+                <td>Rp. <%= trans_detail.dp_id.paid%></td>
+              <% } %>  
               <td>Rp. <%= trans_detail.transaction_Id.total%></td>
               <td><%= trans_detail.transaction_Id.status%></td>
               </tr>
@@ -80,8 +84,7 @@
                 <td ><%= trans.product_id[i].price%></td>
                 <td >
                   <img src="http://localhost:3001/<%= trans.product_id[i].image %> " alt="image" width="200px">
-                </td>
-                
+                </td>                
             </tr>
             <% }%>
           </tbody>
