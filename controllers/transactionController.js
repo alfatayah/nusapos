@@ -25,6 +25,7 @@ module.exports = {
       // operator $nin == not equal with 2 value
       const trans = await tbTrans.find({status : {$nin: ['KASBON' , 'DP']} })
         .populate({ path: 'member_Id ', select: 'no_member name' })
+     const member = await tbMember.find()
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
@@ -32,6 +33,7 @@ module.exports = {
           title: "Nusa | Transaction",
           user: req.session.user,
           trans,
+          member,
           alert,
         });
       
@@ -41,6 +43,15 @@ module.exports = {
       res.redirect("/admin/transaction");
     }
   },
+
+  filterbyDate : async (req, res) => {
+    try {
+      // const { startDate } = req.params;
+      console.log("hello there filter ");
+    } catch (error) {
+      
+    }
+  } ,
 
   viewTransactionKasbon: async (req, res) => {
     try {

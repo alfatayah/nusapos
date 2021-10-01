@@ -16,16 +16,6 @@
 <script src="/sb-admin-2/js/demo/datatables-demo.js"></script>
 <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 
-<!--  jQuery -->
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
-
-<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-<!-- <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> -->
-
-<!-- Bootstrap Date-Picker Plugin -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>  -->
 
 <!-- seacrh and input combo box -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -56,36 +46,3 @@
 <script>
   $('#select2').select2();
 </script>
-
-<!-- 
-<script>
-  $(function () {
-
-    $('#start_date').datepicker({
-      format: "dd-M-yy",
-      todayHighlight: 'TRUE',
-      autoclose: true,
-      minDate: 0,
-      starend_date: new Date(),
-      maxDate: '+1Y+6M'
-    }).on('changeDate', function (ev) {
-      $('#end_date').datepicker('setStarend_date', $("#start_date").val());
-    });
-
-    $('#end_date').datepicker({
-      format: "dd-M-yy",
-      todayHighlight: 'TRUE',
-      autoclose: true,
-      minDate: '0',
-      maxDate: '+1Y+6M'
-    }).on('changeDate', function (ev) {
-      var start = $("#start_date").val();
-      var startD = new Date(start);
-      var end = $("#end_date").val();
-      var endD = new Date(end);
-      var diff = parseInt((endD.getTime() - startD.getTime()) / (24 * 3600 * 1000));
-      $("#days").val(diff);
-    });
-
-  });
-</script> -->

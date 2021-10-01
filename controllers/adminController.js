@@ -161,6 +161,7 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
+      console.log("im here bicrh");
       res.render('admin/discount/view_discount', {
         title: "Nusa | Discount",
         user: req.session.user, 
