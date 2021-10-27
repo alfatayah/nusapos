@@ -23,7 +23,7 @@ module.exports = {
     try {
       // operator $ne == not equal value
       // operator $nin == not equal with 2 value
-      const trans = await tbTrans.find({status : {$nin: ['KASBON' , 'DP']} })
+      const trans = await tbTrans.find({ status : {$nin: ['KASBON' , 'DP']} })
         .populate({ path: 'member_Id ', select: 'no_member name' })
      const member = await tbMember.find()
       const alertMessage = req.flash("alertMessage");
@@ -31,7 +31,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
         res.render('admin/transaction/view_transaction', {
           title: "Nusa | Transaction",
-          user: req.session.user,
+          // user: req.session.user,
           trans,
           member,
           alert,
@@ -46,9 +46,35 @@ module.exports = {
 
   filterbyDate : async (req, res) => {
     try {
-      // const { startDate } = req.params;
-      console.log("hello there filter ");
+      const { startDate  } = req.query;
+      // const trans = await tbTrans.find({ 
+      //   date_transaction: { $gte: startDate ,  $lt : endDate}}).sort({ date_transaction: 'asc'})
+      console.log("startDate " , startDate);
+      console.log("endDate " , endDate);
+
+        const trans = await tbTrans.find( {date_transaction : {$gte: startDate , $lt : endDate} , status : {$nin: ['KASBON' , 'DP']} }  )
+        .populate({ path: 'member_Id ', select: 'no_member name' })
+        const member = await tbMember.find()
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
+        res.render('admin/transaction/view_transaction', {
+          title: "Nusa | Transaction",
+          user: req.session.user,
+          trans,
+          member,
+          alert,
+        });
+
+      
+   
+      console.log("Hello ");
+
+
     } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/transaction");
       
     }
   } ,

@@ -23,6 +23,13 @@ mongoose.connect(localDB, {
   useCreateIndex: true,
   useFindAndModify: false,
 })
+
+mongoose.connect('mongodb://localhost:27017/nusa', {
+  useNewUrlParser: true, 
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+})
 .then(() => console.log("DB NUSA is connected"))
 .catch((err) => console.log("NOT CONNECT " , err));
 

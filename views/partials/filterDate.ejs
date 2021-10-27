@@ -3,7 +3,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+<!-- <script type="text/javascript" src="/js/jquery-3.5.1.js"></script> -->
 
 <script type="text/javascript">
     $(function () {
@@ -28,13 +28,20 @@
 
         $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
             // di sini akan nge hit api post untuk get data berdasarkan tanggal yang dipilih
-            // $(this).attr("https://www.google.com/");
-            $('ul#titleee li a[href="https://www.google.com"]').click(); 
-            
-            // $(this).attr('href', "/admin/transaction/filter_date");
-            // <a href="/admin/transaction/filter_date "></a>
-            console.log("ini log date " , picker.startDate.format('YYYY-MM-DD'));
-            // console.log(picker.endDate.format('YYYY-MM-DD'));
+            var startDate = picker.startDate.format('DD-MM-YY') ;
+            console.log("startDate " , startDate);
+            $.ajax({
+                // url: 'http://192.168.0.108:3000/admin/transaction/filter_date/::',
+                url: 'http://192.168.0.101:3000/api/v1/transaction/filter_date/::',
+                method: 'GET',
+                dataType: 'json',
+                data: { startDate: picker.startDate.format('DD-MM-YY'), endDate: picker.endDate.format('DD-MM-YY') },
+
+            });
+          
+           
         });
     });
+
+ 
 </script>
