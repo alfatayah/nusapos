@@ -31,7 +31,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
         res.render('admin/transaction/view_transaction', {
           title: "Nusa | Transaction",
-          // user: req.session.user,
+          user: req.session.user,
           trans,
           member,
           alert,
