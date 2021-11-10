@@ -13,6 +13,7 @@
             $('#reportrange span').html(start.format('DD-MMM-YY') + ' - ' + end.format('DD-MMM-YY'));
         }
         $('#reportrange').daterangepicker({
+
             startDate: start,
             endDate: end,
             ranges: {
@@ -28,20 +29,33 @@
 
         $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
             // di sini akan nge hit api post untuk get data berdasarkan tanggal yang dipilih
-            var startDate = picker.startDate.format('DD-MM-YY') ;
-            console.log("startDate " , startDate);
-            $.ajax({
-                // url: 'http://192.168.0.108:3000/admin/transaction/filter_date/::',
-                url: 'http://192.168.0.101:3000/api/v1/transaction/filter_date/::',
-                method: 'GET',
-                dataType: 'json',
-                data: { startDate: picker.startDate.format('DD-MM-YY'), endDate: picker.endDate.format('DD-MM-YY') },
+            var startDate = picker.startDate.format('DD-MMM-YY');
+            var endDate = picker.endDate.format('DD-MMM-YY');
 
-            });
-          
-           
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    // var min = picker.startDate.format('DDMMYY');
+                    // var max = picker.endDate.format('DDMMYY');
+                    var min = new Date(picker.startDate.format('DD-MMM-YY'))
+                    var max = new Date(picker.endDate.format('DD-MMM-YY'))
+
+                    var date_var = new Date (data[7])
+                    console.log("min " , min);
+                    console.log("max " , max);
+                    console.log("datevar " , date_var);
+                    if ((isNaN(min) && isNaN(max)) || (isNaN(min) && date_var <= max) ||
+                        (min <= date_var && isNaN(max)) || (min <= date_var && date_var <= max)) {
+                        return true;
+                    }
+                    return false;
+                }
+            );
+            var table = $('#dataTable').DataTable();
+            table.draw();
+            // $.fn.dataTable.ext.search.pop();
         });
     });
 
- 
+
+
 </script>

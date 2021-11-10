@@ -65,12 +65,6 @@ module.exports = {
           member,
           alert,
         });
-
-      
-   
-      console.log("Hello ");
-
-
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
