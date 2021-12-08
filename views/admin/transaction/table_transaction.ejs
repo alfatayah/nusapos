@@ -23,7 +23,7 @@
   <div class="row">
     <div  class="col-lg-3">
       <label>Transaksi</label>
-      <label><%= trans.length  %></label>
+      <input id="totalTransaksi" disabled value="aksdas"> </input>
     </div>
   
     <div class="col-lg-3">
@@ -48,9 +48,6 @@
 <% for(let x = 0; x < trans.length; x++) { %>
   <% sum+= trans[x].total %>
   <% }%>
-
-  
-  
 
     <div class="tab-pane fade show active" id="show-kasbon" role="tabpanel" aria-labelledby="home-tab">
       <div class="row">
