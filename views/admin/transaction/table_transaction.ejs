@@ -1,4 +1,9 @@
 
+<!-- Gimana caranya sorting array based on date transaction? -->
+<!-- data yang di sort berupa beberapa object yang di dalem nya terdapat array -->
+<!-- beberapa object itu gue push ke dalem array dan baru di sorting  -->
+<!-- sorting nya itu di kasih if dan flagging last 7 days dari index nya aja -->
+
 <div>
   <div class="row">
       <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 20%">
@@ -23,31 +28,36 @@
   <div class="row">
     <div  class="col-lg-3">
       <label>Transaksi</label>
-      <input id="totalTransaksi" disabled value="aksdas"> </input>
+      <h4 id="totalTransaksi">
+        <%= trans.length %>
+      </h4>
     </div>
   
     <div class="col-lg-3">
-      <label>Total Penjualan Kotor</label>
-      <label>
+      <label >Total Penjualan Kotor</label>
+      <h4  id="totalPenjualan" >
         <% let sum = 0 ;%>
         <% for(let x = 0; x < trans.length; x++) { %>
           <% sum+= trans[x].total %>
           <% }%>
         <%= sum %>
-      </label>
+      </h4 >
      </div>
   </div>
 
 </div>
-
-
-
-
 </div>
 
-<% for(let x = 0; x < trans.length; x++) { %>
-  <% sum+= trans[x].total %>
-  <% }%>
+
+  <% let dateNow = moment().format('l').split('/', '1');%>
+<% for(let i = 0; i < trans.length; i++) { %>
+  <% let dateTransaction = trans[i].date_transaction.split('/', '1');%>
+  <% if (dateTransaction == dateNow) { %>
+    <label>wow</label>
+  <% } %>  
+
+<% }%>
+
 
     <div class="tab-pane fade show active" id="show-kasbon" role="tabpanel" aria-labelledby="home-tab">
       <div class="row">

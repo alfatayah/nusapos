@@ -4,8 +4,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- <script type="text/javascript" src="/js/moment.min.js"></script>
 <script type="text/javascript" src="/js/daterangepicker.min.js"></script>
-<script type="text/javascript" src="/css/daterangepicker.css"></script> -->
-
+<link rel="stylesheet" href="/css/daterangepicker.css" /> -->
 <!-- Bugs -->
 <!-- Gimana caranya dapetin hasil draw dari table nya ? -->
 <!-- 1. tadi gue coba pake call back draw masih error -->
@@ -16,27 +15,6 @@
 <!-- 2. Coba pake callbackDraw tapi harus bisa implement nya -->
 
 <script type="text/javascript">
-    function searchData(picker) {
-        $.fn.dataTable.ext.search.push(
-            function (settings, data, dataIndex, rows) {
-                var min = new Date(picker.startDate.format('DD-MMM-YY'))
-                var max = new Date(picker.endDate.format('DD-MMM-YY'))
-                var date_var = new Date(data[7])
-                // notes : row data values display here !!
-                if ((isNaN(min) && isNaN(max)) || (isNaN(min) && date_var <= max) ||
-                    (min <= date_var && isNaN(max)) || (min <= date_var && date_var <= max)) {
-                       console.log("data " , data);
-                    return true;
-                }
-                return false;
-            }
-        );
-
-        var table = $('#dataTable').DataTable();
-        table.draw();
-        $.fn.dataTable.ext.search.pop();
-    }
-
     $(function () {
         var start = moment().subtract(29, 'days');
         var end = moment();
@@ -59,33 +37,45 @@
         cb(start, end);
 
         $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-            // di sini akan nge hit api post untuk get data berdasarkan tanggal yang dipilih
-            // var startDate = picker.startDate.format('DD-MMM-YY');
-            // var endDate = picker.endDate.format('DD-MMM-YY');
-
-
             searchData(picker)
-            // var table = $('#dataTable').DataTable();
-            // var datasearch = table.rows({ search: 'KTP' }).data();
-            // datasearch.each(function (value, index) {
-            //     console.log(`data value is ${value}`);
-            // });
-
-
-
-
-
-
-            // notes : result value table is funtion 
-
-            // for (let i = 0; i < valueTable.context.length; i++) {
-            //      console.log('ini data bos ' , valueTable[i]) ;
-
-            // }
-
-            // $.fn.dataTable.ext.search.pop();
         });
     });
+
+     function searchData(picker) {
+         const arrayData = []
+        $.fn.dataTable.ext.search.push(
+            function (settings, data, dataIndex, rows) {
+                var min = new Date(picker.startDate.format('DD-MMM-YY'))
+                var max = new Date(picker.endDate.format('DD-MMM-YY'))
+                var date_var = new Date(data[7])
+                // notes : row data values display here !!
+                if ((isNaN(min) && isNaN(max)) || (isNaN(min) && date_var <= max) ||
+                    (min <= date_var && isNaN(max)) || (min <= date_var && date_var <= max)) {
+                       arrayData.push(data)
+                    return true;
+                }
+                return false;
+            }
+        );
+       
+
+        var table = $('#dataTable').DataTable();
+        table.draw();
+        $.fn.dataTable.ext.search.pop();
+        displayData(arrayData)
+    }
+
+    function displayData(data){
+        let total = 0;
+       data.forEach(element => {
+        total += parseInt(element[9]); 
+       });
+        document.getElementById('totalTransaksi').innerHTML= data.length;
+        document.getElementById('totalPenjualan').innerHTML=  total;
+        
+
+    }
+
 
 
 // create for lopping array
