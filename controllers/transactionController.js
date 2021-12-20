@@ -67,9 +67,6 @@ module.exports = {
         .populate({ path: 'member_Id ', select: 'no_member name' })
         const day4 = await tbTrans.find({ date_transaction: last4, status: { $nin: ['KASBON', 'DP'] } })
         .populate({ path: 'member_Id ', select: 'no_member name' })
-
-        const checking =  !dayToday.length ? today : dayToday;
-
        allData.push(dayToday, day1, day2, day3, day4, )
 
       const alertMessage = req.flash("alertMessage");
