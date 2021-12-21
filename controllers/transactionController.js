@@ -67,7 +67,13 @@ module.exports = {
         .populate({ path: 'member_Id ', select: 'no_member name' })
         const day4 = await tbTrans.find({ date_transaction: last4, status: { $nin: ['KASBON', 'DP'] } })
         .populate({ path: 'member_Id ', select: 'no_member name' })
-       allData.push(dayToday, day1, day2, day3, day4, )
+        const day5 = await tbTrans.find({ date_transaction: last5, status: { $nin: ['KASBON', 'DP'] } })
+        .populate({ path: 'member_Id ', select: 'no_member name' })
+        const day6 = await tbTrans.find({ date_transaction: last6, status: { $nin: ['KASBON', 'DP'] } })
+        .populate({ path: 'member_Id ', select: 'no_member name' })
+        const day7 = await tbTrans.find({ date_transaction: last7, status: { $nin: ['KASBON', 'DP'] } })
+        .populate({ path: 'member_Id ', select: 'no_member name' })
+       allData.push(dayToday, day1, day2, day3, day4, day5, day6, day7); 
 
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");

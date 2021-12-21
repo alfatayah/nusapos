@@ -3,15 +3,14 @@
 <!-- data yang di sort berupa beberapa object yang di dalem nya terdapat array -->
 <!-- beberapa object itu gue push ke dalem array dan baru di sorting  -->
 <!-- sorting nya itu di kasih if dan flagging last 7 days dari index nya aja -->
-<% var totalTrans = 0;%> 
+
 <% for (let x = 0; x < allData.length; x++) { %> 
   <% let dateTransaksi = moment().subtract(x, 'days').format('DD-MMM-YY')%> 
   <div class="tab-pane fade show active" id="show-kasbon" role="tabpanel" aria-labelledby="home-tab">
     <div class="row">
       <div class="col-auto mr-auto font-weight-bold text-primary">Tanggal :</div>
       <div class="col font-weight-bold text-primary"><%= dateTransaksi%> </div>
-      <div class="col-auto font-weight-bold text-primary">Total</div>
-      <div class="col-auto font-weight-bold text-primary"><%= totalTrans %> </div>
+   
     </div>
     <!-- DataTales Example -->
     <div class="card shadow mb-4 mt-2">
@@ -34,7 +33,7 @@
               </tr>
             </thead>
             <tbody>
-               <% for(let i=0; i < allData[x].length; i++) { %>
+               <%  for(let i=0; i < allData[x].length; i++) { %>
                 <tr>
                   <td>
                     <%= i + 1 %>
