@@ -45,9 +45,9 @@ const transactionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  user_id:{
+  userid:{
     type : ObjectId,
-    ref: 'user'
+    ref: "user"
   },
   desc_trans: {
     type: String,

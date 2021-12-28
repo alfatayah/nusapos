@@ -294,8 +294,7 @@ module.exports = {
     const numberinvoice =  trans.length + 1;
     const invoice = "INV"+ moment().format('DDMMYY') + numberinvoice ;
     const status = "NOT_DONE";
-    const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, userID, date_transaction , start_date , end_date  }  = req.body;
-    
+    const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, date_transaction, userid,  start_date , end_date  }  = req.body;
     const product = await tbProduct.find({ _id : productId});
     const transactionWithDiskon = {
       _id: transid,
@@ -310,7 +309,7 @@ module.exports = {
       status, 
       jaminan,
       date_transaction,
-      userID,
+      userid,
       product_id: productId,
       discountId: diskonID,
       payment_method: "_",
@@ -330,7 +329,7 @@ module.exports = {
       status, 
       jaminan,
       date_transaction,
-      userID,
+      userid,
       product_id: productId,
       payment_method: "_",
       desc_trans,
