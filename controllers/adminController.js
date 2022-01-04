@@ -161,7 +161,7 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
-      console.log("im here bicrh");
+ 
       res.render('admin/discount/view_discount', {
         title: "Nusa | Discount",
         user: req.session.user, 
@@ -226,6 +226,7 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
+      
       res.render('admin/dashboard/view_dashboard', {
         title: "Nusa | Dashboard",
         user: req.session.user,
@@ -269,7 +270,6 @@ module.exports = {
         res.redirect(`/admin/dashboard`);
       } else {
         list.push(productSearch);
-        console.table("list " , list);
         res.render('admin/dashboard/view_dashboard', {
           title: "Nusa | Dashboard",
           user: req.session.user,
@@ -290,12 +290,13 @@ module.exports = {
   addTrans: async (req, res) => {
     var transid = mongoose.Types.ObjectId();
     var transdetail_id = mongoose.Types.ObjectId();
-    const trans = await tbTrans.find()
+    const trans = await tbTrans.find();
     const numberinvoice =  trans.length + 1;
     const invoice = "INV"+ moment().format('DDMMYY') + numberinvoice ;
     const status = "NOT_DONE";
     const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, date_transaction, userid,  start_date , end_date  }  = req.body;
     const product = await tbProduct.find({ _id : productId});
+    const member = await tbMember.findOne({_id : select2});
     const transactionWithDiskon = {
       _id: transid,
       member_Id: select2, 
@@ -344,13 +345,15 @@ module.exports = {
       } else {
         await tbTrans.create(diskonID ? transactionWithDiskon : newTransaction );
         await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid , dp_id : null , split_id : null, cash_id: null , kasbon_id: null, transfer_id: null})
-  
         for (var i = 0; i < product.length; i++){
           product[i].status = "NOT AVALAIBLE";
           product[i].transaction_Id.push({_id : transid})
           await product[i].save();
         }
 
+        member.transaction_Id.push({_id : transid});
+        await member.save();
+        
         list.splice(0, list.length )
         req.flash("alertMessage", "Succes Add Transaction");
         req.flash("alertStatus", "success");
@@ -363,6 +366,28 @@ module.exports = {
     }
   },
 
+  // ALL report 
+  reportCustomer: async (req, res) => {
+    try {
+      // untuk alert message dia call component dari partials/message.ejs
+      const member = await tbMember.find()
+      .populate({ path: 'transaction_Id '})
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
+      console.log("member", member);
+      res.render('admin/report/view_customer', {
+        title: "Nusa | Laporan Pelanggan",
+        user: req.session.user, 
+        member,
+        alert,
+      });
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/report");
+    }
+  },
  
 
 }

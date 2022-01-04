@@ -63,10 +63,10 @@ const transactionSchema = new mongoose.Schema({
   payment_method:{
     type: String,
   },
-  transdetail_id: {
+  transdetail_id: [{
     type: ObjectId,
     ref: 'transaction_detail'
-  },
+  }],
 
 
 

@@ -72,8 +72,8 @@
               <thead>
                 <tr >
                   <th>No</th>
-                  <th>No Invoice</th> 
-                  <th>Kasir</th>
+                  <th>No Invoice</th>               
+                  <th class="targetHeaderCell" >Kasir</th>
                   <th>Status</th> 
                   <th>No Member</th> 
                   <th>Member</th> 
@@ -89,7 +89,7 @@
                 <tr  >
                   <td><%= i + 1 %></td>
                   <td><%= trans[i].invoice %></td>
-                  <td><%= user.username %></td>
+                  <td><%= trans[i].userid.username %></td>
                   <td  class="m-0 font-weight-bold text-success" ><%= trans[i].status %></td>
                   <td><%= trans[i].member_Id.no_member %></td>
                   <td><%= trans[i].member_Id.name %></td>

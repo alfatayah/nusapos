@@ -25,6 +25,7 @@ module.exports = {
       // operator $nin == not equal with 2 value
       const trans = await tbTrans.find({ status: { $nin: ['KASBON', 'DP'] } })
         .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({path : 'userid' })
       const member = await tbMember.find()
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
