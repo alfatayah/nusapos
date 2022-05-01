@@ -60,14 +60,13 @@ var data = [
     'documents': [
       {
         _id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315'),
-        no_member: "NK000326",
         name: 'fadhil',
         email: 'fadhil.alfatayah@gmail.com',
         password: 'rahasia',
         address :'Jl. Raya Ciputat Timur',
         no_hp: 0893733342323,
         username_ig: '@alfatayah',
-        identity: 21312312313123,
+        nik: 21312312313123,
         status: 1,
       },
     ]

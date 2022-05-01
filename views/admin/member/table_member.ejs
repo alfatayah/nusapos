@@ -12,7 +12,6 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>No Member</th>
             <th>Nama</th>
             <th>NIK</th>
             <th>Instagram</th> 
@@ -24,9 +23,8 @@
           <% for(let i = 0; i < member.length; i++) { %>
           <tr>
             <td><%= i + 1 %></td>
-            <td><%= member[i].no_member %></td>
             <td><%= member[i].name %></td>
-            <td><%= member[i].identity %></td>
+            <td><%= member[i].nik %></td>
             <td><%= member[i].username_ig %></td>
             <td><%= member[i].no_hp %></td>
             <td><%= member[i].status %></td>

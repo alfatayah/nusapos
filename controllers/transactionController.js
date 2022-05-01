@@ -24,7 +24,7 @@ module.exports = {
       // operator $ne == not equal value
       // operator $nin == not equal with 2 value
       const trans = await tbTrans.find({ status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
         .populate({path : 'userid' })
       const member = await tbMember.find()
       const alertMessage = req.flash("alertMessage");
@@ -59,21 +59,21 @@ module.exports = {
       const last7 = moment().subtract(7, 'days').format('DD-MMM-YY');
 
       const dayToday = await tbTrans.find({ date_transaction: today, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
       const day1 = await tbTrans.find({ date_transaction: last1, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
       const day2 = await tbTrans.find({ date_transaction: last2, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
         const day3 = await tbTrans.find({ date_transaction: last3, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
         const day4 = await tbTrans.find({ date_transaction: last4, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
         const day5 = await tbTrans.find({ date_transaction: last5, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
         const day6 = await tbTrans.find({ date_transaction: last6, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
         const day7 = await tbTrans.find({ date_transaction: last7, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
        allData.push(dayToday, day1, day2, day3, day4, day5, day6, day7); 
 
       const alertMessage = req.flash("alertMessage");
@@ -103,7 +103,7 @@ module.exports = {
       console.log("endDate ", endDate);
 
       const trans = await tbTrans.find({ date_transaction: { $gte: startDate, $lt: endDate }, status: { $nin: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
       const member = await tbMember.find()
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
@@ -126,7 +126,7 @@ module.exports = {
   viewTransactionKasbon: async (req, res) => {
     try {
       const trans = await tbTrans.find({ status: { $in: ['KASBON', 'DP'] } })
-        .populate({ path: 'member_Id ', select: 'no_member name' })
+        .populate({ path: 'member_Id ', select: 'nik name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };

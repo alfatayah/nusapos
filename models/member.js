@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 const  { ObjectId } = mongoose.Schema;
+const bcrypt = require("bcryptjs");
 const memberSchema = new mongoose.Schema({
-  no_member: {
-    type: String,
-    required: true
-  },
   name: {
     type: String,
     required: true
@@ -28,19 +25,25 @@ const memberSchema = new mongoose.Schema({
   username_ig: {
     type: String,
   },
-  identity: {
+  nik: {
     type: String,
     required: true
   },
   status: {
     type: String,
-    required: true
   },
   // di sini gue tambahin FK transaction id untuk laporan customer nya
   transaction_Id: [{
     type: ObjectId,
     ref: 'transaction'
   }],
+})
+
+memberSchema.pre('save', async function (next) {
+  const member = this;
+  if (member.isModified('password')) {
+    member.password = await bcrypt.hash(member.password, 8);
+  }
 })
 
 module.exports = mongoose.model("member", memberSchema);
