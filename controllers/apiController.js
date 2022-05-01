@@ -15,7 +15,6 @@ module.exports = {
         const { email, password } = req.body;
         const mail = await tbMember.findOne({email: email});
         const isPasswordMatch = await bycrypt.compare(password, mail.password);
-        console.log(mail);
         if(mail && isPasswordMatch == true){
           res.status(200).json({
             message: "Success Login",
@@ -40,13 +39,21 @@ module.exports = {
       const dataCreate = {
         name, nik, email, no_hp, password, address
       }
-      console.log(dataCreate);
-      await tbMember.create(dataCreate);
-      res.status(200).json({
-        message: "Success Create Member",
-        "response": 200,
-        "result": dataCreate
-      })
+      const mail = await tbMember.findOne({email: email});
+      if(mail){
+        res.status(200).json({
+          message: "Akun sudah terdaftar",
+          "response": 200,
+          "result": null
+        })
+      }else{
+        await tbMember.create(dataCreate);
+        res.status(200).json({
+          message: "Success Create Member",
+          "response": 200,
+          "result": dataCreate
+        })
+      }
     } catch (error) {
       res.status(500).json({ message: "Internal server error", "result": error })
     }
