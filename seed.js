@@ -63,6 +63,7 @@ var data = [
         no_member: "NK000326",
         name: 'fadhil',
         email: 'fadhil.alfatayah@gmail.com',
+        password: 'rahasia',
         address :'Jl. Raya Ciputat Timur',
         no_hp: 0893733342323,
         username_ig: '@alfatayah',
