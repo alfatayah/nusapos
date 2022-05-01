@@ -13,9 +13,16 @@ const memberSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  username_ig: {
+  email: {
     type: String,
     required: true
+  },
+  address: {
+    type: String,
+    required: true
+  },
+  username_ig: {
+    type: String,
   },
   identity: {
     type: String,
