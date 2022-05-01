@@ -24,7 +24,7 @@ mongoose.connect(localDB, {
   useFindAndModify: false,
 })
 
-mongoose.connect('mongodb://localhost:27017/nusa', {
+mongoose.connect('mongodb://localhost:27017/nusapos', {
   useNewUrlParser: true, 
   useUnifiedTopology: true,
   useCreateIndex: true,
