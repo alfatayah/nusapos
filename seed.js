@@ -67,7 +67,7 @@ var data = [
         no_hp: 0893733342323,
         username_ig: '@alfatayah',
         nik: 21312312313123,
-        status: 1,
+        status: "Verified",
       },
     ]
   },

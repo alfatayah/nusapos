@@ -19,7 +19,9 @@ module.exports = {
           res.status(200).json({
             message: "Success Login",
             "response": 200,
-            "result": { }
+            "result": {
+              message: "Success Login",
+             }
         })
         } else{
           res.status(400).json({
@@ -36,14 +38,15 @@ module.exports = {
   registerMember: async (req, res) => {
     try {
       const { name, nik, email, no_hp, password, address } = req.body;
+      const status = "Not Verified";
       const dataCreate = {
-        name, nik, email, no_hp, password, address
+        name, nik, email, no_hp, password, address, status
       }
       const mail = await tbMember.findOne({email: email});
       if(mail){
-        res.status(200).json({
+        res.status(404).json({
           message: "Akun sudah terdaftar",
-          "response": 200,
+          "response": 404,
           "result": null
         })
       }else{

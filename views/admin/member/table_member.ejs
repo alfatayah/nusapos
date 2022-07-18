@@ -12,10 +12,10 @@
         <thead>
           <tr>
             <th>No</th>
-            <th>Nama</th>
+            <th>Name</th>
             <th>NIK</th>
-            <th>Instagram</th> 
             <th>No HP</th>
+            <th>Email</th>
             <th>Status</th>
           </tr>
         </thead>
@@ -25,9 +25,13 @@
             <td><%= i + 1 %></td>
             <td><%= member[i].name %></td>
             <td><%= member[i].nik %></td>
-            <td><%= member[i].username_ig %></td>
             <td><%= member[i].no_hp %></td>
-            <td><%= member[i].status %></td>
+            <td><%= member[i].email %></td>
+            <% if(member[i].status === "Verified") { %>
+             <td class="m-0 font-weight-bold text-success"><%= member[i].status %></td>
+             <% }else { %> 
+            <td class="m-0 font-weight-bold text-danger"><%= member[i].status %></td>
+              <% }%>
           </tr>
           <% }%>
         </tbody>
