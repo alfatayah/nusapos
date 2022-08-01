@@ -13,25 +13,35 @@ module.exports = {
     loginMember: async (req, res) => {
       try {
         const { email, password } = req.body;
-        const mail = await tbMember.findOne({email: email});
-        const isPasswordMatch = await bycrypt.compare(password, mail.password);
-        if(mail && isPasswordMatch == true){
+        const dataUser = await tbMember.findOne({email: email});
+        const isPasswordMatch = await bycrypt.compare(password, dataUser.password);
+        if(dataUser && isPasswordMatch == true){
           res.status(200).json({
             message: "Success Login",
             "response": 200,
             "result": {
-              message: "Success Login",
+              message: "Sukses Login",
+              name: dataUser.name,
+              userToken: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
              }
         })
-        } else{
-          res.status(400).json({
+        } else if (dataUser || isPasswordMatch == true) {
+          res.status(404).json({
             message: "Nomor HP atau password salah",
-            "response": 400,
-            "result": null
+            "response": 404,
+            "result" : null,
         })
-        }
+        } else if (dataUser && isPasswordMatch == false) {
+          res.status(404).json({
+            message: "Akun belum terdaftar",
+            "response": 404,
+            "result" : null,
+        }) }
+
       } catch (error) {
-          res.status(500).json({ message: "Internal server error", "result" : error })
+          res.status(500).json({ message: "Internal server error", "result" : {
+            message: "Internal server error"
+          } })
       }
   },
 
@@ -47,14 +57,18 @@ module.exports = {
         res.status(404).json({
           message: "Akun sudah terdaftar",
           "response": 404,
-          "result": null
+          "result": {
+            message: "Akun sudah terdaftar",
+          }
         })
-      }else{
+      }else {
         await tbMember.create(dataCreate);
         res.status(200).json({
-          message: "Success Create Member",
+          message: "Sukses membuat akun",
           "response": 200,
-          "result": dataCreate
+          "result": {
+            message: "Sukses membuat akun",
+          }
         })
       }
     } catch (error) {
@@ -68,15 +82,12 @@ module.exports = {
             const product = await tbProduct.find()
                 .populate({ path: 'typeId', select: 'id name' })
                 .populate({ path: 'merkId', select: 'id name' })
-            const merk = await tbMerk.find();
-            const type = await tbType.find();
             res.status(200).json({
                 message: "Success GET Product",
                 "response": 200,
                 "result": {
-                    product,
-                    merk,
-                    type,
+                    message: "Success GET Product",
+                    product: product
                 }
             })
         } catch (error) {

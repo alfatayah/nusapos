@@ -39,20 +39,57 @@ module.exports = {
   //   }
   // },
 
+  addItem: async (req, res) => {
+    try {
+      const { categoryId, title, price, city, about } = req.body;
+      if (req.files.length > 0) {
+        const category = await Category.findOne({ _id: categoryId });
+        const newItem = {
+          categoryId,
+          title,
+          description: about,
+          price,
+          city
+        }
+        const item = await Item.create(newItem);
+        category.itemId.push({ _id: item._id });
+        await category.save();
+        for (let i = 0; i < req.files.length; i++) {
+          const imageSave = await Image.create({ imageUrl: `images/${req.files[i].filename}` });
+          item.imageId.push({ _id: imageSave._id });
+          await item.save();
+        }
+        req.flash("alertMessage", "Succes Add Item");
+        req.flash("alertStatus", "success");
+        res.redirect("/admin/item");
+      }
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/item");
+    }
+  },
+
   addProduct: async (req, res) => {
     try {
       const { product_name, typeId, merkId, status, price , description , barcode  } = req.body;
-      if(req.file){
-        const image = `images/${req.file.filename}`
+      if(req.files.length > 0 ){
+        let images = [];
+        for (let i = 0; i < req.files.length; i++) {
+          const image = `images/${req.files[i].filename}`
+          images.push(image);
+        }
+     
         const dataType = await tbType.findOne({_id: typeId});
         const dataMerk = await tbMerk.findOne({_id : merkId});
+        console.log("Image : ", images);
         const  newItem = {
           typeId,
           merkId,
           product_name, 
           status, 
           description, 
-          image,
+          images,
           price ,
           barcode  
         }
@@ -67,6 +104,7 @@ module.exports = {
       }
 
     } catch (error) {
+      console.log("Error  : ", error);
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
       res.redirect("/admin/product");
