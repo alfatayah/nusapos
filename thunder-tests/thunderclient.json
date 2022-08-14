@@ -1,0 +1,21 @@
+[
+  {
+    "_id": "fa63151d-d1fa-4ff7-8796-de6442a63c87",
+    "colId": "052064fb-bf14-4715-a87d-d8ea6947efbf",
+    "containerId": "",
+    "name": "login",
+    "url": "http://localhost:3000/api/v1/login",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-08-13T02:06:33.710Z",
+    "modified": "2022-08-13T02:08:17.732Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"email\": \"fadhil.alfatayah@gmail.com\",\n    \"password\": \"rahasia\"\n}",
+      "form": []
+    },
+    "tests": []
+  }
+]
