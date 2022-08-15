@@ -102,7 +102,14 @@ module.exports = {
         const newItem = {
           dateIn, dateOut, totalDays, product_id, totalBooking
         }
+
         await tbBooking.create(newItem);
+
+        for (let i = 0; i < product_id.length; i++) {
+          const product = await tbProduct.findOne({ _id:  product_id[i] })
+          product.status = "Not Available";
+          await product.save();
+        }
         res.status(200).json({
           message: "Success Add Booking",
           "response": 200,
@@ -114,6 +121,8 @@ module.exports = {
         res.status(500).json({ message: "Internal server error", "result" : {
           message: "Internal server error"
         } })
+
+        console.log("eror " , error)
       }
     },
     
