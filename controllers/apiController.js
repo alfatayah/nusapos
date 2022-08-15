@@ -5,6 +5,7 @@ const tbProduct = require('../models/product');
 const tbTrans = require('../models/transaction');
 const tbMember = require('../models/member');
 const tbDiscount = require('../models/discount');
+const tbBooking = require('../models/booking');
 const tbType = require('../models/type');
 const tbMerk = require('../models/merk');
 
@@ -94,6 +95,28 @@ module.exports = {
             res.status(500).json({ message: "Internal server error" })
         }
     },
+
+    addBooking : async (req, res) => {
+      try{
+        const {dateIn, dateOut, totalDays, product_id, totalBooking  } = req.body;
+        const newItem = {
+          dateIn, dateOut, totalDays, product_id, totalBooking
+        }
+        await tbBooking.create(newItem);
+        res.status(200).json({
+          message: "Success Add Booking",
+          "response": 200,
+          "result": {
+              message: "Success Add Booking",
+          }
+      })
+      }catch(error){
+        res.status(500).json({ message: "Internal server error", "result" : {
+          message: "Internal server error"
+        } })
+      }
+    },
+    
 
     filterbyDate : async (req, res) => {
       console.log("this is filter");

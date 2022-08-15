@@ -24,11 +24,12 @@ seeder.connect(localDB, {
     './models/split_payment',
     './models/transfer_payment',
     './models/kasbon_payment',
-    './models/dp_payment'
+    './models/dp_payment',
+    './models/booking'
   ]);
 
   // Clear specified collections
-  seeder.clearModels(['user' , 'member', 'merk','product' , 'transaction', 'transaction_detail', 'discount', 'type', 'cash_payment', 'split_payment', 'transfer_payment','kasbon_payment', 'dp_payment'  ], function () {
+  seeder.clearModels(['user' , 'member', 'merk','product' , 'transaction', 'transaction_detail', 'discount', 'type', 'cash_payment', 'split_payment', 'transfer_payment','kasbon_payment', 'dp_payment', 'booking'  ], function () {
     // Callback to populate DB once collections have been cleared
     seeder.populateModels(data, function () {
       seeder.disconnect();
@@ -308,6 +309,22 @@ var data = [
         paid: 51000,
         due_date : '11-1-2021',
         transdetail_id: mongoose.Types.ObjectId('1396cbe292b97300fc101245'),
+      },
+    ]
+  },
+  {
+    'model': 'booking',
+    'documents': [  
+      {
+        _id: mongoose.Types.ObjectId('3496bbe292b97300fc101245'),
+   
+        dateIn : '11-1-2021',
+        dateOut : '12-1-2021',
+        totalDays: 1,
+        product_id: [
+          { _id: mongoose.Types.ObjectId('5e96cbe292b973001c90b193') },
+        ],
+        totalBooking: 51000
       },
     ]
   }
