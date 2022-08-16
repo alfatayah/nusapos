@@ -47,7 +47,7 @@ router.delete('/discount/:id', discountController.deleteDiscount);
 
 router.get("/product", adminController.viewProduct);
 router.post("/product", uploadMultiple, productController.addProduct);
-router.put("/product", uploadSingle, productController.editProduct);
+router.put("/product", uploadMultiple, productController.editProduct);
 router.delete('/product/:id', productController.deleteProduct);
 
 

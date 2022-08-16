@@ -117,7 +117,7 @@ module.exports = {
       const product = await tbProduct.findOne({ _id : id})
       .populate({ path: 'merkId', select: 'id name'})
       .populate({ path: 'typeId', select: 'id name'})
-      if(req.file == undefined){
+      if(req.files == undefined){
         console.log("masuk ke validation undefined " , product);
         product.typeId = typeId;
         product.merkId = merkId;
@@ -131,12 +131,19 @@ module.exports = {
         req.flash("alertStatus", "success");
         res.redirect("/admin/product");
       } else {
-        await fs.unlink(path.join(`public/${product.image}`));
+        for (let i = 0; i < product.images.length; i++) {
+          await fs.unlink(path.join(`public/${product.images[i]}`));
+        }
+        let images = [];
+        for (let i = 0; i < req.files.length; i++) {
+          const image = `images/${req.files[i].filename}`
+          images.push(image);
+        }
         product.typeId = typeId;
         product.merkId = merkId;
         product.product_name = name;
         product.status = status;
-        product.image = `images/${req.file.filename}`
+        product.images = images;
         product.price = price;
         product.description = description;
         product.barcode = barcode;
@@ -156,7 +163,9 @@ module.exports = {
     try {
       const { id } = req.params;
       const product = await tbProduct.findOne({ _id: id });
-      await fs.unlink(path.join(`public/${product.image}`));
+      for (let i = 0; i < product.images.length; i++) {
+        await fs.unlink(path.join(`public/${product.images[i]}`));
+      }
       await product.remove();
       req.flash('alertMessage', 'Success Delete Product');
       req.flash('alertStatus', 'success');

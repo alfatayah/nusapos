@@ -20,7 +20,6 @@
             <th>Description</th>
             <th>Barcode</th>
             <th>Image</th>
-            <th>Barcode pic</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -33,14 +32,12 @@
             <td><%= product[i].typeId.name %></td>
             <td><%= product[i].status %></td>
             <td><%= product[i].price %></td>
-            <td><%= product[i].description %></td>
+            <td ><%= product[i].description %></td>
             <td><%= product[i].barcode %></td>
             <td>
-              <img src="http://localhost:3001/<%= product[i].image %> " alt="image" width="70px">
+              <img src="http://localhost:3001/<%= product[i].images[0] %> " alt="image" width="70px">
             </td>
-            <td>
-              <img id="barcode<%= i + 1 %>"  >
-            </td>
+     
             <td>
               <form action="/admin/product/<%= product[i].id %>?_method=DELETE" method="POST">
                 <a href="javascript:void()" type="button" class="btn btn-warning btn-circle btn-sm button-update"

@@ -18,8 +18,8 @@
             <label for="name">Merk</label>
             <select class="form-control" name="merkId">
               <option value="">---- Merk ----</option>
-               <% for (let i = 0; i< product.length; i++){ %>
-                <option value=<%= product[i].merkId.id %> > <%= product[i].merkId.name %>  </option>
+               <% for (let i = 0; i< merk.length; i++){ %>
+                <option value=<%= merk[i].id %> > <%= merk[i].name %>  </option>
                <% } %>  
             </select>
           </div>
@@ -27,8 +27,8 @@
             <label for="name">Type</label>
             <select class="form-control" name="typeId">
               <option value="">---- Type ----</option>
-               <% for (let i = 0; i< product.length; i++){ %>
-                <option value=<%= product[i].typeId.id %> > <%= product[i].typeId.name %>  </option>
+               <% for (let i = 0; i< type.length; i++){ %>
+                <option value=<%= type[i].id %> > <%= type[i].name %>  </option>
                <% } %>  
             </select>
           </div>
