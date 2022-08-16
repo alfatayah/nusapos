@@ -9,6 +9,7 @@ const tbMember = require('../models/member');
 const tbDiscount = require('../models/discount');
 const tbType = require('../models/type');
 const tbMerk = require('../models/merk');
+const tbBooking = require('../models/booking');
 const { v4: uuidv4 } = require('uuid');
 var mongoose = require('mongoose');
 var moment = require('moment');  
@@ -242,6 +243,25 @@ module.exports = {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
       res.redirect('/admin/dashboard');
+    }
+  },
+
+  viewBook : async (req, res) => {
+    try {
+      const booking = await tbBooking.find();
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
+      res.render('admin/booking/view_booking', {
+        title: "Nusa | Transaksi",
+        user: req.session.user, 
+        booking,
+        alert,
+      });
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/bookinf");
     }
   },
   
