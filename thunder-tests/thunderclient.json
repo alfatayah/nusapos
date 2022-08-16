@@ -36,5 +36,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "516fe6a4-22b0-4984-84a7-0850e541648b",
+    "colId": "052064fb-bf14-4715-a87d-d8ea6947efbf",
+    "containerId": "",
+    "name": "getReport",
+    "url": "http://localhost:3000/api/v1/report",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-08-15T09:20:43.349Z",
+    "modified": "2022-08-15T09:20:52.102Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

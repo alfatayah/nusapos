@@ -16,7 +16,8 @@
             <th>NIK</th>
             <th>No HP</th>
             <th>Email</th>
-            <th>Status</th>
+            <th>Alamat</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -27,11 +28,13 @@
             <td><%= member[i].nik %></td>
             <td><%= member[i].no_hp %></td>
             <td><%= member[i].email %></td>
-            <% if(member[i].status === "Verified") { %>
-             <td class="m-0 font-weight-bold text-success"><%= member[i].status %></td>
-             <% }else { %> 
-            <td class="m-0 font-weight-bold text-danger"><%= member[i].status %></td>
-              <% }%>
+            <td><%= member[i].address %></td>
+            <td>
+                <a href="javascript:void()" type="button" class="btn btn-warning btn-circle btn-sm button-update" data-id="<%= member[i].id %>"  
+                  data-nik="<%= member[i].nik %>" data-nohp="<%= member[i].no_hp %>" data-email="<%= member[i].email %>" data-address="<%= member[i].address %>"
+                  >
+                  <i class="fas fa-edit"></i></a>
+            </td>
           </tr>
           <% }%>
         </tbody>

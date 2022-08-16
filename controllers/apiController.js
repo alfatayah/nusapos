@@ -125,6 +125,26 @@ module.exports = {
         console.log("eror " , error)
       }
     },
+
+    getReport : async (req, res) => {
+      try{
+        const report = await tbBooking.find()
+        res.status(200).json({
+          message: "Success Get Report",
+          "response": 200,
+          "result": {
+              message: "Success Get Report",
+              report: report
+          }
+      })
+      }catch(error){
+        res.status(500).json({ message: "Internal server error", "result" : {
+          message: "Internal server error"
+        } })
+
+        console.log("eror " , error)
+      }
+    },
     
 
     filterbyDate : async (req, res) => {

@@ -388,6 +388,24 @@ module.exports = {
       res.redirect("/admin/report");
     }
   },
+  editMember : async (req, res) => {
+    const {id, nik, nohp , email, address  } = req.body;
+    try {
+      const member = await tbMember.findOne({ _id: id })
+      member.nik = nik;
+      member.no_hp = nohp;
+      member.email = email;
+      member.address = address;
+      await member.save();
+      req.flash("alertMessage", "Succes Update Member");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/member");
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+     res.redirect("/admin/member");
+    }
+   },
  
 
 }

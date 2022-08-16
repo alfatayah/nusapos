@@ -63,6 +63,22 @@
     </div>
   </div>
 </div>
-
+<%- include('edit_member.ejs') %>
 <%- include('../../partials/js.ejs') %>
 </body>
+<script>
+  $('#dataTable').on('click', '.button-update', function () {
+    let id = $(this).data('id');
+    let nik = $(this).data('nik');
+    let nohp = $(this).data('nohp');
+    let email = $(this).data('email');
+    let address = $(this).data('address');
+
+    $('#edit-modal').modal('show');
+    $('.id').val(id);
+    $('.nik').val(nik);
+    $('.nohp').val(nohp);
+    $('.email').val(email);
+    $('.address').val(address);
+  })
+</script>

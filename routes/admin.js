@@ -62,6 +62,7 @@ router.put("/type", typeController.editType);
 router.delete('/type/:id', typeController.deleteType);
 
 router.get("/member", adminController.viewMember);
+router.put("/member", adminController.editMember);
 router.get("/documentation", adminController.viewDoc);
 
 module.exports = router;
