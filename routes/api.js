@@ -7,6 +7,6 @@ router.get("/transaction/filter_date/:startDate:endDate" , apiController.filterb
 router.post("/login", apiController.loginMember);
 router.post("/register", apiController.registerMember);
 router.post("/booking", apiController.addBooking);
-router.get("/report", apiController.getReport);
+router.post("/report", apiController.getReport);
 
 module.exports = router;

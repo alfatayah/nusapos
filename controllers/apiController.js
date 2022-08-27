@@ -22,6 +22,7 @@ module.exports = {
             "response": 200,
             "result": {
               message: "Sukses Login",
+              member_id: dataUser._id,
               name: dataUser.name,
               userToken: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15),
              }
@@ -98,9 +99,9 @@ module.exports = {
 
     addBooking : async (req, res) => {
       try{
-        const {dateIn, dateOut, totalDays, product_id, totalBooking  } = req.body;
+        const {member_id,dateBook, dateIn, dateOut, totalDays, product_id, totalBooking, status  } = req.body;
         const newItem = {
-          dateIn, dateOut, totalDays, product_id, totalBooking
+          member_id, dateBook, dateIn, dateOut, totalDays, product_id, totalBooking, status
         }
 
         await tbBooking.create(newItem);
@@ -127,8 +128,10 @@ module.exports = {
     },
 
     getReport : async (req, res) => {
+      const { member_id} = req.body;
       try{
-        const report = await tbBooking.find()
+        const report = await tbBooking.find({member_id: member_id})
+        console.log("report " , report)
         res.status(200).json({
           message: "Success Get Report",
           "response": 200,

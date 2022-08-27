@@ -2,6 +2,14 @@ const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
 
 const bookingSchema = new mongoose.Schema({
+  member_id: {
+    type: ObjectId,
+    ref: 'member'
+  },
+  dateBook:{
+    type: String,
+    required: true
+  },
   dateIn: {
     type: String,
     required: true
@@ -21,7 +29,13 @@ const bookingSchema = new mongoose.Schema({
   totalBooking:{
     type: Number,
     required: true
-   }
+   },
+   status:{
+    type: String,
+   },
+  description:{
+    type: String,
+  }
 })
 
 module.exports = mongoose.model("booking", bookingSchema);

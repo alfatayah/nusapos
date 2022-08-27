@@ -317,14 +317,45 @@ var data = [
     'documents': [  
       {
         _id: mongoose.Types.ObjectId('3496bbe292b97300fc101245'),
-   
+        member_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315'),
+        dateBook : '11-1-2021',
         dateIn : '11-1-2021',
         dateOut : '12-1-2021',
         totalDays: 1,
         product_id: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b973001c90b193') },
+          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
         ],
-        totalBooking: 51000
+        totalBooking: 51000,
+        status: "PENDING",
+        description: "transaksi pertama bos", 
+      },
+      {
+        _id: mongoose.Types.ObjectId('1496bbe292b973001c101245'),
+        member_id: mongoose.Types.ObjectId('5e96cbe292b97300fc903315'),
+        dateBook : '11-1-2021',
+        dateIn : '11-1-2021',
+        dateOut : '12-1-2021',
+        totalDays: 1,
+        product_id: [
+          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
+        ],
+        totalBooking: 51000,
+        status: "COnfirm",
+        description: "transaksi pertama bos", 
+      },
+      {
+        _id: mongoose.Types.ObjectId('3496b2e292b973001c101245'),
+        member_id: mongoose.Types.ObjectId('1e96cbe292b97300fc903315'),
+        dateBook : '11-1-2021',
+        dateIn : '11-1-2021',
+        dateOut : '12-1-2021',
+        totalDays: 1,
+        product_id: [
+          { _id: mongoose.Types.ObjectId('5e96c1e292b973001c90b193') },
+        ],
+        totalBooking: 51000,
+        status: "COnfirm",
+        description: "transaksi pertama bos", 
       },
     ]
   }
