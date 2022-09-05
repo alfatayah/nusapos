@@ -37,7 +37,7 @@ module.exports = {
           title: "Nusa | Login"
         });
       } else {
-        res.redirect('/admin/dashboard');
+        res.redirect('/admin/booking');
       }
     } catch (error) {
       res.redirect('/admin/signin');
@@ -82,7 +82,7 @@ module.exports = {
         username: user.username,
         status : user.status
       }
-      res.redirect('/admin/dashboard');
+      res.redirect('/admin/booking');
 
     } catch (error) {
       res.redirect("/admin/signin");
@@ -248,7 +248,9 @@ module.exports = {
 
   viewBook : async (req, res) => {
     try {
-      const booking = await tbBooking.find();
+      const booking = await tbBooking.find()
+      .populate({ path: 'member_id', select: 'name' })
+       .populate({ path: 'product_id', select: 'product_name' })
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
@@ -424,6 +426,22 @@ module.exports = {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
      res.redirect("/admin/member");
+    }
+   },
+
+   confirm : async (req, res) => {
+    const {id } = req.body;
+    try {
+      const booking = await tbBooking.findOne({ _id: id })
+      booking.status = "CONFIRM";
+      await booking.save();
+      req.flash("alertMessage", "Succes Confirm Booking");
+      req.flash("alertStatus", "success");
+      res.redirect("/admin/booking/confirm");
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+     res.redirect("/admin/booking/confirm");
     }
    },
  

@@ -1,0 +1,47 @@
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <!-- Button trigger modal -->
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-product">
+        <i class="fas fa-plus"></i>
+      </button> -->
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Booking Id</th>
+              <th>Nama Member</th>
+              <th>Produk</th>
+              <th>Tanggal Booking</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i = 0; i < booking.length; i++) { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td>B<%= String(booking[i]._id).slice(0,4) %>  </td>
+              <td><%= booking[i].member_id.name %></td>
+              <th><%= Object.keys(booking[i].product_id).map(product_name => booking[i].product_id[product_name].product_name ) %></th>
+              <td><%= booking[i].dateIn + "-"+ booking[i].dateOut %></td>
+              <td><%= booking[i].totalBooking %></td>
+              <td><%= booking[i].status %></td>
+              <td>
+                <a href="/admin/booking/confirm/<%= booking[i]._id %> " class="btn btn-success btn-circle btn-sm button-update">
+                  <i class="fas fa-check"></i></a>
+                  <a href="/admin/transaction/detail/ " class="btn btn-success btn-circle btn-sm button-update">
+                    <i class="fas fa-times"></i></a>
+              </td>
+            </tr>
+            <% }%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

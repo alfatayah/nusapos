@@ -131,7 +131,7 @@ module.exports = {
       const { member_id} = req.body;
       try{
         const report = await tbBooking.find({member_id: member_id})
-        console.log("report " , report)
+        .populate({ path: 'product_id', select: 'product_name' })
         res.status(200).json({
           message: "Success Get Report",
           "response": 200,
