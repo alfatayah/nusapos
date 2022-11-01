@@ -85,7 +85,7 @@ module.exports = {
       res.redirect('/admin/booking');
 
     } catch (error) {
-      res.redirect("/admin/signin");
+      // res.redirect("/admin/signin");
     }
   },
 
