@@ -22,7 +22,8 @@ router.get("/dashboard", adminController.viewDashboard);
 router.post("/dashboard/addBook", adminController.addBook);
 router.post("/transaction/addTrans", adminController.addTrans);
 router.get("/booking", adminController.viewBook);
-router.put("/booking/confirm/:id", adminController.confirm);
+router.get("/booking/confirm/:id", adminController.confirm);
+router.get("/booking/reject/:id", adminController.reject);
 
 router.get("/transaction", transactionController.viewTransaction);
 router.get("/transaction/transaction_7days", transactionController.viewTransactionLast7Days);

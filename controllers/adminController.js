@@ -430,20 +430,37 @@ module.exports = {
    },
 
    confirm : async (req, res) => {
-    const {id } = req.body;
+    const { id } = req.params;
     try {
       const booking = await tbBooking.findOne({ _id: id })
       booking.status = "CONFIRM";
       await booking.save();
       req.flash("alertMessage", "Succes Confirm Booking");
       req.flash("alertStatus", "success");
-      res.redirect("/admin/booking/confirm");
+      res.redirect("/admin/booking");
     } catch (error) {
       req.flash("alertMessage", `${error.message}`);
       req.flash("alertStatus", 'danger');
-     res.redirect("/admin/booking/confirm");
+     res.redirect("/admin/booking");
     }
    },
+
+   reject : async (req, res) => {
+    const { id } = req.params;
+    try {
+      const booking = await tbBooking.findOne({ _id: id })
+      booking.status = "REJECTED";
+      await booking.save();
+      req.flash("alertMessage", "Rejected Booking");
+      req.flash("alertStatus", "danger");
+      res.redirect("/admin/booking");
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+     res.redirect("/admin/booking");
+    }
+   },
+ 
  
 
 }
