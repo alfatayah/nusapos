@@ -119,20 +119,20 @@
             'excel', 'pdf', 'print'
         ],
         initComplete: function () {
-            this.api().columns([2]).every(function () {
-                var column = this;
-                var select = $('<select class="aselectpicker" data-show-content="false" data-none-selected-text="Kasir" multiple><option value="" >Show All</option></select>')
-                    .appendTo($(column.header()).empty())
-                    .on('change', function () {
-                        column
-                            .search($(this).val().map($.fn.dataTable.util.escapeRegex).join('|'), true, false)
-                            .draw();
-                    });
+            // this.api().columns([2]).every(function () {
+            //     var column = this;
+            //     var select = $('<select class="aselectpicker" data-show-content="false" data-none-selected-text="Kasir" multiple><option value="" >Show All</option></select>')
+            //         .appendTo($(column.header()).empty())
+            //         .on('change', function () {
+            //             column
+            //                 .search($(this).val().map($.fn.dataTable.util.escapeRegex).join('|'), true, false)
+            //                 .draw();
+            //         });
 
-                column.data().unique().sort().each(function (d, j) {
-                    select.append('<option value="' + d + '">' + d + '</option>')
-                });
-            });
+            //     column.data().unique().sort().each(function (d, j) {
+            //         select.append('<option value="' + d + '">' + d + '</option>')
+            //     });
+            // });
         }
 
     });

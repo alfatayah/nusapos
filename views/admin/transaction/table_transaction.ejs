@@ -12,15 +12,7 @@
       </div>
   
     <div style="width: 20%; margin-left: 2%;">
-    <div class="form-group">
-      <select class="form-control " name="select2" id="select2" required>
-        <option selected disabled value="">Member</option>
-        <% for(var i=0; i < member.length; i++){ %>
-          <option value=<%= member[i]._id %> ><%= member[i].name %>
-          </option>
-          <% } %>
-      </select>
-    </div>
+  
   </div>
 </div>
 
@@ -53,17 +45,10 @@
 <% for(let i = 0; i < trans.length; i++) { %>
   <% let dateTransaction = trans[i].date_transaction.split('/', '1');%>
   <% if (dateTransaction == dateNow) { %>
-    <label>wow</label>
   <% } %>  
-
 <% }%>
 
-
     <div class="tab-pane fade show active" id="show-kasbon" role="tabpanel" aria-labelledby="home-tab">
-      <div class="row">
-        <div class="col-auto mr-auto"> Tanggal</div>
-        <div class="col-auto">Total</div>
-      </div>
       <!-- DataTales Example -->
       <div class="card shadow mb-4 mt-2">
         <div class="card-body">
@@ -73,7 +58,7 @@
                 <tr >
                   <th>No</th>
                   <th>No Invoice</th>               
-                  <th class="targetHeaderCell" >Kasir</th>
+                  <th>Kasir</th>
                   <th>Status</th> 
                   <th>No Member</th> 
                   <th>Member</th> 
@@ -90,7 +75,7 @@
                   <td><%= i + 1 %></td>
                   <td><%= trans[i].invoice %></td>
                   <td><%= trans[i].userid.username %></td>
-                  <td  class="m-0 font-weight-bold text-success" ><%= trans[i].status %></td>
+                  <td><%= trans[i].status %></td>
                   <td><%= trans[i].member_Id.no_member %></td>
                   <td><%= trans[i].member_Id.name %></td>
                   <td><%= trans[i].payment_method %></td>

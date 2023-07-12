@@ -33,7 +33,7 @@ module.exports = {
       if (req.session.user === null || req.session.user == undefined) {
         res.render('index', {
           alert,
-          title: "Nusa | Login"
+          title: "Nusapos | Login"
         });
       } else {
         res.redirect('/admin/dashboard');
@@ -49,7 +49,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/documentation/doc', {
-        title: "Nusa | Documentation",
+        title: "Nusapos | Documentation",
         user: req.session.user, 
         alert,
       });
@@ -72,7 +72,7 @@ module.exports = {
       }
       const isPasswordMatch = await bycrypt.compare(password, user.password);
       if (!isPasswordMatch) {
-        req.flash("alertMessage", "Password Not Match !");
+        req.flash("alertMessage", "Username Or Password Not Match!");
         req.flash("alertStatus", "danger");
         res.redirect("/admin/signin");
       }
@@ -101,7 +101,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/type/view_type', {
-        title: "Nusa | Type",
+        title: "Nusapos | Type",
         user: req.session.user, 
         type,
         alert,
@@ -121,7 +121,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/merk/view_merk', {
-        title: "Nusa | Merk",
+        title: "Nusapos | Merk",
         user: req.session.user, 
         merk,
         alert,
@@ -142,7 +142,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/member/view_member', {
-        title: "Nusa | Product",
+        title: "Nusapos | Product",
         user: req.session.user, 
         member,
         alert,
@@ -163,7 +163,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
  
       res.render('admin/discount/view_discount', {
-        title: "Nusa | Discount",
+        title: "Nusapos | Discount",
         user: req.session.user, 
         discount,
         alert,
@@ -189,7 +189,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/product/view_product', {
-        title: "Nusa | Product",
+        title: "Nusapos | Product",
         user: req.session.user, 
         merk,
         type,
@@ -214,7 +214,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render('admin/dashboard/view_dashboard', {
-        title: "Nusa | Dashboard",
+        title: "Nusapos | Dashboard",
         user: req.session.user,
         product,
         member,
@@ -228,7 +228,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus };
       
       res.render('admin/dashboard/view_dashboard', {
-        title: "Nusa | Dashboard",
+        title: "Nusapos | Dashboard",
         user: req.session.user,
         product,
         member,
@@ -271,7 +271,7 @@ module.exports = {
       } else {
         list.push(productSearch);
         res.render('admin/dashboard/view_dashboard', {
-          title: "Nusa | Dashboard",
+          title: "Nusapos | Dashboard",
           user: req.session.user,
           product,
           list,
@@ -377,7 +377,7 @@ module.exports = {
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       console.log("member", member);
       res.render('admin/report/view_customer', {
-        title: "Nusa | Laporan Pelanggan",
+        title: "Nusapos | Laporan Pelanggan",
         user: req.session.user, 
         member,
         alert,

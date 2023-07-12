@@ -54,7 +54,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus, user: req.session.user };
       res.render('admin/transaction/view_transaction', {
-        title: "Nusa | Transaction",
+        title: "Nusapos | Transaction",
         user: req.session.user,
         trans,
         alert,

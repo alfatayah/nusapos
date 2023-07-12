@@ -25,7 +25,7 @@ module.exports = {
   //     const alertStatus = req.flash("alertStatus");
   //     const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
   //     res.render('admin/product/view_product', {
-  //       title: "Nusa | Product",
+  //       title: "Nusapos | Product",
   //       user: req.session.user, 
   //       merk,
   //       type,
