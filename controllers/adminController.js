@@ -33,7 +33,7 @@ module.exports = {
       if (req.session.user === null || req.session.user == undefined) {
         res.render('index', {
           alert,
-          title: "Nusa | Login"
+          title: "Nusapos | Login"
         });
       } else {
         res.redirect('/admin/dashboard');
@@ -49,7 +49,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/documentation/doc', {
-        title: "Nusa | Documentation",
+        title: "Nusapos | Documentation",
         user: req.session.user, 
         alert,
       });
@@ -72,7 +72,7 @@ module.exports = {
       }
       const isPasswordMatch = await bycrypt.compare(password, user.password);
       if (!isPasswordMatch) {
-        req.flash("alertMessage", "Password Not Match !");
+        req.flash("alertMessage", "Username Or Password Not Match!");
         req.flash("alertStatus", "danger");
         res.redirect("/admin/signin");
       }
@@ -84,7 +84,7 @@ module.exports = {
       res.redirect('/admin/dashboard');
 
     } catch (error) {
-      res.redirect("/admin/signin");
+      // res.redirect("/admin/signin");
     }
   },
 
@@ -101,7 +101,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/type/view_type', {
-        title: "Nusa | Type",
+        title: "Nusapos | Type",
         user: req.session.user, 
         type,
         alert,
@@ -121,7 +121,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/merk/view_merk', {
-        title: "Nusa | Merk",
+        title: "Nusapos | Merk",
         user: req.session.user, 
         merk,
         alert,
@@ -142,7 +142,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/member/view_member', {
-        title: "Nusa | Product",
+        title: "Nusapos | Product",
         user: req.session.user, 
         member,
         alert,
@@ -161,8 +161,9 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
+ 
       res.render('admin/discount/view_discount', {
-        title: "Nusa | Discount",
+        title: "Nusapos | Discount",
         user: req.session.user, 
         discount,
         alert,
@@ -188,7 +189,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
       res.render('admin/product/view_product', {
-        title: "Nusa | Product",
+        title: "Nusapos | Product",
         user: req.session.user, 
         merk,
         type,
@@ -213,7 +214,7 @@ module.exports = {
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
       res.render('admin/dashboard/view_dashboard', {
-        title: "Nusa | Dashboard",
+        title: "Nusapos | Dashboard",
         user: req.session.user,
         product,
         member,
@@ -225,8 +226,9 @@ module.exports = {
       const alertMessage = req.flash("alertMessage");
       const alertStatus = req.flash("alertStatus");
       const alert = { message: alertMessage, status: alertStatus };
+      
       res.render('admin/dashboard/view_dashboard', {
-        title: "Nusa | Dashboard",
+        title: "Nusapos | Dashboard",
         user: req.session.user,
         product,
         member,
@@ -268,9 +270,8 @@ module.exports = {
         res.redirect(`/admin/dashboard`);
       } else {
         list.push(productSearch);
-        console.table("list " , list);
         res.render('admin/dashboard/view_dashboard', {
-          title: "Nusa | Dashboard",
+          title: "Nusapos | Dashboard",
           user: req.session.user,
           product,
           list,
@@ -289,13 +290,13 @@ module.exports = {
   addTrans: async (req, res) => {
     var transid = mongoose.Types.ObjectId();
     var transdetail_id = mongoose.Types.ObjectId();
-    const trans = await tbTrans.find()
+    const trans = await tbTrans.find();
     const numberinvoice =  trans.length + 1;
     const invoice = "INV"+ moment().format('DDMMYY') + numberinvoice ;
     const status = "NOT_DONE";
-    const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, userID, date_transaction , start_date , end_date  }  = req.body;
-    
+    const { select2, productId, jaminan  , days , subtotal, diskonID, total_discount, total,  desc_trans, date_transaction, userid,  start_date , end_date  }  = req.body;
     const product = await tbProduct.find({ _id : productId});
+    const member = await tbMember.findOne({_id : select2});
     const transactionWithDiskon = {
       _id: transid,
       member_Id: select2, 
@@ -309,7 +310,7 @@ module.exports = {
       status, 
       jaminan,
       date_transaction,
-      userID,
+      userid,
       product_id: productId,
       discountId: diskonID,
       payment_method: "_",
@@ -329,7 +330,7 @@ module.exports = {
       status, 
       jaminan,
       date_transaction,
-      userID,
+      userid,
       product_id: productId,
       payment_method: "_",
       desc_trans,
@@ -344,13 +345,15 @@ module.exports = {
       } else {
         await tbTrans.create(diskonID ? transactionWithDiskon : newTransaction );
         await tbTransDetail.create({ _id:transdetail_id , transaction_Id: transid , dp_id : null , split_id : null, cash_id: null , kasbon_id: null, transfer_id: null})
-  
         for (var i = 0; i < product.length; i++){
           product[i].status = "NOT AVALAIBLE";
           product[i].transaction_Id.push({_id : transid})
           await product[i].save();
         }
 
+        member.transaction_Id.push({_id : transid});
+        await member.save();
+        
         list.splice(0, list.length )
         req.flash("alertMessage", "Succes Add Transaction");
         req.flash("alertStatus", "success");
@@ -363,6 +366,28 @@ module.exports = {
     }
   },
 
+  // ALL report 
+  reportCustomer: async (req, res) => {
+    try {
+      // untuk alert message dia call component dari partials/message.ejs
+      const member = await tbMember.find()
+      .populate({ path: 'transaction_Id '})
+      const alertMessage = req.flash("alertMessage");
+      const alertStatus = req.flash("alertStatus");
+      const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
+      console.log("member", member);
+      res.render('admin/report/view_customer', {
+        title: "Nusapos | Laporan Pelanggan",
+        user: req.session.user, 
+        member,
+        alert,
+      });
+    } catch (error) {
+      req.flash("alertMessage", `${error.message}`);
+      req.flash("alertStatus", 'danger');
+      res.redirect("/admin/report");
+    }
+  },
  
 
 }

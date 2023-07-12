@@ -23,6 +23,7 @@ mongoose.connect(deployDB, {
   useCreateIndex: true,
   useFindAndModify: false,
 })
+
 .then(() => console.log("DB NUSA is connected"))
 .catch((err) => console.log("NOT CONNECT " , err));
 
@@ -40,7 +41,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   // ini nanti di uncomment buat max time session nya
-  cookie: { maxAge: 500000 }
+  cookie: { maxAge: 6 * 60 * 60 * 1000  }
 }))
 app.use(flash());
 

@@ -19,11 +19,11 @@
         <%- include('../../partials/message.ejs') %>
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Transaction</h1>
+        <h1 class="h3 mb-4 text-gray-800">History Transaction</h1>
         <!-- End Heading -->
 
         <!-- nanti di sini diisi table nya -->
-        <%- include('table_transaction.ejs') %>
+        <%- include('table_transaction_last7.ejs') %>
       </div>
       <!-- /.container-fluid -->
 
@@ -66,7 +66,7 @@
 
 <%- include('cancel_transaction.ejs') %>
 <%- include('../../partials/js.ejs') %>
-<%- include('../../partials/filterDate.ejs') %>
+<%- include('../../partials/last7days.ejs') %> 
 </body>
 
 <script>

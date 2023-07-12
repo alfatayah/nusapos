@@ -1,0 +1,143 @@
+<!-- script date range -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<!--  apaa sa -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.dataTables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/dataTables.bootstrap.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css" /> -->
+<!-- <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script> -->
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script> -->
+<!-- <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" /> -->
+
+<!-- <script type="text/javascript" src="/js/moment.min.js"></script>
+<script type="text/javascript" src="/js/daterangepicker.min.js"></script>
+<link rel="stylesheet" href="/css/daterangepicker.css" /> -->
+<!-- Bugs -->
+<!-- Gimana caranya dapetin hasil draw dari table nya ? -->
+<!-- 1. tadi gue coba pake call back draw masih error -->
+<!-- 2. masalah nya di ngepush, jadi dapet datanya tuh semua gk dari result sort nya -->
+
+<!-- IDEA -->
+<!-- 1. Filter di datepicker nya di ganti bisa di pake (table.rows({ search: 'KTP' }).data();) -->
+<!-- 2. Coba pake callbackDraw tapi harus bisa implement nya -->
+
+<script type="text/javascript">
+    $(function () {
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+        function cb(start, end) {
+            $('#reportrange span').html(start.format('DD-MMM-YY') + ' - ' + end.format('DD-MMM-YY'));
+        }
+        $('#reportrange').daterangepicker({
+
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            }
+        }, cb);
+        cb(start, end);
+
+        $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+            searchData(picker)
+        });
+    });
+
+    function searchData(picker) {
+        const arrayData = []
+        $.fn.dataTable.ext.search.push(
+            function (settings, data, dataIndex, rows) {
+                var min = new Date(picker.startDate.format('DD-MMM-YY'))
+                var max = new Date(picker.endDate.format('DD-MMM-YY'))
+                var date_var = new Date(data[7])
+                // notes : row data values display here !!
+                if ((isNaN(min) && isNaN(max)) || (isNaN(min) && date_var <= max) ||
+                    (min <= date_var && isNaN(max)) || (min <= date_var && date_var <= max)) {
+                    arrayData.push(data)
+                    return true;
+                }
+                return false;
+            }
+        );
+
+
+        var table = $('#dataTable').DataTable();
+        table.draw();
+        $.fn.dataTable.ext.search.pop();
+        displayData(arrayData)
+    }
+
+    function displayData(data) {
+        let total = 0;
+        data.forEach(element => {
+            total += parseInt(element[9]);
+        });
+        document.getElementById('totalTransaksi').innerHTML = data.length;
+        document.getElementById('totalPenjualan').innerHTML = total;
+
+
+    }
+
+
+    // $('#dataTable').DataTable({
+
+    //     dom: 'Bfrtip',
+    //     buttons: [
+    //         'excel', 'pdf', 'print'
+    //     ]
+    // });
+    $('#dataTable thead tr th').on("click", function(event) {
+  if ($(event.target).is("button")) {
+		table.column(2).orderable(false).draw();//dummy to disable sorting
+  }
+
+});
+    
+    var table = $('#dataTable').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf', 'print'
+        ],
+        initComplete: function () {
+            // this.api().columns([2]).every(function () {
+            //     var column = this;
+            //     var select = $('<select class="aselectpicker" data-show-content="false" data-none-selected-text="Kasir" multiple><option value="" >Show All</option></select>')
+            //         .appendTo($(column.header()).empty())
+            //         .on('change', function () {
+            //             column
+            //                 .search($(this).val().map($.fn.dataTable.util.escapeRegex).join('|'), true, false)
+            //                 .draw();
+            //         });
+
+            //     column.data().unique().sort().each(function (d, j) {
+            //         select.append('<option value="' + d + '">' + d + '</option>')
+            //     });
+            // });
+        }
+
+    });
+
+
+
+
+</script>

@@ -25,9 +25,14 @@ router.post("/transaction/addTrans", adminController.addTrans);
 
 
 router.get("/transaction", transactionController.viewTransaction);
+router.get("/transaction/transaction_7days", transactionController.viewTransactionLast7Days);
 router.get("/transaction/kasbon", transactionController.viewTransactionKasbon);
 router.post("/transaction" , transactionController.cancelTransaction)
-router.get("/transaction/detail/:id", transactionController.showDetailTransaction);
+router.get("/transaction/filter_date/:startDate:endDate" , transactionController.filterbyDate);
+// router.get("/transaction/filter_date" , transactionController.filterbyDate);
+router.get("/transaction/detail/:id", transactionController.showDetailTransaction); 
+
+router.get("/report/customer", adminController.reportCustomer);
 router.get("/transaction/print_transaction/:id", transactionController.showPrintTransaction);
 router.post("/transaction/payment_cash", transactionController.paymentCash);
 router.post ("/transaction/payment_transfer" , transactionController.paymentTransfer);

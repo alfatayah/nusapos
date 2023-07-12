@@ -21,7 +21,7 @@ module.exports = {
   //     const alertStatus = req.flash("alertStatus");
   //     const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
   //     res.render('admin/discount/view_discount', {
-  //       title: "Nusa | Discount",
+  //       title: "Nusapos | Discount",
   //       user: req.session.user, 
   //       discount,
   //       alert,

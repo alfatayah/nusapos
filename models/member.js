@@ -25,6 +25,11 @@ const memberSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  // di sini gue tambahin FK transaction id untuk laporan customer nya
+  transaction_Id: [{
+    type: ObjectId,
+    ref: 'transaction'
+  }],
 })
 
 module.exports = mongoose.model("member", memberSchema);

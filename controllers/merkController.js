@@ -21,7 +21,7 @@ module.exports = {
   //     const alertStatus = req.flash("alertStatus");
   //     const alert = { message: alertMessage, status: alertStatus , user: req.session.user };
   //     res.render('admin/merk/view_merk', {
-  //       title: "Nusa | Merk",
+  //       title: "Nusapos | Merk",
   //       user: req.session.user, 
   //       merk,
   //       alert,
